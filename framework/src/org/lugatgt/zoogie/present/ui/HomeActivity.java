@@ -124,8 +124,11 @@ public abstract class HomeActivity extends Activity {
     protected void navPrevSlide() {
         if (presentation.isAtBeginning()) return;
         
-        //TODO: Transition.
-        jumpTo(presentation.getCurrentSlideIndex() - 1);
+        Slide slide = presentation.prev();
+        createFragmentTransaction(slide).
+            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).
+            commit();
+        updateUi(slide, presentation.getCurrentSlideIndex());
     }
     
     /**
@@ -134,8 +137,11 @@ public abstract class HomeActivity extends Activity {
     protected void navNextSlide() {
         if (presentation.isAtEnd()) return;
 
-        //TODO: Transition.
-        jumpTo(presentation.getCurrentSlideIndex() + 1);
+        Slide slide = presentation.next();
+        createFragmentTransaction(slide).
+            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).
+            commit();
+        updateUi(slide, presentation.getCurrentSlideIndex());
     }
     
     /**
@@ -146,13 +152,21 @@ public abstract class HomeActivity extends Activity {
      * @param idx The slide index.
      */
     protected void jumpTo(int idx) {
-        FragmentManager fragMgr = getFragmentManager();
-        
-        getActionBar().setSelectedNavigationItem(idx);
-        
-        TitleFragment titleFrag = (TitleFragment)fragMgr.findFragmentById(R.id.titleFragment);
         Slide slide = presentation.jumpTo(idx);
-        titleFrag.setSlide(slide);
+        createFragmentTransaction(slide).commit();
+        updateUi(slide, idx);
+    }
+    
+    // CONTENT FRAGMENT ////////////////////////////////////////////////////////
+    
+    /**
+     * Prepare a transaction for transitioning to a new slide.
+     * @param slide The new slide (may not be null).
+     * @return The initialized transaction (never null).
+     *         It is up to the caller to amend and commit it.
+     */
+    protected FragmentTransaction createFragmentTransaction(Slide slide) {
+        FragmentManager fragMgr = getFragmentManager();
         
         // Create the slide fragment.
         Class<? extends SlideFragment> slideFragClass = slide.getFragmentClass();
@@ -173,17 +187,49 @@ public abstract class HomeActivity extends Activity {
         } else {
             ft.add(R.id.slideContainer, slideFrag, CONTENT_FRAG_TAG);
         }
-        ft.commit();
         
-        updateToolbarState();
+        return ft;
     }
     
     // VIEW STATE //////////////////////////////////////////////////////////////
     
     /**
-     * Update the state of the toolbar buttons.
+     * Convenience function to update all UI elements on slide transition.
+     * @param slide The current slide (may not be null).
+     * @param idx The index of the current slide.
      */
-    protected void updateToolbarState() {
+    private void updateUi(Slide slide, int idx) {
+        updateNavigation(slide, idx);
+        updateTitle(slide, idx);
+        updateToolbarState(slide, idx);
+    }
+    
+    /**
+     * Update the navigation controls in the action bar.
+     * @param slide The current slide (may not be null).
+     * @param idx The index of the current slide.
+     */
+    protected void updateNavigation(Slide slide, int idx) {
+        getActionBar().setSelectedNavigationItem(idx);
+    }
+    
+    /**
+     * Update the title fragment.
+     * @param slide The current slide (may not be null).
+     * @param idx The index of the current slide.
+     */
+    protected void updateTitle(Slide slide, int idx) {
+        FragmentManager fragMgr = getFragmentManager();
+        TitleFragment titleFrag = (TitleFragment)fragMgr.findFragmentById(R.id.titleFragment);
+        titleFrag.setSlide(slide);
+    }
+    
+    /**
+     * Update the state of the toolbar buttons.
+     * @param slide The current slide (may not be null).
+     * @param idx The index of the current slide.
+     */
+    protected void updateToolbarState(Slide slide, int idx) {
         int curSlideIndex = presentation.getCurrentSlideIndex();
         prevBtn.setEnabled(curSlideIndex > 0);
         nextBtn.setEnabled(curSlideIndex < presentation.getSlideCount() - 1);
