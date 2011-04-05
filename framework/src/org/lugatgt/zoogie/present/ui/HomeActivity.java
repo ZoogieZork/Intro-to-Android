@@ -169,7 +169,6 @@ public abstract class HomeActivity extends Activity {
         // there's a content fragment or not.
         FragmentTransaction ft = fragMgr.beginTransaction();
         if (fragMgr.findFragmentByTag(CONTENT_FRAG_TAG) != null) {
-            ft.addToBackStack(null);
             ft.replace(R.id.slideContainer, slideFrag, CONTENT_FRAG_TAG);
         } else {
             ft.add(R.id.slideContainer, slideFrag, CONTENT_FRAG_TAG);
