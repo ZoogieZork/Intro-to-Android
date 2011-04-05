@@ -1,0 +1,4 @@
+*.java eol=lf
+*.xml eol=lf
+.classpath eol=native
+.project eol=native
