@@ -73,8 +73,8 @@ public abstract class HomeActivity extends Activity {
             new SlideListSpinnerAdapter(presentation, this),
             new ActionBar.OnNavigationListener() {
                 @Override
-                public boolean onNavigationItemSelected(int pos, long id) {
-                    jumpTo(pos);
+                public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+                    jumpTo(itemPosition);
                     return true;
                 }
             });
@@ -119,15 +119,13 @@ public abstract class HomeActivity extends Activity {
     // NAVIGATION //////////////////////////////////////////////////////////////
     
     /**
-     * Navigate to the previous slide (with transition).
+     * Navigate to the previous slide (without transition).
      */
     protected void navPrevSlide() {
         if (presentation.isAtBeginning()) return;
         
         Slide slide = presentation.prev();
-        createFragmentTransaction(slide).
-            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).
-            commit();
+        createFragmentTransaction(slide, false).commit();
         updateUi(slide, presentation.getCurrentSlideIndex());
     }
     
@@ -138,9 +136,7 @@ public abstract class HomeActivity extends Activity {
         if (presentation.isAtEnd()) return;
 
         Slide slide = presentation.next();
-        createFragmentTransaction(slide).
-            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).
-            commit();
+        createFragmentTransaction(slide, true).commit();
         updateUi(slide, presentation.getCurrentSlideIndex());
     }
     
@@ -153,7 +149,7 @@ public abstract class HomeActivity extends Activity {
      */
     protected void jumpTo(int idx) {
         Slide slide = presentation.jumpTo(idx);
-        createFragmentTransaction(slide).commit();
+        createFragmentTransaction(slide, false).commit();
         updateUi(slide, idx);
     }
     
@@ -162,11 +158,14 @@ public abstract class HomeActivity extends Activity {
     /**
      * Prepare a transaction for transitioning to a new slide.
      * @param slide The new slide (may not be null).
+     * @param animated true if the transition should be animated.
      * @return The initialized transaction (never null).
      *         It is up to the caller to amend and commit it.
      */
-    protected FragmentTransaction createFragmentTransaction(Slide slide) {
+    protected FragmentTransaction createFragmentTransaction(Slide slide, boolean animated) {
         FragmentManager fragMgr = getFragmentManager();
+        
+        Log.i(TAG, "createFragmentTransaction");
         
         // Create the slide fragment.
         Class<? extends SlideFragment> slideFragClass = slide.getFragmentClass();
@@ -182,6 +181,13 @@ public abstract class HomeActivity extends Activity {
         // Add or replace the slide fragment, depending if
         // there's a content fragment or not.
         FragmentTransaction ft = fragMgr.beginTransaction();
+        
+        if (animated) {
+            // The animations must be specified before the action (replace/add)
+            // is specified, otherwise no animation will play.
+            ft.setCustomAnimations(R.anim.fade_slide_left_in, R.anim.fade_slide_left_out);
+        }
+
         if (fragMgr.findFragmentByTag(CONTENT_FRAG_TAG) != null) {
             ft.replace(R.id.slideContainer, slideFrag, CONTENT_FRAG_TAG);
         } else {
@@ -199,8 +205,8 @@ public abstract class HomeActivity extends Activity {
      * @param idx The index of the current slide.
      */
     private void updateUi(Slide slide, int idx) {
-        updateNavigation(slide, idx);
         updateTitle(slide, idx);
+        updateNavigation(slide, idx);
         updateToolbarState(slide, idx);
     }
     
@@ -210,7 +216,9 @@ public abstract class HomeActivity extends Activity {
      * @param idx The index of the current slide.
      */
     protected void updateNavigation(Slide slide, int idx) {
+        /*FIXME: Disabled since it triggers onNavigationItemSelected().
         getActionBar().setSelectedNavigationItem(idx);
+        */
     }
     
     /**
