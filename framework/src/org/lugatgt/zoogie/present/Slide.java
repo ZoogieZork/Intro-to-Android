@@ -44,6 +44,6 @@ public interface Slide {
      * @throws InstantiationException The fragment could not be created.
      * @throws IllegalAccessException The fragment could not be created.
      */
-    public SlideFragment getFragment() throws InstantiationException, IllegalAccessException;
+    public SlideFragment createFragment() throws InstantiationException, IllegalAccessException;
     
 }

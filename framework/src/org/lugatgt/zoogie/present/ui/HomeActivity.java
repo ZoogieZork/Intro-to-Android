@@ -170,7 +170,7 @@ public abstract class HomeActivity extends Activity {
         // Create the slide fragment.
         SlideFragment slideFrag;
         try {
-            slideFrag = slide.getFragment();
+            slideFrag = slide.createFragment();
             if (slideFrag == null) {
                 throw new RuntimeException("Slide fragment is null: " + slide);
             }
