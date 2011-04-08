@@ -36,9 +36,11 @@ public interface Slide {
     public CharSequence getTitle();
     
     /**
-     * Retrieves the target fragment class for instantiating the slide.
-     * @return The class (never null).
+     * Creates the slide fragment used for displaying the content.
+     * @return The slide fragment (may be null).
+     * @throws InstantiationException The fragment could not be created.
+     * @throws IllegalAccessException The fragment could not be created.
      */
-    public Class<? extends SlideFragment> getFragmentClass();
+    public SlideFragment getFragment() throws InstantiationException, IllegalAccessException;
     
 }

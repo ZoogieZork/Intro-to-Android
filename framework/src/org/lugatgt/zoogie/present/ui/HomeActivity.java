@@ -168,12 +168,14 @@ public abstract class HomeActivity extends Activity {
         Log.i(TAG, "createFragmentTransaction");
         
         // Create the slide fragment.
-        Class<? extends SlideFragment> slideFragClass = slide.getFragmentClass();
-        SlideFragment slideFrag = null;
+        SlideFragment slideFrag;
         try {
-            slideFrag = slideFragClass.newInstance();
+            slideFrag = slide.getFragment();
+            if (slideFrag == null) {
+                throw new RuntimeException("Slide fragment is null: " + slide);
+            }
         } catch (Exception ex) {
-            Log.e(TAG, "Unable to instantiate slide fragment: " + slideFragClass, ex);
+            Log.e(TAG, "Unable to instantiate slide fragment: " + slide, ex);
             //TODO: Use a standard placeholder slide fragment.
             throw new RuntimeException(ex);
         }

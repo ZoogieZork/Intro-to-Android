@@ -49,8 +49,8 @@ public class MainPresentation extends Presentation {
         }
         
         @Override
-        public Class<? extends SlideFragment> getFragmentClass() {
-            return fragmentClass;
+        public SlideFragment getFragment() throws InstantiationException, IllegalAccessException {
+            return fragmentClass.newInstance();
         }
         
     }
