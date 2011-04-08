@@ -30,7 +30,8 @@ public class MainPresentation extends Presentation {
         
         TITLE(TitleSlide.class, "Intro to Android Development"),
         INTRO(TitleSlide.class, "Introduction"),
-        API_HISTORY(ApiHistorySlide.class, "API History");
+        API_HISTORY(ApiHistorySlide.class, "API History"),
+        FORK_THIS(ForkThisSlide.class, "Fork This Presentation!");
         
         private Class<? extends SlideFragment> fragmentClass;
         private String title;
