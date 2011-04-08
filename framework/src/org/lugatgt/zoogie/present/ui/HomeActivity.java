@@ -107,6 +107,9 @@ public abstract class HomeActivity extends Activity {
         
         View v = findViewById(R.id.slideContainer);
         v.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
+        
+        //FIXME: Hide the ActionBar for now, until we add custom controls.
+        bar.hide();
     }
     
     @Override
