@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.content.Context;
 import android.os.Bundle;
 
 
@@ -61,10 +62,10 @@ public abstract class Presentation {
     
     // SLIDES //////////////////////////////////////////////////////////////////
     
-    public CharSequence[] getSlideTitles() {
+    public CharSequence[] getSlideTitles(Context ctx) {
         CharSequence[] titles = new CharSequence[slides.size()];
         for (int i = 0; i < slides.size(); i++) {
-            titles[i] = slides.get(i).getTitle();
+            titles[i] = slides.get(i).getTitle(ctx);
         }
         return titles;
     }

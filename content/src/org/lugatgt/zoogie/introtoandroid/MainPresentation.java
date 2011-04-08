@@ -21,6 +21,8 @@ import org.lugatgt.zoogie.present.Presentation;
 import org.lugatgt.zoogie.present.Slide;
 import org.lugatgt.zoogie.present.SlideFragment;
 
+import android.content.Context;
+
 
 public class MainPresentation extends Presentation {
     
@@ -44,7 +46,7 @@ public class MainPresentation extends Presentation {
         }
         
         @Override
-        public String getTitle() {
+        public String getTitle(Context ctx) {
             return title;
         }
         

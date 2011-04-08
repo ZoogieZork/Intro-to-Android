@@ -16,6 +16,8 @@
 
 package org.lugatgt.zoogie.present;
 
+import android.content.Context;
+
 
 /**
  * Metadata for a slide in the presentation.
@@ -31,9 +33,10 @@ public interface Slide {
     
     /**
      * Retrieves the title of the slide.
+     * @param ctx The context, for retrieving resources (may not be null).
      * @return The title, or null if the slide has no title.
      */
-    public CharSequence getTitle();
+    public CharSequence getTitle(Context ctx);
     
     /**
      * Creates the slide fragment used for displaying the content.
