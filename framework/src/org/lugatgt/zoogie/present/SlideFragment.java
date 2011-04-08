@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 
@@ -38,7 +39,8 @@ public abstract class SlideFragment extends Fragment {
         
         View contentView = onCreateContentView(inflater, view, savedInstanceState);
         if (contentView != null) {
-            view.addView(contentView);
+            FrameLayout contentFrame = (FrameLayout)view.findViewById(R.id.contentFrame);
+            contentFrame.addView(contentView);
         }
         
         return view;
