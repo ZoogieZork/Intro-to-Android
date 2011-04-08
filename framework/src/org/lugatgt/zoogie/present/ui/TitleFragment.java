@@ -68,7 +68,7 @@ public class TitleFragment extends Fragment {
     public void setSlide(Slide slide) {
         //TODO: We'd actually want to get the formatted title of the slide.
         //TODO: Support for subtitles.
-        String newTitle = slide.getTitle();
+        CharSequence newTitle = slide.getTitle();
         if (newTitle == null) newTitle = "";
         
         // Do nothing if the title is unchanged.

@@ -33,7 +33,7 @@ public interface Slide {
      * Retrieves the title of the slide.
      * @return The title, or null if the slide has no title.
      */
-    public String getTitle();
+    public CharSequence getTitle();
     
     /**
      * Retrieves the target fragment class for instantiating the slide.
