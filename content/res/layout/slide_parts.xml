@@ -15,23 +15,13 @@
     limitations under the License.
 -->
 
-<resources>
-
-    <style name="TableCell">
-        <item name="android:textSize">48sp</item>
-        <item name="android:layout_marginRight">20dp</item>
-    </style>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     
-    <style name="Slide_Parts_PartImage">
-        <item name="android:layout_width">300dp</item>
-        <item name="android:layout_height">450dp</item>
-        <item name="android:scaleType">center</item>
-    </style>
+    <org.lugatgt.zoogie.introtoandroid.ui.PartsView
+        android:id="@+id/parts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
     
-    <style name="Slide_ApiHistory_ApiCell" parent="TableCell">
-        <item name="android:gravity">right</item>"
-    </style>
-    <style name="Slide_ApiHistory_VersionCell" parent="TableCell"/>
-    <style name="Slide_ApiHistory_NameCell" parent="TableCell"/>
-
-</resources>
+</FrameLayout>

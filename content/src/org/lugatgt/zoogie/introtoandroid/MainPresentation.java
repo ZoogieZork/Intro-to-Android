@@ -29,7 +29,8 @@ public class MainPresentation extends Presentation {
     private enum Slides implements Slide {
         
         TITLE(TitleSlide.class, "Intro to Android Development"),
-        INTRO(TitleSlide.class, "Introduction"),
+        //INTRO(TitleSlide.class, "Introduction"),
+        PARTS(PartsSlide.class, "Parts"),
         API_HISTORY(ApiHistorySlide.class, "API History"),
         FORK_THIS(ForkThisSlide.class, "Fork This Presentation!");
         
