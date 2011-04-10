@@ -14,7 +14,7 @@
  * the License.
  */
 
-package org.lugatgt.zoogie.present;
+package org.lugatgt.zoogie.present.ui;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -23,6 +23,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
+
+import org.lugatgt.zoogie.present.R;
 
 
 /**

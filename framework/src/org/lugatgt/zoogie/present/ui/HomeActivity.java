@@ -19,7 +19,6 @@ package org.lugatgt.zoogie.present.ui;
 import org.lugatgt.zoogie.present.Presentation;
 import org.lugatgt.zoogie.present.R;
 import org.lugatgt.zoogie.present.Slide;
-import org.lugatgt.zoogie.present.SlideFragment;
 
 import android.app.ActionBar;
 import android.app.Activity;
