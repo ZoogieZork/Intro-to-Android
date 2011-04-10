@@ -35,19 +35,28 @@ import android.view.ViewGroup;
 public class PartsSlide extends SlideFragment {
 
     private enum Layer {
-        SYSTEM,
-        APPLICATION,
-        ACTIVITY,
-        FRAGMENTS,
-        VIEWS;
+        SYSTEM(R.drawable.part_test, R.string.parts_system),
+        APPLICATION(R.drawable.part_test, R.string.parts_application),
+        ACTIVITY(R.drawable.part_test, R.string.parts_activity),
+        FRAGMENTS(R.drawable.part_test, R.string.parts_fragments),
+        VIEWS(R.drawable.part_test, R.string.parts_views);
+        
+        private int imageRes;
+        private int labelRes;
+        
+        private Layer(int imageRes, int labelRes) {
+            this.imageRes = imageRes;
+            this.labelRes = labelRes;
+        }
+        
+        public int getImageRes() {
+            return imageRes;
+        }
+        
+        public int getLabelRes() {
+            return labelRes;
+        }
     }
-    
-    /* System (just status bar)
-     * Application (holds activities)
-     * Activity
-     * Fragments
-     * Views
-     */
     
     private static final String EXPAND_AMOUNT_TAG = "expandAmount";
     
@@ -64,7 +73,7 @@ public class PartsSlide extends SlideFragment {
         partsView.setExpandDistanceY(150);
         
         for (Layer layer : Layer.values()) {
-            partsView.addLayer(new PartLayer(R.drawable.part_test));
+            partsView.addLayer(new PartLayer(layer.getImageRes(), layer.getLabelRes()));
         }
         
         partsView.setOnClickListener(new View.OnClickListener() {

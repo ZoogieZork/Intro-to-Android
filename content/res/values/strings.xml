@@ -20,4 +20,10 @@
     <string name="app_name">Intro To Android Development</string>
     
     <string name="toc_header">Table of Contents</string>
+    
+    <string name="parts_system">System</string>
+    <string name="parts_application">Application</string>
+    <string name="parts_activity">Activity</string>
+    <string name="parts_fragments">Fragments</string>
+    <string name="parts_views">Views</string>
 </resources>

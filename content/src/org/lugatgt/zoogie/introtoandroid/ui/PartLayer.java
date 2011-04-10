@@ -19,6 +19,7 @@ package org.lugatgt.zoogie.introtoandroid.ui;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import org.lugatgt.zoogie.introtoandroid.R;
 
@@ -30,13 +31,16 @@ import org.lugatgt.zoogie.introtoandroid.R;
 public class PartLayer {
 
     private int foregroundDrawable;
+    private int topLabelRes;
     
     private ImageView foregroundImage;
+    private TextView topLabel;
     
     // CONSTRUCTORS ////////////////////////////////////////////////////////////
     
-    public PartLayer(int foregroundDrawable) {
+    public PartLayer(int foregroundDrawable, int topLabelRes) {
         this.foregroundDrawable = foregroundDrawable;
+        this.topLabelRes = topLabelRes;
     }
     
     // VIEW ////////////////////////////////////////////////////////////////////
@@ -52,6 +56,9 @@ public class PartLayer {
         
         foregroundImage = (ImageView)view.findViewById(R.id.partLayer_image);
         foregroundImage.setImageResource(foregroundDrawable);
+        
+        topLabel = (TextView)view.findViewById(R.id.partLayer_topLabel);
+        topLabel.setText(topLabelRes);
         
         return view;
     }
@@ -73,6 +80,9 @@ public class PartLayer {
         foregroundImage.setTranslationY(translationY);
         foregroundImage.setRotationX(rotationX);
         foregroundImage.setRotationY(rotationY);
+        
+        topLabel.setAlpha(expandAmount);
+        topLabel.setTranslationY(translationY);
     }
     
 }
