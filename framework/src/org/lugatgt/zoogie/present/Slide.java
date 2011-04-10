@@ -18,6 +18,8 @@ package org.lugatgt.zoogie.present;
 
 import android.content.Context;
 
+import org.lugatgt.zoogie.present.ui.SlideFragment;
+
 
 /**
  * Metadata for a slide in the presentation.

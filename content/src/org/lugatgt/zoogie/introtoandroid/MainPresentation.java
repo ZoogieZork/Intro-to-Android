@@ -19,7 +19,7 @@ package org.lugatgt.zoogie.introtoandroid;
 import org.lugatgt.zoogie.introtoandroid.slide.*;
 import org.lugatgt.zoogie.present.Presentation;
 import org.lugatgt.zoogie.present.Slide;
-import org.lugatgt.zoogie.present.SlideFragment;
+import org.lugatgt.zoogie.present.ui.SlideFragment;
 
 import android.content.Context;
 

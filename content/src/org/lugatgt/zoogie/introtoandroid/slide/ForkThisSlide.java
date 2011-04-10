@@ -17,7 +17,7 @@
 package org.lugatgt.zoogie.introtoandroid.slide;
 
 import org.lugatgt.zoogie.introtoandroid.R;
-import org.lugatgt.zoogie.present.SlideFragment;
+import org.lugatgt.zoogie.present.ui.SlideFragment;
 
 import android.content.Intent;
 import android.net.Uri;
