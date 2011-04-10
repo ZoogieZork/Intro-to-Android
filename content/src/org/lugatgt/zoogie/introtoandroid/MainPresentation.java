@@ -16,30 +16,34 @@
 
 package org.lugatgt.zoogie.introtoandroid;
 
+import android.content.Context;
+
 import org.lugatgt.zoogie.introtoandroid.slide.*;
 import org.lugatgt.zoogie.present.Presentation;
 import org.lugatgt.zoogie.present.Slide;
+import org.lugatgt.zoogie.present.SlideTransition;
+import org.lugatgt.zoogie.present.Transitions;
 import org.lugatgt.zoogie.present.ui.SlideFragment;
-
-import android.content.Context;
 
 
 public class MainPresentation extends Presentation {
     
     private enum Slides implements Slide {
         
-        TITLE(TitleSlide.class, "Intro to Android Development"),
+        TITLE(TitleSlide.class, "Intro to Android Development", Transitions.SLIDE_LEFT),
         //INTRO(TitleSlide.class, "Introduction"),
-        PARTS(PartsSlide.class, "Parts"),
-        API_HISTORY(ApiHistorySlide.class, "API History"),
-        FORK_THIS(ForkThisSlide.class, "Fork This Presentation!");
+        PARTS(PartsSlide.class, "Parts", Transitions.SLIDE_LEFT),
+        API_HISTORY(ApiHistorySlide.class, "API History", Transitions.FADE),
+        FORK_THIS(ForkThisSlide.class, "Fork This Presentation!", Transitions.SLIDE_LEFT);
         
         private Class<? extends SlideFragment> fragmentClass;
         private String title;
+        private SlideTransition transition;
         
-        private Slides(Class<?> fragmentClass, String title) {
+        private Slides(Class<?> fragmentClass, String title, SlideTransition transition) {
             this.fragmentClass = fragmentClass.asSubclass(SlideFragment.class);
             this.title = title;
+            this.transition = transition;
         }
         
         @Override
@@ -55,6 +59,11 @@ public class MainPresentation extends Presentation {
         @Override
         public SlideFragment createFragment() throws InstantiationException, IllegalAccessException {
             return fragmentClass.newInstance();
+        }
+        
+        @Override
+        public SlideTransition getTransition() {
+            return transition;
         }
         
     }

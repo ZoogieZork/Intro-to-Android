@@ -19,6 +19,7 @@ package org.lugatgt.zoogie.present.ui;
 import org.lugatgt.zoogie.present.Presentation;
 import org.lugatgt.zoogie.present.R;
 import org.lugatgt.zoogie.present.Slide;
+import org.lugatgt.zoogie.present.SlideTransition;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -126,8 +127,9 @@ public abstract class HomeActivity extends Activity {
     protected void navPrevSlide() {
         if (presentation.isAtBeginning()) return;
         
+        Slide prevSlide = presentation.getCurrentSlide();
         Slide slide = presentation.prev();
-        createFragmentTransaction(slide, false).commit();
+        createFragmentTransaction(prevSlide, slide, false).commit();
         updateUi(slide, presentation.getCurrentSlideIndex());
     }
     
@@ -137,8 +139,9 @@ public abstract class HomeActivity extends Activity {
     protected void navNextSlide() {
         if (presentation.isAtEnd()) return;
 
+        Slide prevSlide = presentation.getCurrentSlide();
         Slide slide = presentation.next();
-        createFragmentTransaction(slide, true).commit();
+        createFragmentTransaction(prevSlide, slide, true).commit();
         updateUi(slide, presentation.getCurrentSlideIndex());
     }
     
@@ -150,8 +153,9 @@ public abstract class HomeActivity extends Activity {
      * @param idx The slide index.
      */
     protected void jumpTo(int idx) {
+        Slide prevSlide = presentation.getCurrentSlide();
         Slide slide = presentation.jumpTo(idx);
-        createFragmentTransaction(slide, false).commit();
+        createFragmentTransaction(prevSlide, slide, false).commit();
         updateUi(slide, idx);
     }
     
@@ -159,12 +163,13 @@ public abstract class HomeActivity extends Activity {
     
     /**
      * Prepare a transaction for transitioning to a new slide.
+     * @param prevSlide The previous slide (may be null if no previous slide).
      * @param slide The new slide (may not be null).
      * @param animated true if the transition should be animated.
      * @return The initialized transaction (never null).
      *         It is up to the caller to amend and commit it.
      */
-    protected FragmentTransaction createFragmentTransaction(Slide slide, boolean animated) {
+    protected FragmentTransaction createFragmentTransaction(Slide prevSlide, Slide slide, boolean animated) {
         FragmentManager fragMgr = getFragmentManager();
         
         Log.i(TAG, "createFragmentTransaction");
@@ -189,7 +194,14 @@ public abstract class HomeActivity extends Activity {
         if (animated) {
             // The animations must be specified before the action (replace/add)
             // is specified, otherwise no animation will play.
-            ft.setCustomAnimations(R.anim.fade_slide_left_in, R.anim.fade_slide_left_out);
+            if (prevSlide != null) {
+                SlideTransition transition = prevSlide.getTransition();
+                if (transition != null) {
+                    ft.setCustomAnimations(
+                        transition.getInAnimationRes(),
+                        transition.getOutAnimationRes());
+                }
+            }
         }
 
         if (fragMgr.findFragmentByTag(CONTENT_FRAG_TAG) != null) {

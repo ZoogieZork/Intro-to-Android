@@ -48,4 +48,10 @@ public interface Slide {
      */
     public SlideFragment createFragment() throws InstantiationException, IllegalAccessException;
     
+    /**
+     * The transition animation from this slide to the next.
+     * @return A transition, or null to not use any animation.
+     */
+    public SlideTransition getTransition();
+    
 }
