@@ -32,7 +32,7 @@ public class MainPresentation extends Presentation {
         
         TITLE(TitleSlide.class, "Intro to Android Development", Transitions.SLIDE_LEFT),
         //INTRO(TitleSlide.class, "Introduction"),
-        PARTS(PartsSlide.class, "Parts", Transitions.SLIDE_LEFT),
+        PARTS(PartsSlide.class, "Anatomy of an Android App", Transitions.SLIDE_LEFT),
         API_HISTORY(ApiHistorySlide.class, "API History", Transitions.FADE),
         FORK_THIS(ForkThisSlide.class, "Fork This Presentation!", Transitions.SLIDE_LEFT);
         
