@@ -16,8 +16,5 @@
 -->
 
 <resources>
-    <string name="hello">Hello World!</string>
-    <string name="app_name">Presentation</string>
-    
     <string name="title_slide_title">Title</string>
 </resources>
