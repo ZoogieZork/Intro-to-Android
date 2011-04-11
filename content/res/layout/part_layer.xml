@@ -26,6 +26,11 @@
         android:gravity="right"/>
     
     <ImageView
+        android:id="@+id/partLayer_bg"
+        android:layout_width="300dp"
+        android:layout_height="450dp"
+        android:scaleType="center"/>
+    <ImageView
         android:id="@+id/partLayer_image"
         android:layout_width="300dp"
         android:layout_height="450dp"

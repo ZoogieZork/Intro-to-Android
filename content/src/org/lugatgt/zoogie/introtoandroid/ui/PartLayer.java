@@ -31,15 +31,18 @@ import org.lugatgt.zoogie.introtoandroid.R;
 public class PartLayer {
 
     private int foregroundDrawable;
+    private int backgroundDrawable;
     private int topLabelRes;
     
+    private ImageView backgroundImage;
     private ImageView foregroundImage;
     private TextView topLabel;
     
     // CONSTRUCTORS ////////////////////////////////////////////////////////////
     
-    public PartLayer(int foregroundDrawable, int topLabelRes) {
+    public PartLayer(int foregroundDrawable, int backgroundDrawable, int topLabelRes) {
         this.foregroundDrawable = foregroundDrawable;
+        this.backgroundDrawable = backgroundDrawable;
         this.topLabelRes = topLabelRes;
     }
     
@@ -53,6 +56,9 @@ public class PartLayer {
      */
     public View onCreateView(LayoutInflater inflater) {
         View view = inflater.inflate(R.layout.part_layer, null);
+        
+        backgroundImage = (ImageView)view.findViewById(R.id.partLayer_bg);
+        backgroundImage.setImageResource(backgroundDrawable);
         
         foregroundImage = (ImageView)view.findViewById(R.id.partLayer_image);
         foregroundImage.setImageResource(foregroundDrawable);
@@ -75,6 +81,12 @@ public class PartLayer {
         float rotationX, float rotationY)
     {
         if (foregroundImage == null) return;
+        
+        backgroundImage.setAlpha(expandAmount);
+        backgroundImage.setTranslationX(translationX);
+        backgroundImage.setTranslationY(translationY);
+        backgroundImage.setRotationX(rotationX);
+        backgroundImage.setRotationY(rotationY);
         
         foregroundImage.setTranslationX(translationX);
         foregroundImage.setTranslationY(translationY);
