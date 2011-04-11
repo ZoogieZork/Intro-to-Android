@@ -69,6 +69,7 @@ public abstract class HomeActivity extends Activity {
         bar.setDisplayUseLogoEnabled(false);
         bar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         
+        /*FIXME: Disabled until custom action bar is implemented.
         bar.setListNavigationCallbacks(
             new SlideListSpinnerAdapter(presentation, this),
             new ActionBar.OnNavigationListener() {
@@ -78,6 +79,7 @@ public abstract class HomeActivity extends Activity {
                     return true;
                 }
             });
+        */
         
         prevBtn = (Button)findViewById(R.id.prevBtn);
         prevBtn.setOnClickListener(new View.OnClickListener() {
