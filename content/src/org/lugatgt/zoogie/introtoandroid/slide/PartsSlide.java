@@ -35,11 +35,11 @@ import android.view.ViewGroup;
 public class PartsSlide extends SlideFragment {
 
     private enum Layer {
-        SYSTEM(R.drawable.part_test, R.string.parts_system),
-        APPLICATION(R.drawable.part_test, R.string.parts_application),
-        ACTIVITY(R.drawable.part_test, R.string.parts_activity),
-        FRAGMENTS(R.drawable.part_test, R.string.parts_fragments),
-        VIEWS(R.drawable.part_test, R.string.parts_views);
+        SYSTEM(R.drawable.part_system, R.string.parts_system),
+        APPLICATION(R.drawable.part_application, R.string.parts_application),
+        ACTIVITY(R.drawable.part_activity, R.string.parts_activity),
+        FRAGMENTS(R.drawable.part_fragments, R.string.parts_fragments),
+        VIEWS(R.drawable.part_views, R.string.parts_views);
         
         private int imageRes;
         private int labelRes;
@@ -73,7 +73,7 @@ public class PartsSlide extends SlideFragment {
         partsView.setExpandDistanceY(150);
         
         for (Layer layer : Layer.values()) {
-            partsView.addLayer(new PartLayer(layer.getImageRes(), layer.getLabelRes()));
+            partsView.addLayer(new PartLayer(layer.getImageRes(), R.drawable.part_bg, layer.getLabelRes()));
         }
         
         partsView.setOnClickListener(new View.OnClickListener() {
