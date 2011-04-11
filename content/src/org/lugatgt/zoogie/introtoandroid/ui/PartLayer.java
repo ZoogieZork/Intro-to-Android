@@ -18,6 +18,7 @@ package org.lugatgt.zoogie.introtoandroid.ui;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -95,6 +96,10 @@ public class PartLayer {
         
         topLabel.setAlpha(expandAmount);
         topLabel.setTranslationY(translationY);
+        FrameLayout.LayoutParams labelLayout = new FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+        labelLayout.setMargins(translationX + 300, 0, 0, 0);
+        topLabel.setLayoutParams(labelLayout);
     }
     
 }
