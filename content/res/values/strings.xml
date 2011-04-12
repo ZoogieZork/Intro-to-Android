@@ -26,4 +26,18 @@
     <string name="parts_activity">Activity</string>
     <string name="parts_fragments">Fragments</string>
     <string name="parts_views">Views</string>
+    
+    <string-array name="dalvik_content">
+        <item>Android\'s virtual machine optimized for mobile devices</item>
+        <item>Each app gets its own VM</item>
+        <item>Register-based, executes Dalvik bytecode from Dalvik executables</item>
+        <item>JIT compiler generates native code at runtime</item>
+    </string-array>
+    
+    <string-array name="dalvik_java_content">
+        <item>Android SDK can translate Java bytecode to Dalvik bytecode</item>
+        <item>Apache Harmony provides implementations of most of the Java class library</item>
+        <item>Prefer C or C++?  Dalvik can call native code via JNI.</item>
+        <item>Android 2.3 (Gingerbread) expands native support significantly</item>
+    </string-array>
 </resources>
