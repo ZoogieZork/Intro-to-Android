@@ -16,6 +16,8 @@
 
 package org.lugatgt.zoogie.introtoandroid;
 
+import java.lang.reflect.InvocationTargetException;
+
 import android.content.Context;
 
 import org.lugatgt.zoogie.introtoandroid.slide.*;
@@ -31,7 +33,6 @@ public class MainPresentation extends Presentation {
     private enum Slides implements Slide {
         
         TITLE(TitleSlide.class, "Intro to Android Development", Transitions.SLIDE_LEFT),
-        //INTRO(TitleSlide.class, "Introduction"),
         PARTS(PartsSlide.class, "Anatomy of an Android App", Transitions.SLIDE_LEFT),
         API_HISTORY(ApiHistorySlide.class, "API History", Transitions.FADE),
         FORK_THIS(ForkThisSlide.class, "Fork This Presentation!", Transitions.SLIDE_LEFT);
@@ -39,10 +40,12 @@ public class MainPresentation extends Presentation {
         private Class<? extends SlideFragment> fragmentClass;
         private String title;
         private SlideTransition transition;
+        private int[] contentResources;
         
-        private Slides(Class<?> fragmentClass, String title, SlideTransition transition) {
+        private Slides(Class<?> fragmentClass, String title, SlideTransition transition, int... contentResources) {
             this.fragmentClass = fragmentClass.asSubclass(SlideFragment.class);
             this.title = title;
+            this.contentResources = contentResources;
             this.transition = transition;
         }
         
@@ -57,8 +60,26 @@ public class MainPresentation extends Presentation {
         }
         
         @Override
-        public SlideFragment createFragment() throws InstantiationException, IllegalAccessException {
-            return fragmentClass.newInstance();
+        public SlideFragment createFragment() throws InstantiationException, IllegalAccessException, InvocationTargetException {
+            if (contentResources == null || contentResources.length == 0) {
+                return fragmentClass.newInstance();
+            } else {
+                // Use reflection to find a constructor that takes the same
+                // number of int arguments as contentResources.
+                Class<?>[] paramTypes = new Class<?>[contentResources.length];
+                Object[] params = new Object[contentResources.length];
+                for (int i = 0; i < paramTypes.length; i++) {
+                    paramTypes[i] = Integer.TYPE;
+                    params[i] = contentResources[i];
+                }
+                try {
+                    return fragmentClass.getConstructor(paramTypes).newInstance(params);
+                } catch (NoSuchMethodException e) {
+                    throw new InstantiationException(
+                        "Class " + fragmentClass + " does not have a constructor that " +
+                        "takes " + contentResources.length + " int parameter(s).");
+                }
+            }
         }
         
         @Override
