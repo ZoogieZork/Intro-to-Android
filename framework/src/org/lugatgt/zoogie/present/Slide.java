@@ -16,6 +16,8 @@
 
 package org.lugatgt.zoogie.present;
 
+import java.lang.reflect.InvocationTargetException;
+
 import android.content.Context;
 
 import org.lugatgt.zoogie.present.ui.SlideFragment;
@@ -45,8 +47,9 @@ public interface Slide {
      * @return The slide fragment (may be null).
      * @throws InstantiationException The fragment could not be created.
      * @throws IllegalAccessException The fragment could not be created.
+     * @throws InvocationTargetException The fragment's constructor threw an exception.
      */
-    public SlideFragment createFragment() throws InstantiationException, IllegalAccessException;
+    public SlideFragment createFragment() throws InstantiationException, IllegalAccessException, InvocationTargetException;
     
     /**
      * The transition animation from this slide to the next.
