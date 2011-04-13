@@ -16,7 +16,6 @@
 -->
 
 <resources>
-    <string name="hello">Hello World, HomeActivity!</string>
     <string name="app_name">Intro To Android Development</string>
     
     <string name="toc_header">Table of Contents</string>
