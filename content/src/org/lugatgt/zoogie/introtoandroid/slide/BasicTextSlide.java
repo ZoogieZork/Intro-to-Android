@@ -35,9 +35,17 @@ import org.lugatgt.zoogie.present.ui.SlideFragment;
  */
 public class BasicTextSlide extends SlideFragment {
 
+    private static final String TEXT_RES_TAG = "textRes";
+    
     private int textRes;
     
     // CONSTRUCTORS ////////////////////////////////////////////////////////////
+    
+    /**
+     * No-arg constructor (called only by the system when restoring instance).
+     */
+    public BasicTextSlide() {
+    }
     
     /**
      * Constructor.
@@ -54,6 +62,10 @@ public class BasicTextSlide extends SlideFragment {
     protected View onCreateContentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         TableLayout view = (TableLayout)inflater.inflate(R.layout.slide_basic_text, null);
         
+        if (savedInstanceState != null) {
+            textRes = savedInstanceState.getInt(TEXT_RES_TAG);
+        }
+        
         CharSequence[] textRows = getResources().getTextArray(textRes);
         for (CharSequence textRow : textRows) {
             TableRow row = (TableRow)inflater.inflate(R.layout.basic_text_row, null);
@@ -64,6 +76,13 @@ public class BasicTextSlide extends SlideFragment {
         }
         
         return view;
+    }
+    
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        
+        outState.putInt(TEXT_RES_TAG, textRes);
     }
     
 }
