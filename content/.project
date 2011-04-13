@@ -30,4 +30,11 @@
 		<nature>com.android.ide.eclipse.adt.AndroidNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>presenter_src</name>
+			<type>2</type>
+			<locationURI>_android_presenter_c90c42a8/src</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
