@@ -49,12 +49,12 @@
         <Button
             android:id="@+id/prevBtn"
             style="@style/ToolbarButton"
-            android:text="&lt;"/>
+            android:drawableRight="@android:drawable/ic_media_previous"/>
         <Button
             android:id="@+id/nextBtn"
             style="@style/ToolbarButton"
             android:layout_toRightOf="@id/prevBtn"
-            android:text="&gt;"/>
+            android:drawableLeft="@android:drawable/ic_media_play"/>
         
     </RelativeLayout>
     
