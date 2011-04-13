@@ -105,6 +105,7 @@ public abstract class HomeActivity extends Activity {
             // we only need to restore the presentation internal state.
             presentation.onRestoreInstanceState(savedInstanceState);
             bar.setSelectedNavigationItem(presentation.getCurrentSlideIndex());
+            updateToolbarState(presentation.getCurrentSlide(), presentation.getCurrentSlideIndex());
         }
         
         View v = findViewById(R.id.slideContainer);
