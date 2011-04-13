@@ -17,6 +17,7 @@
 package org.lugatgt.zoogie.introtoandroid.slide;
 
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +59,7 @@ public class BasicTextSlide extends SlideFragment {
             TableRow row = (TableRow)inflater.inflate(R.layout.basic_text_row, null);
             TextView textView = (TextView)row.findViewById(R.id.basicText_text);
             textView.setText(textRow);
+            textView.setMovementMethod(LinkMovementMethod.getInstance());
             view.addView(row);
         }
         
