@@ -34,7 +34,7 @@ public class MainPresentation extends Presentation {
         
         TITLE(TitleSlide.class, "Intro to Android Development", Transitions.SLIDE_LEFT),
         STARTING(BasicTextSlide.class, "Getting Started", Transitions.SLIDE_LEFT, R.array.starting_content),
-        DALVIK(BasicTextSlide.class, "Dalvik VM", Transitions.SLIDE_LEFT, R.array.dalvik_content),
+        DALVIK(BasicTextSlide.class, "Dalvik VM", Transitions.SLIDE_UP, R.array.dalvik_content),
         DALVIK_JAVA(BasicTextSlide.class, "Dalvik VM", Transitions.SLIDE_LEFT, R.array.dalvik_java_content),
         PARTS(PartsSlide.class, "Anatomy of an Android App", Transitions.SLIDE_LEFT),
         API_HISTORY(ApiHistorySlide.class, "API History", Transitions.FADE),

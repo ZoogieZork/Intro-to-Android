@@ -27,4 +27,6 @@ public interface Transitions {
     
     SlideTransition SLIDE_LEFT = new SlideTransition(R.anim.fade_slide_left_out, R.anim.fade_slide_left_in);
     
+    SlideTransition SLIDE_UP = new SlideTransition(R.anim.fade_slide_up_out, R.anim.fade_slide_up_in);
+    
 }
