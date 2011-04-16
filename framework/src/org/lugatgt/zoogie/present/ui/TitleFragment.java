@@ -19,6 +19,7 @@ package org.lugatgt.zoogie.present.ui;
 import org.lugatgt.zoogie.present.R;
 import org.lugatgt.zoogie.present.Slide;
 
+import android.animation.ObjectAnimator;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
@@ -43,6 +44,7 @@ public class TitleFragment extends Fragment {
     private ForegroundColorSpan subtitleColorSpan;
     
     private TextView titleLbl;
+    private TextView titleAnimLbl;
     
     private CharSequence title = "";
     private CharSequence subtitle = "";
@@ -57,11 +59,12 @@ public class TitleFragment extends Fragment {
             getResources().getColor(R.color.subtitle_fg));
         
         titleLbl = (TextView)view.findViewById(R.id.titleLbl);
+        titleAnimLbl = (TextView)view.findViewById(R.id.titleAnimLbl);
         
         if (savedInstanceState != null) {
             title = savedInstanceState.getCharSequence(TITLE_KEY);
             subtitle = savedInstanceState.getCharSequence(SUBTITLE_KEY);
-            updateUi();
+            updateUi(false);
         }
         
         return view;
@@ -80,8 +83,9 @@ public class TitleFragment extends Fragment {
     /**
      * Update the title to reflect a new slide.
      * @param slide The new slide (may not be null).
+     * @param animate true to animate between the previous title and the new title.
      */
-    public void setSlide(Slide slide) {
+    public void setSlide(Slide slide, boolean animate) {
         CharSequence newTitle = slide.getTitle(getActivity());
         if (newTitle == null) newTitle = "";
         
@@ -93,17 +97,26 @@ public class TitleFragment extends Fragment {
         
         title = newTitle;
         subtitle = newSubtitle;
-        updateUi();
+        updateUi(animate);
     }
     
-    private void updateUi() {
+    private void updateUi(boolean animate) {
         SpannableStringBuilder sb = new SpannableStringBuilder();
         sb.append(title);
         if (subtitle.length() > 0) {
             sb.append(": ").append(subtitle);
             sb.setSpan(subtitleColorSpan, title.length() + 2, sb.length(), 0);
         }
-        titleLbl.setText(sb);
+        
+        if (animate) {
+            titleAnimLbl.setText(titleLbl.getText());
+            titleLbl.setAlpha(0.0f);
+            titleLbl.setText(sb);
+            ObjectAnimator.ofFloat(titleLbl, "alpha", 0.0f, 1.0f).setDuration(500).start();
+            ObjectAnimator.ofFloat(titleAnimLbl, "alpha", 1.0f, 0.0f).setDuration(500).start();
+        } else {
+            titleLbl.setText(sb);
+        }
     }
     
 }

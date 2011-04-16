@@ -24,5 +24,9 @@
         android:id="@+id/titleLbl"
         android:layout_alignParentBottom="true"
         style="@style/SlideTitle"/>
+    <TextView
+        android:id="@+id/titleAnimLbl"
+        android:layout_alignParentBottom="true"
+        style="@style/SlideTitle"/>
     
 </RelativeLayout>

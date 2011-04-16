@@ -133,7 +133,7 @@ public abstract class HomeActivity extends Activity {
         Slide prevSlide = presentation.getCurrentSlide();
         Slide slide = presentation.prev();
         createFragmentTransaction(prevSlide, slide, false).commit();
-        updateUi(slide, presentation.getCurrentSlideIndex());
+        updateUi(slide, presentation.getCurrentSlideIndex(), false);
     }
     
     /**
@@ -145,7 +145,7 @@ public abstract class HomeActivity extends Activity {
         Slide prevSlide = presentation.getCurrentSlide();
         Slide slide = presentation.next();
         createFragmentTransaction(prevSlide, slide, true).commit();
-        updateUi(slide, presentation.getCurrentSlideIndex());
+        updateUi(slide, presentation.getCurrentSlideIndex(), true);
     }
     
     /**
@@ -159,7 +159,7 @@ public abstract class HomeActivity extends Activity {
         Slide prevSlide = presentation.getCurrentSlide();
         Slide slide = presentation.jumpTo(idx);
         createFragmentTransaction(prevSlide, slide, false).commit();
-        updateUi(slide, idx);
+        updateUi(slide, idx, false);
     }
     
     // CONTENT FRAGMENT ////////////////////////////////////////////////////////
@@ -222,9 +222,10 @@ public abstract class HomeActivity extends Activity {
      * Convenience function to update all UI elements on slide transition.
      * @param slide The current slide (may not be null).
      * @param idx The index of the current slide.
+     * @param animate true to animate the transition, if possible.
      */
-    private void updateUi(Slide slide, int idx) {
-        updateTitle(slide, idx);
+    private void updateUi(Slide slide, int idx, boolean animate) {
+        updateTitle(slide, idx, animate);
         updateNavigation(slide, idx);
         updateToolbarState(slide, idx);
     }
@@ -244,11 +245,12 @@ public abstract class HomeActivity extends Activity {
      * Update the title fragment.
      * @param slide The current slide (may not be null).
      * @param idx The index of the current slide.
+     * @param animate true to animate the transition, if possible.
      */
-    protected void updateTitle(Slide slide, int idx) {
+    protected void updateTitle(Slide slide, int idx, boolean animate) {
         FragmentManager fragMgr = getFragmentManager();
         TitleFragment titleFrag = (TitleFragment)fragMgr.findFragmentById(R.id.titleFragment);
-        titleFrag.setSlide(slide);
+        titleFrag.setSlide(slide, animate);
     }
     
     /**
