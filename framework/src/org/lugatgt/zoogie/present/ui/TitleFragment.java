@@ -16,9 +16,6 @@
 
 package org.lugatgt.zoogie.present.ui;
 
-import org.lugatgt.zoogie.present.R;
-import org.lugatgt.zoogie.present.Slide;
-
 import android.animation.ObjectAnimator;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -27,8 +24,10 @@ import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import org.lugatgt.zoogie.present.R;
+import org.lugatgt.zoogie.present.Slide;
 
 
 /**
@@ -45,6 +44,8 @@ public class TitleFragment extends Fragment {
     
     private TextView titleLbl;
     private TextView titleAnimLbl;
+    private View titleFrame;
+    private View titleAnimFrame;
     
     private CharSequence title = "";
     private CharSequence subtitle = "";
@@ -60,6 +61,8 @@ public class TitleFragment extends Fragment {
         
         titleLbl = (TextView)view.findViewById(R.id.titleLbl);
         titleAnimLbl = (TextView)view.findViewById(R.id.titleAnimLbl);
+        titleFrame = view.findViewById(R.id.titleFrame);
+        titleAnimFrame = view.findViewById(R.id.titleAnimFrame);
         
         if (savedInstanceState != null) {
             title = savedInstanceState.getCharSequence(TITLE_KEY);
@@ -104,16 +107,19 @@ public class TitleFragment extends Fragment {
         SpannableStringBuilder sb = new SpannableStringBuilder();
         sb.append(title);
         if (subtitle.length() > 0) {
+            // Use a different foreground color for the subtitle.
             sb.append(": ").append(subtitle);
             sb.setSpan(subtitleColorSpan, title.length() + 2, sb.length(), 0);
         }
         
         if (animate) {
             titleAnimLbl.setText(titleLbl.getText());
-            titleLbl.setAlpha(0.0f);
             titleLbl.setText(sb);
-            ObjectAnimator.ofFloat(titleLbl, "alpha", 0.0f, 1.0f).setDuration(500).start();
-            ObjectAnimator.ofFloat(titleAnimLbl, "alpha", 1.0f, 0.0f).setDuration(500).start();
+            // We animate the frames instead of the TextViews because setting
+            // the alpha on a TextView with a ForegroundColorSpan doesn't
+            // quite work right (the span overrides the alpha).
+            ObjectAnimator.ofFloat(titleFrame, "alpha", 0.0f, 1.0f).setDuration(500).start();
+            ObjectAnimator.ofFloat(titleAnimFrame, "alpha", 1.0f, 0.0f).setDuration(500).start();
         } else {
             titleLbl.setText(sb);
         }

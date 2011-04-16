@@ -20,13 +20,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     
-    <TextView
-        android:id="@+id/titleLbl"
-        android:layout_alignParentBottom="true"
-        style="@style/SlideTitle"/>
-    <TextView
-        android:id="@+id/titleAnimLbl"
-        android:layout_alignParentBottom="true"
-        style="@style/SlideTitle"/>
+    <RelativeLayout 
+        android:id="@+id/titleFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/titleLbl"
+            android:layout_alignParentBottom="true"
+            style="@style/SlideTitle"/>
+    </RelativeLayout>
+    <RelativeLayout 
+        android:id="@+id/titleAnimFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/titleAnimLbl"
+            android:layout_alignParentBottom="true"
+            style="@style/SlideTitle"/>
+    </RelativeLayout>
     
 </RelativeLayout>
