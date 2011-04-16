@@ -21,14 +21,18 @@
         <item name="android:windowActionBarOverlay">true</item>
     </style>
     
+    <style name="SlideTitleFrame">
+        <item name="android:background">#1fffffff</item>
+    </style>
+    
     <style name="SlideTitle">
         <item name="android:textSize">52sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/title_fg</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">bottom</item>
         <item name="android:paddingLeft">20dp</item>
-        <item name="android:background">#1fffffff</item>
     </style>
     
     <style name="SlideText">

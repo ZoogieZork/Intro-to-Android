@@ -35,21 +35,27 @@ public class MainPresentation extends Presentation {
         TITLE(TitleSlide.class, "Intro to Android Development", Transitions.SLIDE_LEFT),
         STARTING(BasicTextSlide.class, "Getting Started", Transitions.SLIDE_LEFT, R.array.starting_content),
         DALVIK(BasicTextSlide.class, "Dalvik VM", Transitions.SLIDE_UP, R.array.dalvik_content),
-        DALVIK_JAVA(BasicTextSlide.class, "Dalvik VM", Transitions.SLIDE_LEFT, R.array.dalvik_java_content),
+        DALVIK_JAVA(BasicTextSlide.class, "Dalvik VM", "Where does Java fit in?", Transitions.SLIDE_LEFT, R.array.dalvik_java_content),
         PARTS(PartsSlide.class, "Anatomy of an Android App", Transitions.SLIDE_LEFT),
-        PARTS_OTHER(BasicTextSlide.class, "Other Parts of an App", Transitions.SLIDE_LEFT, R.array.parts_other_content),
+        PARTS_OTHER(BasicTextSlide.class, "Anatomy of an Android App", "Other Parts", Transitions.SLIDE_LEFT, R.array.parts_other_content),
         LIFECYCLE(BasicTextSlide.class, "What happens to my app when it goes away?", Transitions.SLIDE_LEFT, R.array.lifecycle_content),
         API_HISTORY(ApiHistorySlide.class, "API History", Transitions.FADE),
         FORK_THIS(ForkThisSlide.class, "Fork This Presentation!", Transitions.SLIDE_LEFT);
         
         private Class<? extends SlideFragment> fragmentClass;
         private String title;
+        private String subtitle;
         private SlideTransition transition;
         private int[] contentResources;
         
         private Slides(Class<?> fragmentClass, String title, SlideTransition transition, int... contentResources) {
+            this(fragmentClass, title, null, transition, contentResources);
+        }
+        
+        private Slides(Class<?> fragmentClass, String title, String subtitle, SlideTransition transition, int... contentResources) {
             this.fragmentClass = fragmentClass.asSubclass(SlideFragment.class);
             this.title = title;
+            this.subtitle = subtitle;
             this.contentResources = contentResources;
             this.transition = transition;
         }
@@ -62,6 +68,11 @@ public class MainPresentation extends Presentation {
         @Override
         public String getTitle(Context ctx) {
             return title;
+        }
+        
+        @Override
+        public String getSubtitle(Context ctx) {
+            return subtitle;
         }
         
         @Override

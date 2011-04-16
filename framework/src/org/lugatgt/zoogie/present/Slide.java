@@ -43,6 +43,13 @@ public interface Slide {
     public CharSequence getTitle(Context ctx);
     
     /**
+     * Retrieves the subtitle of the slide.
+     * @param ctx The context, for retrieving resources (may not be null).
+     * @return The subtitle, or null if the slide has no subtitle.
+     */
+    public CharSequence getSubtitle(Context ctx);
+    
+    /**
      * Creates the slide fragment used for displaying the content.
      * @return The slide fragment (may be null).
      * @throws InstantiationException The fragment could not be created.

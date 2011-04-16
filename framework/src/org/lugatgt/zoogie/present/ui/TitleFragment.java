@@ -21,9 +21,12 @@ import org.lugatgt.zoogie.present.Slide;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -34,7 +37,15 @@ import android.widget.TextView;
  */
 public class TitleFragment extends Fragment {
 
+    private static final String TITLE_KEY = "title";
+    private static final String SUBTITLE_KEY = "subtitle";
+    
+    private ForegroundColorSpan subtitleColorSpan;
+    
     private TextView titleLbl;
+    
+    private CharSequence title = "";
+    private CharSequence subtitle = "";
     
     // LIFECYCLE ///////////////////////////////////////////////////////////////
     
@@ -42,39 +53,57 @@ public class TitleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.title, null);
         
+        subtitleColorSpan = new ForegroundColorSpan(
+            getResources().getColor(R.color.subtitle_fg));
+        
         titleLbl = (TextView)view.findViewById(R.id.titleLbl);
+        
+        if (savedInstanceState != null) {
+            title = savedInstanceState.getCharSequence(TITLE_KEY);
+            subtitle = savedInstanceState.getCharSequence(SUBTITLE_KEY);
+            updateUi();
+        }
         
         return view;
     }
     
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        
-        if (savedInstanceState != null) {
-            titleLbl.setText(savedInstanceState.getCharSequence("title"));
-        }
-    }
-    
-    @Override
-    public void onSaveInstanceState (Bundle outState) {
+    public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         
-        outState.putCharSequence("title", titleLbl.getText());
+        outState.putCharSequence(TITLE_KEY, title);
+        outState.putCharSequence(SUBTITLE_KEY, subtitle);
     }
     
     // CONTENT /////////////////////////////////////////////////////////////////
     
+    /**
+     * Update the title to reflect a new slide.
+     * @param slide The new slide (may not be null).
+     */
     public void setSlide(Slide slide) {
-        //TODO: We'd actually want to get the formatted title of the slide.
-        //TODO: Support for subtitles.
         CharSequence newTitle = slide.getTitle(getActivity());
         if (newTitle == null) newTitle = "";
         
-        // Do nothing if the title is unchanged.
-        if (newTitle.equals(titleLbl.getText())) return;
+        CharSequence newSubtitle = slide.getSubtitle(getActivity());
+        if (newSubtitle == null) newSubtitle = "";
         
-        titleLbl.setText(newTitle);
+        // Do nothing if the title and subtitle are unchanged.
+        if (newTitle.equals(title) && newSubtitle.equals(subtitle)) return;
+        
+        title = newTitle;
+        subtitle = newSubtitle;
+        updateUi();
+    }
+    
+    private void updateUi() {
+        SpannableStringBuilder sb = new SpannableStringBuilder();
+        sb.append(title);
+        if (subtitle.length() > 0) {
+            sb.append(": ").append(subtitle);
+            sb.setSpan(subtitleColorSpan, title.length() + 2, sb.length(), 0);
+        }
+        titleLbl.setText(sb);
     }
     
 }
