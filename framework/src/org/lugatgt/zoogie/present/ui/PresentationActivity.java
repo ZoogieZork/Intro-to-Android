@@ -21,6 +21,7 @@ import org.lugatgt.zoogie.present.R;
 import org.lugatgt.zoogie.present.Slide;
 import org.lugatgt.zoogie.present.SlideTransition;
 
+import android.animation.ObjectAnimator;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -276,7 +277,7 @@ public abstract class PresentationActivity extends Activity {
     protected void updateTitle(Slide slide, int idx, boolean animate) {
         FragmentManager fragMgr = getFragmentManager();
         TitleFragment titleFrag = (TitleFragment)fragMgr.findFragmentById(R.id.titleFragment);
-        titleFrag.setSlide(slide, animate);
+        titleFrag.setSlide(slide, idx, animate);
     }
     
     /**
