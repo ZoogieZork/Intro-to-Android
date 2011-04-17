@@ -54,6 +54,7 @@
         <item>Homescreen widgets</item>
         <item>Background services</item>
         <item>Broadcast receivers</item>
+        <item>Dialogs</item>
     </string-array>
     
     <string-array name="lifecycle_content">
