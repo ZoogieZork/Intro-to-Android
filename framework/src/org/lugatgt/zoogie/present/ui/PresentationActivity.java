@@ -16,12 +16,6 @@
 
 package org.lugatgt.zoogie.present.ui;
 
-import org.lugatgt.zoogie.present.Presentation;
-import org.lugatgt.zoogie.present.R;
-import org.lugatgt.zoogie.present.Slide;
-import org.lugatgt.zoogie.present.SlideTransition;
-
-import android.animation.ObjectAnimator;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -33,6 +27,11 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+
+import org.lugatgt.zoogie.present.Presentation;
+import org.lugatgt.zoogie.present.R;
+import org.lugatgt.zoogie.present.Slide;
+import org.lugatgt.zoogie.present.SlideTransition;
 
 
 /**
