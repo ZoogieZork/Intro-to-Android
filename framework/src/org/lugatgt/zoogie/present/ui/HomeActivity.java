@@ -28,6 +28,7 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -120,6 +121,31 @@ public abstract class HomeActivity extends Activity {
         super.onSaveInstanceState(outState);
         
         presentation.onSaveInstanceState(outState);
+    }
+    
+    // EVENTS //////////////////////////////////////////////////////////////////
+    
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        
+        // These define the global navigation keys.
+        // Since this is only called if a view on a slide doesn't handle the
+        // keypress first, slides should avoid defining keyboard shortcuts
+        // that interfere with the following keys.
+        // (Of course, for some views it's unavoidable, e.g. EditText). 
+        
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_DPAD_RIGHT:
+            case KeyEvent.KEYCODE_SPACE:
+                navNextSlide();
+                return true;
+                
+            case KeyEvent.KEYCODE_DPAD_LEFT:
+                navPrevSlide();
+                return true;
+        }
+        
+        return super.onKeyDown(keyCode, event);
     }
     
     // NAVIGATION //////////////////////////////////////////////////////////////
