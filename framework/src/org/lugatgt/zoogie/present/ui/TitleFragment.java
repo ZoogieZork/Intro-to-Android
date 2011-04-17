@@ -47,6 +47,7 @@ public class TitleFragment extends Fragment {
     private ForegroundColorSpan subtitleColorSpan;
     private int normalHeight;
     private int expandedHeight;
+    private int slideTransitionDuration;
     
     private RelativeLayout contentView;
     private TextView titleLbl;
@@ -70,6 +71,7 @@ public class TitleFragment extends Fragment {
         subtitleColorSpan = new ForegroundColorSpan(res.getColor(R.color.subtitle_fg));
         normalHeight = res.getDimensionPixelSize(R.dimen.title_frag_height);
         expandedHeight = res.getDimensionPixelSize(R.dimen.title_frag_expanded_height);
+        slideTransitionDuration = res.getInteger(R.integer.slideTransitionDuration);
         
         index = 0;
         
@@ -146,7 +148,8 @@ public class TitleFragment extends Fragment {
         if (oldIndex > 0 && index > 0) {
             // Do nothing, height is already correct.
         } else if (oldIndex == 0 && index > 0 && animate) {
-            ObjectAnimator.ofInt(this, "contentHeight", expandedHeight, normalHeight).setDuration(500).start();
+            ObjectAnimator.ofInt(this, "contentHeight", expandedHeight, normalHeight).
+                setDuration(slideTransitionDuration).start();
         } else {
             contentView.getLayoutParams().height =
                 index == 0 ? expandedHeight : normalHeight;
@@ -166,8 +169,10 @@ public class TitleFragment extends Fragment {
             // We animate the frames instead of the TextViews because setting
             // the alpha on a TextView with a ForegroundColorSpan doesn't
             // quite work right (the span overrides the alpha).
-            ObjectAnimator.ofFloat(titleFrame, "alpha", 0.0f, 1.0f).setDuration(500).start();
-            ObjectAnimator.ofFloat(titleAnimFrame, "alpha", 1.0f, 0.0f).setDuration(500).start();
+            ObjectAnimator.ofFloat(titleFrame, "alpha", 0.0f, 1.0f).
+                setDuration(slideTransitionDuration).start();
+            ObjectAnimator.ofFloat(titleAnimFrame, "alpha", 1.0f, 0.0f).
+                setDuration(slideTransitionDuration).start();
         } else {
             titleLbl.setText(sb);
         }

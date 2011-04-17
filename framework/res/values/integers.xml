@@ -15,17 +15,10 @@
     limitations under the License.
 -->
 
-<set xmlns:android="http://schemas.android.com/apk/res/android">
-    <objectAnimator
-        android:propertyName="y"
-        android:valueType="floatType"
-        android:valueFrom="0"
-        android:valueTo="-720dp"
-        android:duration="@integer/slideTransitionDuration"/>
-    <objectAnimator
-        android:propertyName="alpha"
-        android:valueType="floatType"
-        android:valueFrom="1"
-        android:valueTo="0"
-        android:duration="@integer/slideTransitionDuration"/>
-</set>
+<resources>
+    <!--
+        How long the animation between slides should last.
+        Default is the system-configured animation time.
+    -->
+    <integer name="slideTransitionDuration">@android:integer/config_mediumAnimTime</integer>
+</resources>
