@@ -26,6 +26,14 @@
     <string name="parts_fragments">Fragments</string>
     <string name="parts_views">Views</string>
     
+    <string name="android_creative_commons_attribution"
+        >Portions of this page are modifications based on work created and
+        <a href="http://code.google.com/policies.html">shared by Google</a>
+        and used according to terms described in the
+        <a href="http://creativecommons.org/licenses/by/3.0/">Creative
+        Commons 3.0 Attribution License</a>.
+    </string>
+    
     <string-array name="starting_content">
         <item>Android SDK:
             \n<a href="http://developer.android.com/sdk/">http://developer.android.com/sdk/</a></item>
