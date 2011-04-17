@@ -16,10 +16,10 @@
 
 package org.lugatgt.zoogie.introtoandroid;
 
-import org.lugatgt.zoogie.present.ui.HomeActivity;
+import org.lugatgt.zoogie.present.ui.PresentationActivity;
 
 
-public class MainActivity extends HomeActivity {
+public class MainActivity extends PresentationActivity {
 
     public MainActivity() {
         super(new MainPresentation());

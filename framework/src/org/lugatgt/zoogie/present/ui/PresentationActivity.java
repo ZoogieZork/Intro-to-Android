@@ -38,9 +38,9 @@ import android.widget.Button;
  * Main presentation activity.
  * @author Michael Imamura
  */
-public abstract class HomeActivity extends Activity {
+public abstract class PresentationActivity extends Activity {
     
-    private static final String TAG = HomeActivity.class.getSimpleName();
+    private static final String TAG = PresentationActivity.class.getSimpleName();
     
     private static final String CONTENT_FRAG_TAG = "contentSlide";
     
@@ -51,7 +51,7 @@ public abstract class HomeActivity extends Activity {
     
     // CONSTRUCTORS ////////////////////////////////////////////////////////////
     
-    public HomeActivity(Presentation presentation) {
+    public PresentationActivity(Presentation presentation) {
         this.presentation = presentation;
     }
     
