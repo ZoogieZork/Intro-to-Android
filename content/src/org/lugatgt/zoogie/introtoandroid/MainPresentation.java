@@ -44,7 +44,8 @@ public class MainPresentation extends Presentation {
         API_HISTORY(ApiHistorySlide.class, "API History", Transitions.SLIDE_LEFT),
         MARKET(BasicTextSlide.class, "Android Market", Transitions.SLIDE_UP, R.array.market_content),
         MARKET_OTHER(BasicTextSlide.class, "Android Market", "Alternate Markets", Transitions.SLIDE_UP, R.array.market_alt_content),
-        MARKET_PUBLISH(BasicTextSlide.class, "Android Market", "Publishing", Transitions.FADE, R.array.market_publish_content),
+        MARKET_PUBLISH(BasicTextSlide.class, "Android Market", "Publishing", Transitions.SLIDE_LEFT, R.array.market_publish_content),
+        MAINTENANCE(BasicTextSlide.class, "Oh, no! Something went wrong!", Transitions.FADE, R.array.maintenance_content),
         FORK_THIS(ForkThisSlide.class, "Fork This Presentation!", Transitions.SLIDE_LEFT);
         
         private Class<? extends SlideFragment> fragmentClass;

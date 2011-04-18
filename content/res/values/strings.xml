@@ -102,6 +102,15 @@
         <item>Generate a public/private keypair to sign your .apk files</item>
         <item>Export a release build and sign it with your private key</item>
         <item>Create two screenshots (use emulator or DDMS) and a <b>512x512</b> icon</item>
+        <item>ProGuard (optional): Obfuscates <i>and optimizes!</i></item>
+    </string-array>
+    
+    <string-array name="maintenance_content">
+        <item>Built-in error reporting for ANRs (\"Application Not Responding\") and uncaught exceptions</item>
+        <item>View and analyze error reports in the same place you manage your apps</item>
+        <item>Remember to fill in the \"Recent Changes\" area!</item>
+        <item>Enhanced crash reports by integrating ACRA
+            \n<a href="http://code.google.com/p/acra/">http://code.google.com/p/acra/</a></item>
     </string-array>
     
 </resources>
