@@ -35,12 +35,12 @@ public class MainPresentation extends Presentation {
         TITLE(TitleSlide.class, "Intro to Android Development", Transitions.SLIDE_LEFT),
         ANDROID(AndroidSlide.class, "About Android", Transitions.FADE),
         INTERNALS(InternalsSlide.class, "Under the Hood", Transitions.SLIDE_LEFT),
-        STARTING(BasicTextSlide.class, "Getting Started", Transitions.SLIDE_LEFT, R.array.starting_content),
         DALVIK(BasicTextSlide.class, "Dalvik VM", Transitions.SLIDE_UP, R.array.dalvik_content),
         DALVIK_JAVA(BasicTextSlide.class, "Dalvik VM", "Where does Java fit in?", Transitions.SLIDE_LEFT, R.array.dalvik_java_content),
         PARTS(PartsSlide.class, "Anatomy of an Android App", Transitions.SLIDE_LEFT),
         PARTS_OTHER(BasicTextSlide.class, "Anatomy of an Android App", "Other Parts", Transitions.SLIDE_LEFT, R.array.parts_other_content),
         LIFECYCLE(BasicTextSlide.class, "What happens to my app when it goes away?", Transitions.SLIDE_LEFT, R.array.lifecycle_content),
+        STARTING(BasicTextSlide.class, "Getting Started", Transitions.SLIDE_LEFT, R.array.starting_content),
         API_HISTORY(ApiHistorySlide.class, "API History", Transitions.FADE),
         FORK_THIS(ForkThisSlide.class, "Fork This Presentation!", Transitions.SLIDE_LEFT);
         
