@@ -39,6 +39,7 @@ public class MainPresentation extends Presentation {
         DALVIK_JAVA(BasicTextSlide.class, "Dalvik VM", "Where does Java fit in?", Transitions.SLIDE_LEFT, R.array.dalvik_java_content),
         PARTS(PartsSlide.class, "Anatomy of an Android App", Transitions.SLIDE_LEFT),
         PARTS_OTHER(BasicTextSlide.class, "Anatomy of an Android App", "Other Parts", Transitions.SLIDE_LEFT, R.array.parts_other_content),
+        APPS(BasicTextSlide.class, "Other Kinds of Apps", Transitions.SLIDE_LEFT, R.array.apps_content),
         LIFECYCLE(BasicTextSlide.class, "What happens to my app when it goes away?", Transitions.SLIDE_LEFT, R.array.lifecycle_content),
         STARTING(BasicTextSlide.class, "Getting Started", Transitions.SLIDE_LEFT, R.array.starting_content),
         API_HISTORY(ApiHistorySlide.class, "API History", Transitions.SLIDE_LEFT),

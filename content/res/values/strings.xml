@@ -71,6 +71,12 @@
         <item>Dialogs</item>
     </string-array>
     
+    <string-array name="apps_content">
+        <item>Live wallpapers</item>
+        <item>Launchers</item>
+        <item>On-screen keyboards</item>
+    </string-array>
+    
     <string-array name="lifecycle_content">
         <item>When the user presses the \"Home\" button, the task is pushed to the background</item>
         <item>Background tasks are freed by the system when memory is low</item>
