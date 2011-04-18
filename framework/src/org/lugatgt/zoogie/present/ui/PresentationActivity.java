@@ -201,8 +201,6 @@ public abstract class PresentationActivity extends Activity {
     protected FragmentTransaction createFragmentTransaction(Slide prevSlide, Slide slide, boolean animated) {
         FragmentManager fragMgr = getFragmentManager();
         
-        Log.i(TAG, "createFragmentTransaction");
-        
         // Create the slide fragment.
         SlideFragment slideFrag;
         try {
