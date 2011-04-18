@@ -29,4 +29,6 @@ public interface Transitions {
     
     SlideTransition SLIDE_UP = new SlideTransition(R.anim.fade_slide_up_out, R.anim.fade_slide_up_in);
     
+    SlideTransition ZOOM_IN = new SlideTransition(R.anim.fade_zoom_in_out, R.anim.fade_zoom_in_in);
+    
 }

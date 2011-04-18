@@ -33,7 +33,7 @@ public class MainPresentation extends Presentation {
     private enum Slides implements Slide {
         
         TITLE(TitleSlide.class, "Intro to Android Development", Transitions.SLIDE_LEFT),
-        ANDROID(AndroidSlide.class, "About Android", Transitions.FADE),
+        ANDROID(AndroidSlide.class, "About Android", Transitions.ZOOM_IN),
         INTERNALS(InternalsSlide.class, "Under the Hood", Transitions.SLIDE_LEFT),
         DALVIK(BasicTextSlide.class, "Dalvik VM", Transitions.SLIDE_UP, R.array.dalvik_content),
         DALVIK_JAVA(BasicTextSlide.class, "Dalvik VM", "Where does Java fit in?", Transitions.SLIDE_LEFT, R.array.dalvik_java_content),
