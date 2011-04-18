@@ -78,4 +78,30 @@
         <item>Activity <i>onCreate</i> gets passed a Bundle: If it\'s not null, then use it to restore your state</item>
     </string-array>
     
+    <string-array name="market_content">
+        <item>Anybody can publish to the Android Market!
+            \n<a href="https://market.android.com/">https://market.android.com/</a></item>
+        <item>Post-moderated, fast turnaround for upload and upgrade</item>
+        <item>Paid apps not available in some countries</item>
+        <item>Some carriers only allow installs from the official Google Android Market</item>
+    </string-array>
+    
+    <string-array name="market_alt_content">
+        <item>GetJar
+            \n<a href="http://www.getjar.com/">http://www.getjar.com/</a></item>
+        <item>Amazon Appstore
+            \n<a href="http://www.amazon.com/mobile-apps/">http://www.amazon.com/mobile-apps/</a></item>
+        <item><a href="http://slideme.org/">SlideME</a>,
+            <a href="http://onlyandroid.mobihand.com/">MobiHand</a>,
+            <a href="http://www.mikandi.com/">MiKandi</a> <i>(NSFW!)</i>, etc.</item>
+    </string-array>
+    
+    <string-array name="market_publish_content">
+        <item>Sign up for an Android Market developer account:
+            \n<a href="http://market.android.com/publish">http://market.android.com/publish</a></item>
+        <item>Generate a public/private keypair to sign your .apk files</item>
+        <item>Export a release build and sign it with your private key</item>
+        <item>Create two screenshots (use emulator or DDMS) and a <b>512x512</b> icon</item>
+    </string-array>
+    
 </resources>

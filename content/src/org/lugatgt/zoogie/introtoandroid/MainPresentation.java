@@ -41,7 +41,10 @@ public class MainPresentation extends Presentation {
         PARTS_OTHER(BasicTextSlide.class, "Anatomy of an Android App", "Other Parts", Transitions.SLIDE_LEFT, R.array.parts_other_content),
         LIFECYCLE(BasicTextSlide.class, "What happens to my app when it goes away?", Transitions.SLIDE_LEFT, R.array.lifecycle_content),
         STARTING(BasicTextSlide.class, "Getting Started", Transitions.SLIDE_LEFT, R.array.starting_content),
-        API_HISTORY(ApiHistorySlide.class, "API History", Transitions.FADE),
+        API_HISTORY(ApiHistorySlide.class, "API History", Transitions.SLIDE_LEFT),
+        MARKET(BasicTextSlide.class, "Android Market", Transitions.SLIDE_UP, R.array.market_content),
+        MARKET_OTHER(BasicTextSlide.class, "Android Market", "Alternate Markets", Transitions.SLIDE_UP, R.array.market_alt_content),
+        MARKET_PUBLISH(BasicTextSlide.class, "Android Market", "Publishing", Transitions.FADE, R.array.market_publish_content),
         FORK_THIS(ForkThisSlide.class, "Fork This Presentation!", Transitions.SLIDE_LEFT);
         
         private Class<? extends SlideFragment> fragmentClass;
