@@ -133,6 +133,8 @@ public class SplashActivity extends Activity {
     
     private static class SplashException extends RuntimeException {
         
+        private static final long serialVersionUID = 35226278106161720L;
+
         public SplashException() {
             super("A test error occurred in the splash screen.");
         }
