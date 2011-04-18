@@ -21,11 +21,11 @@
         android:valueType="floatType"
         android:valueFrom="0"
         android:valueTo="-1280dp"
-        android:duration="@android:integer/config_mediumAnimTime"/>
+        android:duration="@integer/slideTransitionDuration"/>
     <objectAnimator
         android:propertyName="alpha"
         android:valueType="floatType"
         android:valueFrom="1"
         android:valueTo="0"
-        android:duration="@android:integer/config_mediumAnimTime"/>
+        android:duration="@integer/slideTransitionDuration"/>
 </set>

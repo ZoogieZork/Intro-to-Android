@@ -16,11 +16,6 @@
 
 package org.lugatgt.zoogie.present.ui;
 
-import org.lugatgt.zoogie.present.Presentation;
-import org.lugatgt.zoogie.present.R;
-import org.lugatgt.zoogie.present.Slide;
-import org.lugatgt.zoogie.present.SlideTransition;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -28,18 +23,24 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+
+import org.lugatgt.zoogie.present.Presentation;
+import org.lugatgt.zoogie.present.R;
+import org.lugatgt.zoogie.present.Slide;
+import org.lugatgt.zoogie.present.SlideTransition;
 
 
 /**
  * Main presentation activity.
  * @author Michael Imamura
  */
-public abstract class HomeActivity extends Activity {
+public abstract class PresentationActivity extends Activity {
     
-    private static final String TAG = HomeActivity.class.getSimpleName();
+    private static final String TAG = PresentationActivity.class.getSimpleName();
     
     private static final String CONTENT_FRAG_TAG = "contentSlide";
     
@@ -50,7 +51,7 @@ public abstract class HomeActivity extends Activity {
     
     // CONSTRUCTORS ////////////////////////////////////////////////////////////
     
-    public HomeActivity(Presentation presentation) {
+    public PresentationActivity(Presentation presentation) {
         this.presentation = presentation;
     }
     
@@ -122,6 +123,31 @@ public abstract class HomeActivity extends Activity {
         presentation.onSaveInstanceState(outState);
     }
     
+    // EVENTS //////////////////////////////////////////////////////////////////
+    
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        
+        // These define the global navigation keys.
+        // Since this is only called if a view on a slide doesn't handle the
+        // keypress first, slides should avoid defining keyboard shortcuts
+        // that interfere with the following keys.
+        // (Of course, for some views it's unavoidable, e.g. EditText). 
+        
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_DPAD_RIGHT:
+            case KeyEvent.KEYCODE_SPACE:
+                navNextSlide();
+                return true;
+                
+            case KeyEvent.KEYCODE_DPAD_LEFT:
+                navPrevSlide();
+                return true;
+        }
+        
+        return super.onKeyDown(keyCode, event);
+    }
+    
     // NAVIGATION //////////////////////////////////////////////////////////////
     
     /**
@@ -174,8 +200,6 @@ public abstract class HomeActivity extends Activity {
      */
     protected FragmentTransaction createFragmentTransaction(Slide prevSlide, Slide slide, boolean animated) {
         FragmentManager fragMgr = getFragmentManager();
-        
-        Log.i(TAG, "createFragmentTransaction");
         
         // Create the slide fragment.
         SlideFragment slideFrag;
@@ -250,7 +274,7 @@ public abstract class HomeActivity extends Activity {
     protected void updateTitle(Slide slide, int idx, boolean animate) {
         FragmentManager fragMgr = getFragmentManager();
         TitleFragment titleFrag = (TitleFragment)fragMgr.findFragmentById(R.id.titleFragment);
-        titleFrag.setSlide(slide, animate);
+        titleFrag.setSlide(slide, idx, animate);
     }
     
     /**

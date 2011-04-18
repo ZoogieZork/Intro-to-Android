@@ -15,17 +15,8 @@
     limitations under the License.
 -->
 
-<set xmlns:android="http://schemas.android.com/apk/res/android">
-    <objectAnimator
-        android:propertyName="y"
-        android:valueType="floatType"
-        android:valueFrom="0"
-        android:valueTo="-720dp"
-        android:duration="@integer/slideTransitionDuration"/>
-    <objectAnimator
-        android:propertyName="alpha"
-        android:valueType="floatType"
-        android:valueFrom="1"
-        android:valueTo="0"
-        android:duration="@integer/slideTransitionDuration"/>
-</set>
+<resources>
+    <!-- Height of the title fragment, in normal and expanded states.  -->
+    <dimen name="title_frag_height">120dp</dimen>
+    <dimen name="title_frag_expanded_height">350dp</dimen>
+</resources>

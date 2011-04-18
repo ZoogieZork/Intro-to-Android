@@ -33,13 +33,19 @@ public class MainPresentation extends Presentation {
     private enum Slides implements Slide {
         
         TITLE(TitleSlide.class, "Intro to Android Development", Transitions.SLIDE_LEFT),
-        STARTING(BasicTextSlide.class, "Getting Started", Transitions.SLIDE_LEFT, R.array.starting_content),
+        ANDROID(AndroidSlide.class, "About Android", Transitions.ZOOM_IN),
+        INTERNALS(InternalsSlide.class, "About Android", "Under the Hood", Transitions.SLIDE_LEFT),
         DALVIK(BasicTextSlide.class, "Dalvik VM", Transitions.SLIDE_UP, R.array.dalvik_content),
         DALVIK_JAVA(BasicTextSlide.class, "Dalvik VM", "Where does Java fit in?", Transitions.SLIDE_LEFT, R.array.dalvik_java_content),
         PARTS(PartsSlide.class, "Anatomy of an Android App", Transitions.SLIDE_LEFT),
         PARTS_OTHER(BasicTextSlide.class, "Anatomy of an Android App", "Other Parts", Transitions.SLIDE_LEFT, R.array.parts_other_content),
         LIFECYCLE(BasicTextSlide.class, "What happens to my app when it goes away?", Transitions.SLIDE_LEFT, R.array.lifecycle_content),
-        API_HISTORY(ApiHistorySlide.class, "API History", Transitions.FADE),
+        STARTING(BasicTextSlide.class, "Getting Started", Transitions.SLIDE_LEFT, R.array.starting_content),
+        API_HISTORY(ApiHistorySlide.class, "API History", Transitions.SLIDE_LEFT),
+        MARKET(BasicTextSlide.class, "Android Market", Transitions.SLIDE_UP, R.array.market_content),
+        MARKET_OTHER(BasicTextSlide.class, "Android Market", "Alternate Markets", Transitions.SLIDE_UP, R.array.market_alt_content),
+        MARKET_PUBLISH(BasicTextSlide.class, "Android Market", "Publishing", Transitions.SLIDE_LEFT, R.array.market_publish_content),
+        MAINTENANCE(BasicTextSlide.class, "Oh, no! Something went wrong!", Transitions.FADE, R.array.maintenance_content),
         FORK_THIS(ForkThisSlide.class, "Fork This Presentation!", Transitions.SLIDE_LEFT);
         
         private Class<? extends SlideFragment> fragmentClass;

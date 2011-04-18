@@ -26,6 +26,20 @@
     <string name="parts_fragments">Fragments</string>
     <string name="parts_views">Views</string>
     
+    <string name="android_creative_commons_attribution"
+        >Portions of this page are modifications based on work created and
+        <a href="http://code.google.com/policies.html">shared by Google</a>
+        and used according to terms described in the
+        <a href="http://creativecommons.org/licenses/by/3.0/">Creative
+        Commons 3.0 Attribution License</a>.
+    </string>
+    
+    <string-array name="internals_content">
+        <item>Linux kernel</item>
+        <item>Bionic libc</item>
+        <item>Dalvik VM</item>
+    </string-array>
+    
     <string-array name="starting_content">
         <item>Android SDK:
             \n<a href="http://developer.android.com/sdk/">http://developer.android.com/sdk/</a></item>
@@ -54,13 +68,49 @@
         <item>Homescreen widgets</item>
         <item>Background services</item>
         <item>Broadcast receivers</item>
+        <item>Dialogs</item>
     </string-array>
     
     <string-array name="lifecycle_content">
-        <item>When the user presses the "Home" button, the task is pushed to the background</item>
+        <item>When the user presses the \"Home\" button, the task is pushed to the background</item>
         <item>Background tasks are freed by the system when memory is low</item>
         <item>You get a chance to save your state: Override <i>onSaveInstanceState</i></item>
         <item>Activity <i>onCreate</i> gets passed a Bundle: If it\'s not null, then use it to restore your state</item>
+    </string-array>
+    
+    <string-array name="market_content">
+        <item>Anybody can publish to the Android Market!
+            \n<a href="https://market.android.com/">https://market.android.com/</a></item>
+        <item>Post-moderated, fast turnaround for upload and upgrade</item>
+        <item>Paid apps not available in some countries</item>
+        <item>Some carriers only allow installs from the official Google Android Market</item>
+    </string-array>
+    
+    <string-array name="market_alt_content">
+        <item>GetJar
+            \n<a href="http://www.getjar.com/">http://www.getjar.com/</a></item>
+        <item>Amazon Appstore
+            \n<a href="http://www.amazon.com/mobile-apps/">http://www.amazon.com/mobile-apps/</a></item>
+        <item><a href="http://slideme.org/">SlideME</a>,
+            <a href="http://onlyandroid.mobihand.com/">MobiHand</a>,
+            MiKandi <i>(NSFW!)</i>, etc.</item>
+    </string-array>
+    
+    <string-array name="market_publish_content">
+        <item>Sign up for an Android Market developer account:
+            \n<a href="http://market.android.com/publish">http://market.android.com/publish</a></item>
+        <item>Generate a public/private keypair to sign your .apk files</item>
+        <item>Export a release build and sign it with your private key</item>
+        <item>Create two screenshots (use emulator or DDMS) and a <b>512x512</b> icon</item>
+        <item>ProGuard (optional): Obfuscates <i>and optimizes!</i></item>
+    </string-array>
+    
+    <string-array name="maintenance_content">
+        <item>Built-in error reporting for ANRs (\"Application Not Responding\") and uncaught exceptions</item>
+        <item>View and analyze error reports in the same place you manage your apps</item>
+        <item>Remember to fill in the \"Recent Changes\" area!</item>
+        <item>Enhanced crash reports by integrating ACRA
+            \n<a href="http://code.google.com/p/acra/">http://code.google.com/p/acra/</a></item>
     </string-array>
     
 </resources>

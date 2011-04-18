@@ -18,12 +18,15 @@ package org.lugatgt.zoogie.present.ui;
 
 import android.animation.ObjectAnimator;
 import android.app.Fragment;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.lugatgt.zoogie.present.R;
@@ -37,16 +40,22 @@ import org.lugatgt.zoogie.present.Slide;
  */
 public class TitleFragment extends Fragment {
 
+    private static final String INDEX_KEY = "index";
     private static final String TITLE_KEY = "title";
     private static final String SUBTITLE_KEY = "subtitle";
     
     private ForegroundColorSpan subtitleColorSpan;
+    private int normalHeight;
+    private int expandedHeight;
+    private int slideTransitionDuration;
     
+    private RelativeLayout contentView;
     private TextView titleLbl;
     private TextView titleAnimLbl;
     private View titleFrame;
     private View titleAnimFrame;
     
+    private int index;
     private CharSequence title = "";
     private CharSequence subtitle = "";
     
@@ -54,29 +63,51 @@ public class TitleFragment extends Fragment {
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.title, null);
+        contentView = (RelativeLayout)inflater.inflate(R.layout.title, null);
         
-        subtitleColorSpan = new ForegroundColorSpan(
-            getResources().getColor(R.color.subtitle_fg));
+        // Load resources -- these may change depending on orientation, etc.,
+        // so we need to load them on every onCreateView().
+        Resources res = getResources();
+        subtitleColorSpan = new ForegroundColorSpan(res.getColor(R.color.subtitle_fg));
+        normalHeight = res.getDimensionPixelSize(R.dimen.title_frag_height);
+        expandedHeight = res.getDimensionPixelSize(R.dimen.title_frag_expanded_height);
+        slideTransitionDuration = res.getInteger(R.integer.slideTransitionDuration);
         
-        titleLbl = (TextView)view.findViewById(R.id.titleLbl);
-        titleAnimLbl = (TextView)view.findViewById(R.id.titleAnimLbl);
-        titleFrame = view.findViewById(R.id.titleFrame);
-        titleAnimFrame = view.findViewById(R.id.titleAnimFrame);
+        index = 0;
+        
+        titleLbl = (TextView)contentView.findViewById(R.id.titleLbl);
+        titleAnimLbl = (TextView)contentView.findViewById(R.id.titleAnimLbl);
+        titleFrame = contentView.findViewById(R.id.titleFrame);
+        titleAnimFrame = contentView.findViewById(R.id.titleAnimFrame);
         
         if (savedInstanceState != null) {
+            index = savedInstanceState.getInt(INDEX_KEY);
             title = savedInstanceState.getCharSequence(TITLE_KEY);
             subtitle = savedInstanceState.getCharSequence(SUBTITLE_KEY);
-            updateUi(false);
+            // Since updateUi() changes the layout, we can't call it here
+            // because the view hasn't been attached to the activity's
+            // layout yet.
         }
         
-        return view;
+        return contentView;
+    }
+    
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        
+        if (savedInstanceState != null) {
+            // We call updateUi() here since this is after our layout has been
+            // attached to the activity's layout.
+            updateUi(0, false);
+        }
     }
     
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         
+        outState.putInt(INDEX_KEY, index);
         outState.putCharSequence(TITLE_KEY, title);
         outState.putCharSequence(SUBTITLE_KEY, subtitle);
     }
@@ -86,9 +117,10 @@ public class TitleFragment extends Fragment {
     /**
      * Update the title to reflect a new slide.
      * @param slide The new slide (may not be null).
+     * @param idx The zero-based index of the slide in the presentation.
      * @param animate true to animate between the previous title and the new title.
      */
-    public void setSlide(Slide slide, boolean animate) {
+    public void setSlide(Slide slide, int idx, boolean animate) {
         CharSequence newTitle = slide.getTitle(getActivity());
         if (newTitle == null) newTitle = "";
         
@@ -98,12 +130,31 @@ public class TitleFragment extends Fragment {
         // Do nothing if the title and subtitle are unchanged.
         if (newTitle.equals(title) && newSubtitle.equals(subtitle)) return;
         
+        int oldIndex = index;
+        index = idx;
         title = newTitle;
         subtitle = newSubtitle;
-        updateUi(animate);
+        
+        updateUi(oldIndex, animate);
     }
     
-    private void updateUi(boolean animate) {
+    /**
+     * Update the UI elements to reflect the current state.
+     * @param oldIndex The zero-based previous slide index.
+     * @param animate true if moving to the new state should be animated.
+     */
+    private void updateUi(int oldIndex, boolean animate) {
+        // Update our height, animating it if requested.
+        if (oldIndex > 0 && index > 0) {
+            // Do nothing, height is already correct.
+        } else if (oldIndex == 0 && index > 0 && animate) {
+            ObjectAnimator.ofInt(this, "contentHeight", expandedHeight, normalHeight).
+                setDuration(slideTransitionDuration).start();
+        } else {
+            contentView.getLayoutParams().height =
+                index == 0 ? expandedHeight : normalHeight;
+        }
+        
         SpannableStringBuilder sb = new SpannableStringBuilder();
         sb.append(title);
         if (subtitle.length() > 0) {
@@ -118,11 +169,26 @@ public class TitleFragment extends Fragment {
             // We animate the frames instead of the TextViews because setting
             // the alpha on a TextView with a ForegroundColorSpan doesn't
             // quite work right (the span overrides the alpha).
-            ObjectAnimator.ofFloat(titleFrame, "alpha", 0.0f, 1.0f).setDuration(500).start();
-            ObjectAnimator.ofFloat(titleAnimFrame, "alpha", 1.0f, 0.0f).setDuration(500).start();
+            ObjectAnimator.ofFloat(titleFrame, "alpha", 0.0f, 1.0f).
+                setDuration(slideTransitionDuration).start();
+            ObjectAnimator.ofFloat(titleAnimFrame, "alpha", 1.0f, 0.0f).
+                setDuration(slideTransitionDuration).start();
         } else {
             titleLbl.setText(sb);
         }
+    }
+    
+    /**
+     * <em>Do not call this method directly!</em>
+     * <p>
+     * This is called by the {@link ObjectAnimator} to update the layout height
+     * since {@link LayoutParams} doesn't have a public {@code setHeight()}
+     * method.
+     * @param height The new height in pixels.
+     */
+    public void setContentHeight(int height) {
+        contentView.getLayoutParams().height = height;
+        contentView.requestLayout();
     }
     
 }

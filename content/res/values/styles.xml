@@ -28,6 +28,22 @@
         <item name="android:scaleType">center</item>
     </style>
     
+    <style name="Slide_Internals_Cell" parent="TableCell">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginBottom">20dp</item>
+    </style>
+    <style name="Slide_Internals_HeadingCell" parent="Slide_Internals_Cell">
+    </style>
+    <style name="Slide_Internals_NameCell" parent="Slide_Internals_Cell">
+        <item name="android:textSize">54sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Slide_Internals_LicenseCell" parent="Slide_Internals_Cell">
+        <item name="android:textSize">32sp</item>
+    </style>
+    
     <style name="Slide_ApiHistory_ApiCell" parent="TableCell">
         <item name="android:gravity">right</item>"
     </style>
