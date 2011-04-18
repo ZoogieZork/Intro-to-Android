@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="70dp"
+        android:shrinkColumns="*"
+        android:stretchColumns="*">
+        
+        <TableRow>
+            <TextView
+                style="@style/Slide_Internals_HeadingCell"
+                android:text="Kernel"/>
+            <TextView
+                style="@style/Slide_Internals_HeadingCell"
+                android:text="libc"/>
+            <TextView
+                style="@style/Slide_Internals_HeadingCell"
+                android:text="VM"/>
+        </TableRow>
+        
+        <TableRow>
+            <TextView
+                style="@style/Slide_Internals_NameCell"
+                android:text="Linux"/>
+            <TextView
+                style="@style/Slide_Internals_NameCell"
+                android:text="Bionic"/>
+            <TextView
+                style="@style/Slide_Internals_NameCell"
+                android:text="Dalvik"/>
+        </TableRow>
+        
+        <TableRow>
+            <TextView
+                style="@style/Slide_Internals_LicenseCell"
+                android:text="GPL"/>
+            <TextView
+                style="@style/Slide_Internals_LicenseCell"
+                android:text="BSD"/>
+            <TextView
+                style="@style/Slide_Internals_LicenseCell"
+                android:text="Apache"/>
+        </TableRow>
+        
+    </TableLayout>
+    
+</LinearLayout>
