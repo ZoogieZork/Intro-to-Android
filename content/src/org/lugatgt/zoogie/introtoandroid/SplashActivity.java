@@ -81,6 +81,8 @@ public class SplashActivity extends Activity {
             launchPresentation();
         } else if ("11f9578d05e6f7bb58a3cdd00107e9f4e3882671".equals(inviteHash)) {
             throw new SplashException();
+        } else if ("daaad336276d15594d0e765f96c17cd746bf4971".equals(inviteHash)) {
+            spinForever();
         } else {
             inviteCodeTxt.setError("Invalid code");
             inviteCodeTxt.getText().clear();
@@ -94,6 +96,16 @@ public class SplashActivity extends Activity {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         finish();
+    }
+    
+    private void spinForever() {
+        for (;;) {
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                Log.w(TAG, "Woken from sleep!");
+            }
+        }
     }
     
     // UTILITIES ///////////////////////////////////////////////////////////////
