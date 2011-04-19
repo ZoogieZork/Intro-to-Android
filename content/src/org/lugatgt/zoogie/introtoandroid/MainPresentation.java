@@ -37,6 +37,7 @@ public class MainPresentation extends Presentation {
         INTERNALS(InternalsSlide.class, "About Android", "Under the Hood", Transitions.SLIDE_LEFT),
         DALVIK(BasicTextSlide.class, "Dalvik VM", Transitions.SLIDE_UP, R.array.dalvik_content),
         DALVIK_JAVA(BasicTextSlide.class, "Dalvik VM", "Where does Java fit in?", Transitions.SLIDE_LEFT, R.array.dalvik_java_content),
+        API(BasicTextSlide.class, "What's included in the API?", Transitions.SLIDE_LEFT, R.array.api_content),
         PARTS(PartsSlide.class, "Anatomy of an Android App", Transitions.SLIDE_LEFT),
         PARTS_OTHER(BasicTextSlide.class, "Anatomy of an Android App", "Other Parts", Transitions.SLIDE_LEFT, R.array.parts_other_content),
         APPS(BasicTextSlide.class, "Other Kinds of Apps", Transitions.SLIDE_LEFT, R.array.apps_content),

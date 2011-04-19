@@ -80,6 +80,14 @@
         <item>Android 2.3 (Gingerbread) expands native support significantly</item>
     </string-array>
     
+    <string-array name="api_content">
+        <item><b>Basic:</b> Views, preferences, database, private storage, media playback, access
+            to system databases, ability to talk to other apps / services</item>
+        <item><b>Device capabilities (most require permissions):</b> Network access,
+            location (network and/or GPS), camera, audio capture</item>
+        <item><b>Low-level:</b> 3D graphics (OpenGL ES), audio (OpenSL ES)</item>
+    </string-array>
+    
     <string-array name="parts_other_content">
         <item>Homescreen widgets</item>
         <item>Background services</item>
