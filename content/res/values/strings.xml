@@ -50,6 +50,22 @@
             \n(not available in the Eclipse Marketplace)</item>
     </string-array>
     
+    <string-array name="debug_content">
+        <item>Debugging in Eclipse (breakpoints, watches, etc.)</item>
+        <item>ADB (Android Debug Bridge): Linux shell, log viewer, upload/download files from device</item>
+        <item>DDMS (Dalvik Debug Monitor Server): Screenshots, thread dumps, heap dumps</item>
+        <item>Traceview: Profiling</item>
+        <item>Hierarchy viewer: Inspect your UI</item>
+    </string-array>
+    
+    <string-array name="debug_log_content">
+        <item>System logger: <i>android.util.Log</i></item>
+        <item>adb logcat (view logs from connected system)</item>
+        <item>aLogcat (view logs on device)</item>
+        <item>Log levels:
+            \nVerbose, Debug, Info, Warn, Error, WTF</item>
+    </string-array>
+    
     <string-array name="dalvik_content">
         <item>Android\'s virtual machine optimized for mobile devices</item>
         <item>Each app gets its own VM</item>
