@@ -26,7 +26,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 import org.lugatgt.zoogie.present.Presentation;
 import org.lugatgt.zoogie.present.R;
@@ -46,8 +46,8 @@ public abstract class PresentationActivity extends Activity {
     
     private Presentation presentation;
     
-    private Button prevBtn;
-    private Button nextBtn;
+    private ImageButton prevBtn;
+    private ImageButton nextBtn;
     
     // CONSTRUCTORS ////////////////////////////////////////////////////////////
     
@@ -82,7 +82,7 @@ public abstract class PresentationActivity extends Activity {
             });
         */
         
-        prevBtn = (Button)findViewById(R.id.prevBtn);
+        prevBtn = (ImageButton)findViewById(R.id.prevBtn);
         prevBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,7 +90,7 @@ public abstract class PresentationActivity extends Activity {
             }
         });
         
-        nextBtn = (Button)findViewById(R.id.nextBtn);
+        nextBtn = (ImageButton)findViewById(R.id.nextBtn);
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
