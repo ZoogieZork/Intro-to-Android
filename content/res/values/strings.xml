@@ -153,4 +153,17 @@
             \n<a href="http://code.google.com/p/acra/">http://code.google.com/p/acra/</a></item>
     </string-array>
     
+    <string-array name="links_content">
+        <item>Android Developers
+            \n<a href="http://developer.android.com/">http://developer.android.com/</a></item>
+        <item>Android API Reference
+            \n<a href="http://developer.android.com/reference/packages.html">http://developer.android.com/reference/packages.html</a></item>
+        <item>Android Developers Blog
+            \n<a href="http://android-developers.blogspot.com/">http://android-developers.blogspot.com/</a></item>
+        <item>android-developers Mailing List
+            \n<a href="http://groups.google.com/group/android-developers">http://groups.google.com/group/android-developers</a></item>
+        <item>Stack Overflow
+            \n<a href="http://stackoverflow.com/">http://stackoverflow.com/</a></item>
+    </string-array>
+    
 </resources>
