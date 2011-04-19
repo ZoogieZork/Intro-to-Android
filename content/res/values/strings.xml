@@ -92,6 +92,12 @@
         <item><b>Low-level:</b> 3D graphics (OpenGL ES), audio (OpenSL ES)</item>
     </string-array>
     
+    <string-array name="api_google_content">
+        <item>MapView</item>
+        <item>WebView</item>
+        <item>Licensing Verification Library</item>
+    </string-array>
+    
     <string-array name="parts_other_content">
         <item>Homescreen widgets</item>
         <item>Background services</item>
