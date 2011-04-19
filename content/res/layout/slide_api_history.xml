@@ -15,107 +15,161 @@
     limitations under the License.
 -->
 
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="match_parent">
-    
-    <TableRow>
-        <TextView
-            style="@style/Slide_ApiHistory_ApiCell"
-            android:textStyle="bold"
-            android:text="API"/>
-        <TextView
-            style="@style/Slide_ApiHistory_VersionCell"
-            android:textStyle="bold"
-            android:text="Version"/>
-        <TextView
-            style="@style/Slide_ApiHistory_NameCell"
-            android:textStyle="bold"
-            android:text="Name"/>
-    </TableRow>
-    
-    <TableRow>
-        <TextView
-            style="@style/Slide_ApiHistory_ApiCell"
-            android:text="11"/>
-        <TextView
-            style="@style/Slide_ApiHistory_VersionCell"
-            android:text="3.0"/>
-        <TextView
-            style="@style/Slide_ApiHistory_NameCell"
-            android:text="Honeycomb"/>
-    </TableRow>
-    
-    <TableRow>
-        <TextView
-            style="@style/Slide_ApiHistory_ApiCell"
-            android:text="10"/>
-        <TextView
-            style="@style/Slide_ApiHistory_VersionCell"
-            android:text="2.3.3"/>
-        <TextView
-            style="@style/Slide_ApiHistory_NameCell"
-            android:text="Gingerbread"/>
-    </TableRow>
-    
-    <TableRow>
-        <TextView
-            style="@style/Slide_ApiHistory_ApiCell"
-            android:text="9"/>
-        <TextView
-            style="@style/Slide_ApiHistory_VersionCell"
-            android:text="2.3"/>
-        <TextView
-            style="@style/Slide_ApiHistory_NameCell"
-            android:text="Gingerbread"/>
-    </TableRow>
-    
-    <TableRow>
-        <TextView
-            style="@style/Slide_ApiHistory_ApiCell"
-            android:text="8"/>
-        <TextView
-            style="@style/Slide_ApiHistory_VersionCell"
-            android:text="2.2"/>
-        <TextView
-            style="@style/Slide_ApiHistory_NameCell"
-            android:text="Froyo"/>
-    </TableRow>
-    
-    <TableRow>
-        <TextView
-            style="@style/Slide_ApiHistory_ApiCell"
-            android:text="7"/>
-        <TextView
-            style="@style/Slide_ApiHistory_VersionCell"
-            android:text="2.1"/>
-        <TextView
-            style="@style/Slide_ApiHistory_NameCell"
-            android:text="Eclair"/>
-    </TableRow>
-    
-    <TableRow>
-        <TextView
-            style="@style/Slide_ApiHistory_ApiCell"
-            android:text="6"/>
-        <TextView
-            style="@style/Slide_ApiHistory_VersionCell"
-            android:text="2.0.1"/>
-        <TextView
-            style="@style/Slide_ApiHistory_NameCell"
-            android:text="Eclair"/>
-    </TableRow>
-    
-    <TableRow>
-        <TextView
-            style="@style/Slide_ApiHistory_ApiCell"
-            android:text="5"/>
-        <TextView
-            style="@style/Slide_ApiHistory_VersionCell"
-            android:text="2.0"/>
-        <TextView
-            style="@style/Slide_ApiHistory_NameCell"
-            android:text="Eclair"/>
-    </TableRow>
-    
-</TableLayout>
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        
+        <TableRow>
+            <TextView
+                style="@style/Slide_ApiHistory_ApiCell"
+                android:textStyle="bold"
+                android:text="API"/>
+            <TextView
+                style="@style/Slide_ApiHistory_VersionCell"
+                android:textStyle="bold"
+                android:text="Version"/>
+            <TextView
+                style="@style/Slide_ApiHistory_NameCell"
+                android:textStyle="bold"
+                android:text="Name"/>
+        </TableRow>
+        
+        <TableRow>
+            <TextView
+                style="@style/Slide_ApiHistory_ApiCell"
+                android:text="11"/>
+            <TextView
+                style="@style/Slide_ApiHistory_VersionCell"
+                android:text="3.0"/>
+            <TextView
+                style="@style/Slide_ApiHistory_NameCell"
+                android:text="Honeycomb"/>
+        </TableRow>
+        
+        <TableRow>
+            <TextView
+                style="@style/Slide_ApiHistory_ApiCell"
+                android:text="10"/>
+            <TextView
+                style="@style/Slide_ApiHistory_VersionCell"
+                android:text="2.3.3"/>
+            <TextView
+                style="@style/Slide_ApiHistory_NameCell"
+                android:text="Gingerbread"/>
+        </TableRow>
+        
+        <TableRow>
+            <TextView
+                style="@style/Slide_ApiHistory_ApiCell"
+                android:text="9"/>
+            <TextView
+                style="@style/Slide_ApiHistory_VersionCell"
+                android:text="2.3"/>
+            <TextView
+                style="@style/Slide_ApiHistory_NameCell"
+                android:text="Gingerbread"/>
+        </TableRow>
+        
+        <TableRow>
+            <TextView
+                style="@style/Slide_ApiHistory_ApiCell"
+                android:text="8"/>
+            <TextView
+                style="@style/Slide_ApiHistory_VersionCell"
+                android:text="2.2"/>
+            <TextView
+                style="@style/Slide_ApiHistory_NameCell"
+                android:text="Froyo"/>
+        </TableRow>
+        
+        <TableRow>
+            <TextView
+                style="@style/Slide_ApiHistory_ApiCell"
+                android:text="7"/>
+            <TextView
+                style="@style/Slide_ApiHistory_VersionCell"
+                android:text="2.1"/>
+            <TextView
+                style="@style/Slide_ApiHistory_NameCell"
+                android:text="Eclair"/>
+        </TableRow>
+        
+        <TableRow>
+            <TextView
+                style="@style/Slide_ApiHistory_ApiCell"
+                android:text="6"/>
+            <TextView
+                style="@style/Slide_ApiHistory_VersionCell"
+                android:text="2.0.1"/>
+            <TextView
+                style="@style/Slide_ApiHistory_NameCell"
+                android:text="Eclair"/>
+        </TableRow>
+        
+        <TableRow>
+            <TextView
+                style="@style/Slide_ApiHistory_ApiCell"
+                android:text="5"/>
+            <TextView
+                style="@style/Slide_ApiHistory_VersionCell"
+                android:text="2.0"/>
+            <TextView
+                style="@style/Slide_ApiHistory_NameCell"
+                android:text="Eclair"/>
+        </TableRow>
+        
+        <TableRow>
+            <TextView
+                style="@style/Slide_ApiHistory_ApiCell"
+                android:text="4"/>
+            <TextView
+                style="@style/Slide_ApiHistory_VersionCell"
+                android:text="1.6"/>
+            <TextView
+                style="@style/Slide_ApiHistory_NameCell"
+                android:text="Donut"/>
+        </TableRow>
+        
+        <TableRow>
+            <TextView
+                style="@style/Slide_ApiHistory_ApiCell"
+                android:text="3"/>
+            <TextView
+                style="@style/Slide_ApiHistory_VersionCell"
+                android:text="1.5"/>
+            <TextView
+                style="@style/Slide_ApiHistory_NameCell"
+                android:text="Cupcake"/>
+        </TableRow>
+        
+        <TableRow>
+            <TextView
+                style="@style/Slide_ApiHistory_ApiCell"
+                android:text="2"/>
+            <TextView
+                style="@style/Slide_ApiHistory_VersionCell"
+                android:text="1.1"/>
+            <TextView
+                style="@style/Slide_ApiHistory_NameCell"
+                android:text=""/>
+        </TableRow>
+        
+        <TableRow>
+            <TextView
+                style="@style/Slide_ApiHistory_ApiCell"
+                android:text="1"/>
+            <TextView
+                style="@style/Slide_ApiHistory_VersionCell"
+                android:text="1.0"/>
+            <TextView
+                style="@style/Slide_ApiHistory_NameCell"
+                android:text=""/>
+        </TableRow>
+        
+    </TableLayout>
+
+</ScrollView>

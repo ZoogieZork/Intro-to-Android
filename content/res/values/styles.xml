@@ -58,8 +58,12 @@
     
     <style name="Slide_ApiHistory_ApiCell" parent="TableCell">
         <item name="android:gravity">right</item>"
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginRight">30dp</item>"
     </style>
-    <style name="Slide_ApiHistory_VersionCell" parent="TableCell"/>
+    <style name="Slide_ApiHistory_VersionCell" parent="TableCell">
+        <item name="android:gravity">center</item>"
+    </style>
     <style name="Slide_ApiHistory_NameCell" parent="TableCell"/>
 
 </resources>
