@@ -46,15 +46,15 @@
         android:paddingRight="40dp"
         android:paddingBottom="40dp">
         
-        <Button
+        <ImageButton
             android:id="@+id/prevBtn"
             style="@style/ToolbarButton"
-            android:drawableRight="@android:drawable/ic_media_previous"/>
-        <Button
+            android:src="@android:drawable/ic_media_previous"/>
+        <ImageButton
             android:id="@+id/nextBtn"
             style="@style/ToolbarButton"
             android:layout_toRightOf="@id/prevBtn"
-            android:drawableLeft="@android:drawable/ic_media_play"/>
+            android:src="@android:drawable/ic_media_play"/>
         
     </RelativeLayout>
     

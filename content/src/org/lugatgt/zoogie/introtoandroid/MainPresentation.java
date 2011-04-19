@@ -37,15 +37,21 @@ public class MainPresentation extends Presentation {
         INTERNALS(InternalsSlide.class, "About Android", "Under the Hood", Transitions.SLIDE_LEFT),
         DALVIK(BasicTextSlide.class, "Dalvik VM", Transitions.SLIDE_UP, R.array.dalvik_content),
         DALVIK_JAVA(BasicTextSlide.class, "Dalvik VM", "Where does Java fit in?", Transitions.SLIDE_LEFT, R.array.dalvik_java_content),
+        API(BasicTextSlide.class, "What's included in the API?", Transitions.SLIDE_UP, R.array.api_content),
+        API_GOOGLE(BasicTextSlide.class, "Other Google APIs", Transitions.SLIDE_LEFT, R.array.api_google_content),
         PARTS(PartsSlide.class, "Anatomy of an Android App", Transitions.SLIDE_LEFT),
         PARTS_OTHER(BasicTextSlide.class, "Anatomy of an Android App", "Other Parts", Transitions.SLIDE_LEFT, R.array.parts_other_content),
+        APPS(BasicTextSlide.class, "Other Kinds of Apps", Transitions.SLIDE_LEFT, R.array.apps_content),
         LIFECYCLE(BasicTextSlide.class, "What happens to my app when it goes away?", Transitions.SLIDE_LEFT, R.array.lifecycle_content),
         STARTING(BasicTextSlide.class, "Getting Started", Transitions.SLIDE_LEFT, R.array.starting_content),
         API_HISTORY(ApiHistorySlide.class, "API History", Transitions.SLIDE_LEFT),
+        DEBUG(BasicTextSlide.class, "Debugging", Transitions.SLIDE_UP, R.array.debug_content),
+        DEBUG_LOG(BasicTextSlide.class, "Debugging", "Logging", Transitions.SLIDE_LEFT, R.array.debug_log_content),
         MARKET(BasicTextSlide.class, "Android Market", Transitions.SLIDE_UP, R.array.market_content),
         MARKET_OTHER(BasicTextSlide.class, "Android Market", "Alternate Markets", Transitions.SLIDE_UP, R.array.market_alt_content),
         MARKET_PUBLISH(BasicTextSlide.class, "Android Market", "Publishing", Transitions.SLIDE_LEFT, R.array.market_publish_content),
-        MAINTENANCE(BasicTextSlide.class, "Oh, no! Something went wrong!", Transitions.FADE, R.array.maintenance_content),
+        MAINTENANCE(BasicTextSlide.class, "Oh, no! Something went wrong!", Transitions.SLIDE_LEFT, R.array.maintenance_content),
+        LINKS(BasicTextSlide.class, "Where to go for help?", Transitions.FADE, R.array.links_content),
         FORK_THIS(ForkThisSlide.class, "Fork This Presentation!", Transitions.SLIDE_LEFT);
         
         private Class<? extends SlideFragment> fragmentClass;

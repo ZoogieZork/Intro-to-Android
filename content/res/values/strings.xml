@@ -20,6 +20,10 @@
     
     <string name="toc_header">Table of Contents</string>
     
+    <string name="byline_presenter">Michael Imamura</string>
+    <string name="byline_event">LUG@GT</string>
+    <string name="byline_date">Wed Apr 20 2011</string>
+    
     <string name="parts_system">System</string>
     <string name="parts_application">Application</string>
     <string name="parts_activity">Activity</string>
@@ -50,6 +54,22 @@
             \n(not available in the Eclipse Marketplace)</item>
     </string-array>
     
+    <string-array name="debug_content">
+        <item>Debugging in Eclipse (breakpoints, watches, etc.)</item>
+        <item>ADB (Android Debug Bridge): Linux shell, log viewer, upload/download files from device</item>
+        <item>DDMS (Dalvik Debug Monitor Server): Screenshots, thread dumps, heap dumps</item>
+        <item>Traceview: Profiling</item>
+        <item>Hierarchy viewer: Inspect your UI</item>
+    </string-array>
+    
+    <string-array name="debug_log_content">
+        <item>System logger: <i>android.util.Log</i></item>
+        <item>adb logcat (view logs from connected system)</item>
+        <item>aLogcat (view logs on device)</item>
+        <item>Log levels:
+            \nVerbose, Debug, Info, Warn, Error, WTF</item>
+    </string-array>
+    
     <string-array name="dalvik_content">
         <item>Android\'s virtual machine optimized for mobile devices</item>
         <item>Each app gets its own VM</item>
@@ -64,11 +84,31 @@
         <item>Android 2.3 (Gingerbread) expands native support significantly</item>
     </string-array>
     
+    <string-array name="api_content">
+        <item><b>Basic:</b> Views, preferences, database, private storage, media playback, access
+            to system databases, ability to talk to other apps / services</item>
+        <item><b>Device capabilities (most require permissions):</b> Network access,
+            location (network and/or GPS), camera, audio capture, Bluetooth, NFC</item>
+        <item><b>Low-level:</b> 3D graphics (OpenGL ES), audio (OpenSL ES)</item>
+    </string-array>
+    
+    <string-array name="api_google_content">
+        <item>MapView</item>
+        <item>WebView</item>
+        <item>Licensing Verification Library</item>
+    </string-array>
+    
     <string-array name="parts_other_content">
         <item>Homescreen widgets</item>
         <item>Background services</item>
         <item>Broadcast receivers</item>
         <item>Dialogs</item>
+    </string-array>
+    
+    <string-array name="apps_content">
+        <item>Live wallpapers</item>
+        <item>Launchers</item>
+        <item>On-screen keyboards</item>
     </string-array>
     
     <string-array name="lifecycle_content">
@@ -111,6 +151,19 @@
         <item>Remember to fill in the \"Recent Changes\" area!</item>
         <item>Enhanced crash reports by integrating ACRA
             \n<a href="http://code.google.com/p/acra/">http://code.google.com/p/acra/</a></item>
+    </string-array>
+    
+    <string-array name="links_content">
+        <item>Android Developers
+            \n<a href="http://developer.android.com/">http://developer.android.com/</a></item>
+        <item>Android API Reference
+            \n<a href="http://developer.android.com/reference/packages.html">http://developer.android.com/reference/packages.html</a></item>
+        <item>Android Developers Blog
+            \n<a href="http://android-developers.blogspot.com/">http://android-developers.blogspot.com/</a></item>
+        <item>android-developers Mailing List
+            \n<a href="http://groups.google.com/group/android-developers">http://groups.google.com/group/android-developers</a></item>
+        <item>Stack Overflow
+            \n<a href="http://stackoverflow.com/">http://stackoverflow.com/</a></item>
     </string-array>
     
 </resources>
