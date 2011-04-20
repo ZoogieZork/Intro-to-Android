@@ -55,7 +55,8 @@ public class MainPresentation extends Presentation {
         MARKET_PUBLISH(BasicTextSlide.class, "Android Market", "Publishing", Transitions.SLIDE_LEFT, R.array.market_publish_content),
         MAINTENANCE(BasicTextSlide.class, "Oh, no! Something went wrong!", Transitions.SLIDE_LEFT, R.array.maintenance_content),
         LINKS(BasicTextSlide.class, "Where to go for help?", Transitions.FADE, R.array.links_content),
-        FORK_THIS(ForkThisSlide.class, "Fork This Presentation!", Transitions.SLIDE_LEFT);
+        FORK_THIS(ForkThisSlide.class, "Fork This Presentation!", Transitions.ZOOM_IN),
+        RAFFLE(RaffleSlide.class, "Raffle Time!", Transitions.SLIDE_LEFT);
         
         private Class<? extends SlideFragment> fragmentClass;
         private String title;
