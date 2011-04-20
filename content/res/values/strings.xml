@@ -118,6 +118,35 @@
         <item>Activity <i>onCreate</i> gets passed a Bundle: If it\'s not null, then use it to restore your state</item>
     </string-array>
     
+    <string-array name="resources_content">
+        <item>Need to support:</item>
+        <item>Different screen orientations&#8230;</item>
+        <item>Different screen sizes&#8230;</item>
+        <item>Different languages&#8230;</item>
+        <item>Different API versions&#8230;</item>
+        <item>&#8230; oh my!</item>
+    </string-array>
+    
+    <string-array name="resources_types_content">
+        <item>Layouts</item>
+        <item>Drawables</item>
+        <item>Animations</item>
+        <item>Menus</item>
+        <item>Colors</item>
+        <item>Values (strings, colors, styles)</item>
+        <item>Raw data</item>
+    </string-array>
+    
+    <string-array name="resources_dirs_content">
+        <item>Directory names look like this:
+            \n<i>type</i>[-<i>qualifier</i>][-<i>qualifier</i>]&#8230;</item>
+        <item>Qualifiers are optional, examples: Screen sizes (\"hdpi\", \"mdpi\"),
+            screen orientation (\"port\", \"land\"), language (\"en\"), etc.</item>
+        <item>Android searches for resources in the most-specific directory, down to the
+            least-specific directory</item>
+        <item>Example: layout-land-hdpi-en-v11</item>
+    </string-array>
+    
     <string-array name="market_content">
         <item>Anybody can publish to the Android Market!
             \n<a href="https://market.android.com/">https://market.android.com/</a></item>
