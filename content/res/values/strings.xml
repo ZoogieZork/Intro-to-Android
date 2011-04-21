@@ -144,7 +144,7 @@
             screen orientation (\"port\", \"land\"), language (\"en\"), etc.</item>
         <item>Android searches for resources in the most-specific directory, down to the
             least-specific directory</item>
-        <item>Example: layout-land-hdpi-en-v11</item>
+        <item>Example: layout-land-mdpi-en-v11</item>
     </string-array>
     
     <string-array name="market_content">
