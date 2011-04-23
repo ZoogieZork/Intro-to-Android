@@ -24,7 +24,7 @@ package org.lugatgt.zoogie.present;
 public interface Transitions {
     
     SlideTransition FADE = new SlideTransition(android.R.animator.fade_out, android.R.animator.fade_in);
-    
+    SlideTransition SPIN = new SlideTransition(R.anim.spin_out, R.anim.spin_in);
     SlideTransition SLIDE_LEFT = new SlideTransition(R.anim.fade_slide_left_out, R.anim.fade_slide_left_in);
     
     SlideTransition SLIDE_UP = new SlideTransition(R.anim.fade_slide_up_out, R.anim.fade_slide_up_in);
