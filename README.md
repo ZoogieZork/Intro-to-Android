@@ -3,6 +3,11 @@ Intro To Android
 
 This is an experimental work-in-progress to build an Android app that is both a presentation and example of Android development.
 
+*Now available on the Android Market!*
+
+https://market.android.com/details?id=org.lugatgt.zoogie.introtoandroid
+
+
 Goals
 -----
 
