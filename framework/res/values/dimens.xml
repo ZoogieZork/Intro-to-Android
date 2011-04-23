@@ -19,4 +19,7 @@
     <!-- Height of the title fragment, in normal and expanded states.  -->
     <dimen name="title_frag_height">120dp</dimen>
     <dimen name="title_frag_expanded_height">350dp</dimen>
+    
+    <!-- The difference in height between the expanded and normal heights. -->
+    <dimen name="title_frag_diff_height">230dp</dimen>
 </resources>
