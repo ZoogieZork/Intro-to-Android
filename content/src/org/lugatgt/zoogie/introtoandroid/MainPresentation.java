@@ -34,7 +34,7 @@ public class MainPresentation extends Presentation {
         
         TITLE(TitleSlide.class, "Intro to Android Development", Transitions.SLIDE_LEFT),
         ANDROID(AndroidSlide.class, "About Android", Transitions.ZOOM_IN),
-        INTERNALS(InternalsSlide.class, "About Android", "Under the Hood", Transitions.SLIDE_LEFT),
+        INTERNALS(InternalsSlide.class, "About Android", "Under the Hood", Transitions.SPIN),
         DALVIK(BasicTextSlide.class, "Dalvik VM", Transitions.SLIDE_UP, R.array.dalvik_content),
         DALVIK_JAVA(BasicTextSlide.class, "Dalvik VM", "Where does Java fit in?", Transitions.SLIDE_LEFT, R.array.dalvik_java_content),
         API(BasicTextSlide.class, "What's included in the API?", Transitions.SLIDE_UP, R.array.api_content),
