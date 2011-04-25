@@ -22,6 +22,8 @@ import org.lugatgt.zoogie.introtoandroid.ui.PartsView;
 import org.lugatgt.zoogie.present.ui.SlideFragment;
 
 import android.animation.ObjectAnimator;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -100,14 +102,16 @@ public class PartsSlide extends SlideFragment {
     // ACTIONS /////////////////////////////////////////////////////////////////
     
     protected void togglePartsExpand() {
-        ObjectAnimator animator;
+    	ObjectAnimator toggle;
         if (partsView.getExpandAmount() < 1.0f) {
-            animator = ObjectAnimator.ofFloat(partsView, "expandAmount", 0.0f, 1.0f);
+            toggle = ObjectAnimator.ofFloat(partsView, "expandAmount", 0.0f, 1.0f);
+            toggle.setInterpolator(new AccelerateInterpolator());
         } else {
-            animator = ObjectAnimator.ofFloat(partsView, "expandAmount", 1.0f, 0.0f);
+            toggle = ObjectAnimator.ofFloat(partsView, "expandAmount", 1.0f, 0.0f);
+            toggle.setInterpolator(new DecelerateInterpolator());
         }
-        animator.setDuration(1000);
-        animator.start();
+        toggle.setDuration(800);
+        toggle.start();
     }
 
 }
