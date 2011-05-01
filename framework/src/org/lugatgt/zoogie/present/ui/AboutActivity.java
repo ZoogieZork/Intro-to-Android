@@ -21,7 +21,6 @@ import java.util.List;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceFragment;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +32,14 @@ import org.lugatgt.zoogie.present.R;
 
 /**
  * Base class for "About" activity, for displaying info about the presentation.
+ * <p>
+ * This is somewhat an abuse of the new style of {@link PreferenceActivity} in
+ * Honeycomb.  It gives us a set of tabs ("headers") which switch between
+ * content fragments.  We don't actually use any of the features for loading
+ * or modifying preferences here.
+ * <p>
+ * Subclasses can add their own content by overriding {@link #onBuildHeaders(List)}.
+ * 
  * @author Michael Imamura
  */
 public abstract class AboutActivity extends PreferenceActivity {
