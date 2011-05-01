@@ -16,10 +16,12 @@
 
 package org.lugatgt.zoogie.introtoandroid.slide;
 
+import org.lugatgt.zoogie.introtoandroid.AboutActivity;
 import org.lugatgt.zoogie.introtoandroid.R;
 import org.lugatgt.zoogie.present.ui.SlideFragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,7 +53,18 @@ public class TitleSlide extends SlideFragment {
         TextView versionLbl = (TextView)view.findViewById(R.id.versionLbl);
         versionLbl.setText("Version " + versionName);
         
+        view.findViewById(R.id.aboutBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onAboutButtonClick();
+            }
+        });
+        
         return view;
+    }
+    
+    protected void onAboutButtonClick() {
+        startActivity(new Intent(getActivity(), AboutActivity.class));
     }
     
 }
