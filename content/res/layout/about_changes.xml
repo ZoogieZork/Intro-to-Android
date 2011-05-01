@@ -15,16 +15,18 @@
     limitations under the License.
 -->
 
-<preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <header
-        android:fragment="org.lugatgt.zoogie.introtoandroid.AboutActivity$AboutFragment"
-        android:title="@string/about_about_title"
-        android:summary="@string/about_about_summary"/>
-
-    <header
-        android:fragment="org.lugatgt.zoogie.introtoandroid.AboutActivity$ChangesFragment"
-        android:title="@string/about_changes_title"
-        android:summary="@string/about_changes_summary"/>
-
-</preference-headers>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+    
+    <LinearLayout
+        android:id="@+id/changesContainer"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"/>
+        
+</ScrollView>

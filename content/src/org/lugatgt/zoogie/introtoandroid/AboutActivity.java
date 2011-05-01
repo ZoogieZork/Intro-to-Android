@@ -20,7 +20,6 @@ import java.util.List;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,6 +60,27 @@ public class AboutActivity extends org.lugatgt.zoogie.present.ui.AboutActivity {
             
             TextView contentTxt = (TextView)view.findViewById(R.id.contentTxt);
             contentTxt.setMovementMethod(LinkMovementMethod.getInstance());
+            
+            return view;
+        }
+        
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////
+    // ChangesFragment
+    
+    public static class ChangesFragment extends Fragment {
+        
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            View view = inflater.inflate(R.layout.about_changes, null);
+            
+            ViewGroup changeListContainer = (ViewGroup)view.findViewById(R.id.changesContainer);
+            for (CharSequence s : getResources().getTextArray(R.array.about_changes)) {
+                TextView textView = new TextView(container.getContext());
+                textView.setText(s);
+                changeListContainer.addView(textView);
+            }
             
             return view;
         }

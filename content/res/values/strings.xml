@@ -31,6 +31,18 @@
         \nKurtis Nelson
     </string>
     
+    <string name="about_changes_title">Version History</string>
+    <string name="about_changes_summary"></string>
+    <string-array name="about_changes">
+        <item><b>Version 1.1</b>
+            \n<li>New \"About\" pages.</li>
+            \n<li>Animation tweaks.</li>
+        </item>
+        <item><b>Version 1.0</b>
+            \n<li>Initial version.</li>
+        </item>
+    </string-array>
+    
     <string name="toc_header">Table of Contents</string>
     
     <string name="byline_presenter">Michael Imamura</string>
