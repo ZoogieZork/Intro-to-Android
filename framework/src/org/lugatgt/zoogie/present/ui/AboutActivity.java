@@ -45,19 +45,6 @@ public abstract class AboutActivity extends PreferenceActivity {
     }
     
     ////////////////////////////////////////////////////////////////////////////
-    // AboutFragment
-    
-    public static class AboutFragment extends PreferenceFragment {
-        
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            
-        }
-        
-    }
-    
-    ////////////////////////////////////////////////////////////////////////////
     // LicenseFragment
     
     public static class LicenseFragment extends Fragment {

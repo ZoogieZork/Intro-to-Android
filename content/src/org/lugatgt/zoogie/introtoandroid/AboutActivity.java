@@ -16,6 +16,19 @@
 
 package org.lugatgt.zoogie.introtoandroid;
 
+import java.util.List;
+
+import android.app.Fragment;
+import android.os.Bundle;
+import android.preference.PreferenceFragment;
+import android.text.method.LinkMovementMethod;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import org.lugatgt.zoogie.present.R;
+
 
 /**
  * The "About" activity.
@@ -28,4 +41,30 @@ package org.lugatgt.zoogie.introtoandroid;
  */
 public class AboutActivity extends org.lugatgt.zoogie.present.ui.AboutActivity {
 
+    // LIFECYCLE ///////////////////////////////////////////////////////////////
+    
+    @Override
+    public void onBuildHeaders(List<Header> target) {
+        // Add our own content-specific pages first, followed by the standard set.
+        loadHeadersFromResource(R.xml.about_content_headers, target);
+        super.onBuildHeaders(target);
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////
+    // AboutFragment
+    
+    public static class AboutFragment extends Fragment {
+        
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            View view = inflater.inflate(R.layout.about_content, null);
+            
+            TextView contentTxt = (TextView)view.findViewById(R.id.contentTxt);
+            contentTxt.setMovementMethod(LinkMovementMethod.getInstance());
+            
+            return view;
+        }
+        
+    }
+    
 }

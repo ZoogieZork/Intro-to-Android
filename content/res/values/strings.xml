@@ -19,6 +19,17 @@
     <string name="app_name">Intro To Android Development</string>
     
     <string name="about_title">About Intro To Android Development</string>
+    <string name="about_content"
+        ><big><b>Intro to Android Development</b></big>
+        \nCopyright &#169; 2011 Michael Imamura.
+        \n\nPresented at the <a href="http://www.lugatgt.org/">Linux Users
+        Group at Georgia Tech</a> (LUG@GT).
+        \n\nThis project is hosted on GitHub.  View the source code, file
+        bug reports and feature suggestions:
+        \n<a href="https://github.com/ZoogieZork/Intro-to-Android">https://github.com/ZoogieZork/Intro-to-Android</a>
+        \n\n<b>Contributors:</b>
+        \nKurtis Nelson
+    </string>
     
     <string name="toc_header">Table of Contents</string>
     

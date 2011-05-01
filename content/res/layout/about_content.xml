@@ -15,11 +15,18 @@
     limitations under the License.
 -->
 
-<preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <header
-        android:fragment="org.lugatgt.zoogie.present.ui.AboutActivity$LicenseFragment"
-        android:title="@string/about_license_title"
-        android:summary="@string/about_license_summary"/>
-
-</preference-headers>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+    
+    <TextView
+        android:id="@+id/contentTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="@string/about_content"/>
+    
+</ScrollView>
