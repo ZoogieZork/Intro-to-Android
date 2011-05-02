@@ -105,11 +105,10 @@ public class PartsSlide extends SlideFragment {
     	ObjectAnimator toggle;
         if (partsView.getExpandAmount() < 1.0f) {
             toggle = ObjectAnimator.ofFloat(partsView, "expandAmount", 0.0f, 1.0f);
-            toggle.setInterpolator(new AccelerateInterpolator());
         } else {
             toggle = ObjectAnimator.ofFloat(partsView, "expandAmount", 1.0f, 0.0f);
-            toggle.setInterpolator(new DecelerateInterpolator());
         }
+        toggle.setInterpolator(new DecelerateInterpolator());
         toggle.setDuration(800);
         toggle.start();
     }
