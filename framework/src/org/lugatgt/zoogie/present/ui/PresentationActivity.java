@@ -38,7 +38,7 @@ import org.lugatgt.zoogie.present.SlideTransition;
  * Main presentation activity.
  * @author Michael Imamura
  */
-public abstract class PresentationActivity extends Activity {
+public abstract class PresentationActivity extends Activity implements Presentation.OnIndexChangedListener {
     
     private static final String TAG = PresentationActivity.class.getSimpleName();
     
@@ -53,6 +53,7 @@ public abstract class PresentationActivity extends Activity {
     
     public PresentationActivity(Presentation presentation) {
         this.presentation = presentation;
+        presentation.setOnIndexChangedListener(this);
     }
     
     // LIFECYCLE ///////////////////////////////////////////////////////////////
@@ -86,7 +87,7 @@ public abstract class PresentationActivity extends Activity {
         prevBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navPrevSlide();
+                presentation.prev();
             }
         });
         
@@ -94,13 +95,13 @@ public abstract class PresentationActivity extends Activity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navNextSlide();
+                presentation.next();
             }
         });
         
         if (savedInstanceState == null) {
             // Starting from scratch.
-            jumpTo(0);
+            onAfterIndexChanged(null, 0, true);
         } else {
             // The title and slide fragments will restore their own state;
             // we only need to restore the presentation internal state.
@@ -137,55 +138,15 @@ public abstract class PresentationActivity extends Activity {
         switch (keyCode) {
             case KeyEvent.KEYCODE_DPAD_RIGHT:
             case KeyEvent.KEYCODE_SPACE:
-                navNextSlide();
+                presentation.next();
                 return true;
                 
             case KeyEvent.KEYCODE_DPAD_LEFT:
-                navPrevSlide();
+                presentation.prev();
                 return true;
         }
         
         return super.onKeyDown(keyCode, event);
-    }
-    
-    // NAVIGATION //////////////////////////////////////////////////////////////
-    
-    /**
-     * Navigate to the previous slide (without transition).
-     */
-    protected void navPrevSlide() {
-        if (presentation.isAtBeginning()) return;
-        
-        Slide prevSlide = presentation.getCurrentSlide();
-        Slide slide = presentation.prev();
-        createFragmentTransaction(prevSlide, slide, false).commit();
-        updateUi(slide, presentation.getCurrentSlideIndex(), false);
-    }
-    
-    /**
-     * Navigate to the next slide (with transition).
-     */
-    protected void navNextSlide() {
-        if (presentation.isAtEnd()) return;
-
-        Slide prevSlide = presentation.getCurrentSlide();
-        Slide slide = presentation.next();
-        createFragmentTransaction(prevSlide, slide, true).commit();
-        updateUi(slide, presentation.getCurrentSlideIndex(), true);
-    }
-    
-    /**
-     * Switch directly to a slide by index.
-     * <p>
-     * No transition animation will be played, even if the slide is the next or
-     * previous to the current slide.
-     * @param idx The slide index.
-     */
-    protected void jumpTo(int idx) {
-        Slide prevSlide = presentation.getCurrentSlide();
-        Slide slide = presentation.jumpTo(idx);
-        createFragmentTransaction(prevSlide, slide, false).commit();
-        updateUi(slide, idx, false);
     }
     
     // CONTENT FRAGMENT ////////////////////////////////////////////////////////
@@ -286,6 +247,14 @@ public abstract class PresentationActivity extends Activity {
         int curSlideIndex = presentation.getCurrentSlideIndex();
         prevBtn.setEnabled(curSlideIndex > 0);
         nextBtn.setEnabled(curSlideIndex < presentation.getSlideCount() - 1);
+    }
+    
+    // Presentation.OnIndexChangedListener /////////////////////////////////////
+    
+    public void onAfterIndexChanged(Slide oldSlide, int oldIndex, boolean immediate) {
+        Slide slide = presentation.getCurrentSlide();
+        createFragmentTransaction(oldSlide, slide, !immediate).commit();
+        updateUi(slide, presentation.getCurrentSlideIndex(), !immediate);
     }
     
 }

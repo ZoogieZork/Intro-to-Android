@@ -37,6 +37,8 @@ public abstract class Presentation {
     private List<Slide> slides;
     private Map<String, Slide> nameToSlide;
     
+    private OnIndexChangedListener indexChangedListener;
+    
     private int idx;
     
     // CONSTRUCTORS ////////////////////////////////////////////////////////////
@@ -58,6 +60,16 @@ public abstract class Presentation {
         }
         
         idx = 0;
+    }
+    
+    // FIELD ACCESS ////////////////////////////////////////////////////////////
+    
+    /**
+     * Set the callback for when the current slide index changes.
+     * @param listener The listener (may be null).
+     */
+    public void setOnIndexChangedListener(OnIndexChangedListener listener) {
+        indexChangedListener = listener;
     }
     
     // SLIDES //////////////////////////////////////////////////////////////////
@@ -95,7 +107,10 @@ public abstract class Presentation {
             throw new ArrayIndexOutOfBoundsException(
                 "Slide index must be 0 <= idx < " + slides.size());
         }
+        Slide oldSlide = getCurrentSlide();
+        int oldIdx = idx;
         idx = i;
+        fireOnIndexChanged(oldSlide, oldIdx, true);
         return getCurrentSlide();
     }
     
@@ -103,7 +118,9 @@ public abstract class Presentation {
         if (idx == 0) {
             return null;
         } else {
+            Slide oldSlide = getCurrentSlide();
             idx--;
+            fireOnIndexChanged(oldSlide, idx + 1, true);
             return getCurrentSlide();
         }
     }
@@ -112,7 +129,9 @@ public abstract class Presentation {
         if (idx == slides.size() - 1) {
             return null;
         } else {
+            Slide oldSlide = getCurrentSlide();
             idx++;
+            fireOnIndexChanged(oldSlide, idx - 1, false);
             return getCurrentSlide();
         }
     }
@@ -125,6 +144,37 @@ public abstract class Presentation {
     
     public void onSaveInstanceState(Bundle outState) {
         outState.putInt(PROP_INDEX, idx);
+    }
+    
+    // EVENTS //////////////////////////////////////////////////////////////////
+    
+    protected void fireOnIndexChanged(Slide oldSlide, int oldIndex, boolean immediate) {
+        if (indexChangedListener != null) {
+            if (oldIndex != idx) {
+                indexChangedListener.onAfterIndexChanged(oldSlide, oldIndex, immediate);
+            }
+        }
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////
+    // OnIndexChangedListener
+    
+    public interface OnIndexChangedListener {
+        
+        /**
+         * Called when the current slide index changes.
+         * <p>
+         * Implementations can find the new slide and slide index by calling
+         * {@link #getCurrentSlide()} and {@link #getCurrentSlideIndex()},
+         * respectively.
+         * 
+         * @param oldSlide The old slide (may be null).
+         * @param oldIndex The old slide index.
+         * @param immediate true if navigating to the new slide immediately;
+         *                  (i.e., should not play any animations).
+         */
+        void onAfterIndexChanged(Slide oldSlide, int oldIndex, boolean immediate);
+        
     }
     
 }
