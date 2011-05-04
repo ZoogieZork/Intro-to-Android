@@ -20,6 +20,8 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -61,7 +63,21 @@ public abstract class PresentationActivity extends Activity implements Presentat
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
+        
+        // Check if we are in a debug build.
+        boolean debugPackage = false;
+        try {
+            debugPackage = (getPackageManager().getPackageInfo(getPackageName(), 0).applicationInfo.flags &
+                ApplicationInfo.FLAG_DEBUGGABLE) != 0;
+        } catch (NameNotFoundException ex) {
+            // Shouldn't happen (in theory).
+            Log.w(TAG, "Failed to retrieve our own debug status", ex);
+        }
+        
+        if (debugPackage) {
+            Log.i(TAG, "Initializing strict mode for debug build");
+            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
+        }
         
         requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         setContentView(R.layout.main);
