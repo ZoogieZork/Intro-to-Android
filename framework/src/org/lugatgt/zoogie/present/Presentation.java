@@ -35,7 +35,7 @@ public abstract class Presentation {
     private static final String PROP_INDEX = PROP_PFX + "index";
     
     private List<Slide> slides;
-    private Map<String, Slide> nameToSlide;
+    private Map<String, Integer> nameToIndex;
     
     private OnIndexChangedListener indexChangedListener;
     
@@ -54,9 +54,10 @@ public abstract class Presentation {
         
         slides = Arrays.asList(initSlides);
         
-        nameToSlide = new HashMap<String, Slide>();
-        for (Slide initSlide : initSlides) {
-            nameToSlide.put(initSlide.getName(), initSlide);
+        nameToIndex = new HashMap<String, Integer>();
+        for (int i = 0; i < initSlides.length; i++) {
+            Slide initSlide = initSlides[i];
+            nameToIndex.put(initSlide.getName(), i);
         }
         
         idx = 0;
@@ -112,6 +113,15 @@ public abstract class Presentation {
         idx = i;
         fireOnIndexChanged(oldSlide, oldIdx, true);
         return getCurrentSlide();
+    }
+    
+    public Slide jumpTo(String name) {
+        Integer newIdx = nameToIndex.get(name);
+        if (newIdx == null) {
+            throw new IllegalArgumentException("Unable to find a slide named \"" + name + '"');
+        } else {
+            return jumpTo(newIdx);
+        }
     }
     
     public Slide prev() {
