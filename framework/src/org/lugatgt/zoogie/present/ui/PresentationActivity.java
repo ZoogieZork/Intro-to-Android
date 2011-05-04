@@ -191,12 +191,19 @@ public abstract class PresentationActivity extends Activity implements Presentat
                 }
             }
         }
-
-        if (fragMgr.findFragmentByTag(CONTENT_FRAG_TAG) != null) {
+        
+        // If there is an existing visible slide fragment, then detach it (mark
+        // it as no longer the active slide) and replace it and mark the new
+        // fragment as active.  Otherwise, just add the new fragment and mark it
+        // as active.
+        SlideFragment oldFragment = (SlideFragment)fragMgr.findFragmentByTag(CONTENT_FRAG_TAG);
+        if (oldFragment != null) {
+            oldFragment.onDetachFromPresentation();
             ft.replace(R.id.slideContainer, slideFrag, CONTENT_FRAG_TAG);
         } else {
             ft.add(R.id.slideContainer, slideFrag, CONTENT_FRAG_TAG);
         }
+        slideFrag.onAttachToPresentation(presentation);
         
         return ft;
     }

@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
+import org.lugatgt.zoogie.present.Presentation;
 import org.lugatgt.zoogie.present.R;
 
 
@@ -33,6 +34,19 @@ import org.lugatgt.zoogie.present.R;
  */
 public abstract class SlideFragment extends Fragment {
 
+    private Presentation presentation;
+    
+    // FIELD ACCESS ////////////////////////////////////////////////////////////
+    
+    /**
+     * Retrieve the presentation this slide fragment is attached to (if any).
+     * @return The presentation, or null if this slide is not the active (visible)
+     *         slide.
+     */
+    protected Presentation getPresentation() {
+        return presentation;
+    }
+    
     // LIFECYCLE ///////////////////////////////////////////////////////////////
     
     @Override
@@ -46,6 +60,28 @@ public abstract class SlideFragment extends Fragment {
         }
         
         return view;
+    }
+    
+    /**
+     * Called when this fragment is attached to the presentation.
+     * <p>
+     * This occurs before the fragment about to become the active
+     * (visible) slide, before the fragment is attached to the activity.
+     * 
+     * @param presentation The active presentation this slide is becoming part of.
+     */
+    public void onAttachToPresentation(Presentation presentation) {
+        this.presentation = presentation;
+    }
+    
+    /**
+     * Called when this fragment is detached from the presentation.
+     * <p>
+     * This occurs when the fragment is no longer the active (visible) slide,
+     * before the fragment is detached from the activity.
+     */
+    public void onDetachFromPresentation() {
+        presentation = null;
     }
     
     // CONTENT /////////////////////////////////////////////////////////////////
