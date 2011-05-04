@@ -77,6 +77,7 @@ public abstract class PresentationActivity extends Activity implements Presentat
         if (debugPackage) {
             Log.i(TAG, "Initializing strict mode for debug build");
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
+            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyLog().penaltyDeath().build());
         }
         
         requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
