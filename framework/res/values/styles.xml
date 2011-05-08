@@ -17,7 +17,7 @@
 
 <resources>
 
-    <style name="AppTheme"/>
+    <style name="AppTheme" parent="@android:style/Theme.NoTitleBar.Fullscreen"/>
     
     <style name="PrefsTheme"/>
     
