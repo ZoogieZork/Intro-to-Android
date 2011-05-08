@@ -16,18 +16,17 @@
 
 package org.lugatgt.zoogie.introtoandroid.slide;
 
-import org.lugatgt.zoogie.introtoandroid.R;
-import org.lugatgt.zoogie.introtoandroid.ui.PartLayer;
-import org.lugatgt.zoogie.introtoandroid.ui.PartsView;
-import org.lugatgt.zoogie.present.ui.SlideFragment;
-
 import android.animation.ObjectAnimator;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
+
+import org.lugatgt.zoogie.introtoandroid.R;
+import org.lugatgt.zoogie.introtoandroid.ui.PartLayer;
+import org.lugatgt.zoogie.introtoandroid.ui.PartsView;
+import org.lugatgt.zoogie.present.ui.SlideFragment;
 
 
 /**
