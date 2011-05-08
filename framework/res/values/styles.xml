@@ -17,9 +17,9 @@
 
 <resources>
 
-    <style name="AppTheme" parent="@android:style/Theme.Holo">
-        <item name="android:windowActionBarOverlay">true</item>
-    </style>
+    <style name="AppTheme"/>
+    
+    <style name="PrefsTheme"/>
     
     <style name="SlideTitleFrame">
         <item name="android:background">#1fffffff</item>
