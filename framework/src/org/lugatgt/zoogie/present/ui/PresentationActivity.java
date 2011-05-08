@@ -16,14 +16,19 @@
 
 package org.lugatgt.zoogie.present.ui;
 
+import org.lugatgt.zoogie.present.Presentation;
+import org.lugatgt.zoogie.present.R;
+import org.lugatgt.zoogie.present.Slide;
+import org.lugatgt.zoogie.present.SlideTransition;
+
 import android.app.ActionBar;
-import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -31,17 +36,12 @@ import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import org.lugatgt.zoogie.present.Presentation;
-import org.lugatgt.zoogie.present.R;
-import org.lugatgt.zoogie.present.Slide;
-import org.lugatgt.zoogie.present.SlideTransition;
-
 
 /**
  * Main presentation activity.
  * @author Michael Imamura
  */
-public abstract class PresentationActivity extends Activity implements Presentation.OnIndexChangedListener {
+public abstract class PresentationActivity extends FragmentActivity implements Presentation.OnIndexChangedListener {
     
     private static final String TAG = PresentationActivity.class.getSimpleName();
     
@@ -67,6 +67,8 @@ public abstract class PresentationActivity extends Activity implements Presentat
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
+        boolean onHoneycomb = (android.os.Build.VERSION.SDK_INT >= 11);
+        
         // Check if we are in a debug build.
         boolean debugPackage = false;
         try {
@@ -78,22 +80,27 @@ public abstract class PresentationActivity extends Activity implements Presentat
         }
         
         if (debugPackage) {
-            Log.i(TAG, "Initializing strict mode for debug build");
-            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
-            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyLog().penaltyDeath().build());
+            // Strict mode is only available in Honeycomb.
+            if (onHoneycomb) {
+                Log.i(TAG, "Initializing strict mode for debug build");
+                StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
+                StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyLog().penaltyDeath().build());
+            }
         }
         
         requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         setContentView(R.layout.main);
         
-        ActionBar bar = getActionBar();
-        bar.setDisplayHomeAsUpEnabled(false);
-        bar.setDisplayUseLogoEnabled(false);
-        bar.setDisplayShowCustomEnabled(true);
-        bar.setCustomView(R.layout.actionbar);
-        
-        View actionbarView = bar.getCustomView();
-        actionbarSlideTitleLbl = (TextView)actionbarView.findViewById(R.id.actionbar_slideTitle);
+        if (onHoneycomb) {
+            ActionBar bar = getActionBar();
+            bar.setDisplayHomeAsUpEnabled(false);
+            bar.setDisplayUseLogoEnabled(false);
+            bar.setDisplayShowCustomEnabled(true);
+            bar.setCustomView(R.layout.actionbar);
+            
+            View actionbarView = bar.getCustomView();
+            actionbarSlideTitleLbl = (TextView)actionbarView.findViewById(R.id.actionbar_slideTitle);
+        }
         
         prevBtn = (ImageButton)findViewById(R.id.prevBtn);
         prevBtn.setOnClickListener(new View.OnClickListener() {
@@ -121,8 +128,10 @@ public abstract class PresentationActivity extends Activity implements Presentat
             updateToolbarState(presentation.getCurrentSlide(), presentation.getCurrentSlideIndex());
         }
         
-        View v = findViewById(R.id.slideContainer);
-        v.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
+        if (onHoneycomb) {
+            View v = findViewById(R.id.slideContainer);
+            v.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
+        }
         
         //FIXME: Hide the ActionBar for now, until we add custom controls.
         //bar.hide();
@@ -171,7 +180,7 @@ public abstract class PresentationActivity extends Activity implements Presentat
      *         It is up to the caller to amend and commit it.
      */
     protected FragmentTransaction createFragmentTransaction(Slide prevSlide, Slide slide, boolean animated) {
-        FragmentManager fragMgr = getFragmentManager();
+        FragmentManager fragMgr = getSupportFragmentManager();
         
         // Create the slide fragment.
         SlideFragment slideFrag;
@@ -239,7 +248,9 @@ public abstract class PresentationActivity extends Activity implements Presentat
      * @param idx The index of the current slide.
      */
     protected void updateNavigation(Slide slide, int idx) {
-        actionbarSlideTitleLbl.setText(slide.getTitle(this));
+        if (actionbarSlideTitleLbl != null) {
+            actionbarSlideTitleLbl.setText(slide.getTitle(this));
+        }
     }
     
     /**
@@ -249,7 +260,7 @@ public abstract class PresentationActivity extends Activity implements Presentat
      * @param animate true to animate the transition, if possible.
      */
     protected void updateTitle(Slide slide, int idx, boolean animate) {
-        FragmentManager fragMgr = getFragmentManager();
+        FragmentManager fragMgr = getSupportFragmentManager();
         TitleFragment titleFrag = (TitleFragment)fragMgr.findFragmentById(R.id.titleFragment);
         titleFrag.setSlide(slide, idx, animate);
     }

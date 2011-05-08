@@ -17,9 +17,9 @@
 package org.lugatgt.zoogie.present.ui;
 
 import android.animation.ObjectAnimator;
-import android.app.Fragment;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
