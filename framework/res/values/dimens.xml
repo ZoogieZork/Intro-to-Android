@@ -22,4 +22,9 @@
     
     <!-- The difference in height between the expanded and normal heights. -->
     <dimen name="title_frag_diff_height">250dp</dimen>
+    
+    <dimen name="title_frag_textSize">32sp</dimen>
+    
+    <!-- Padding around the edges of each slide. -->
+    <dimen name="slide_padding">10dp</dimen>
 </resources>
