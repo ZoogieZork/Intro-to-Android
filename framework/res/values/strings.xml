@@ -16,6 +16,8 @@
 -->
 
 <resources>
+    <string name="app_name">Presentation</string>
+
     <string name="title_slide_title">Title</string>
     
     <string name="menu_about">About</string>

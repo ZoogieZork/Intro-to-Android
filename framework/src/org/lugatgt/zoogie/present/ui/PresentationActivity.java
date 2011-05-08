@@ -29,6 +29,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import org.lugatgt.zoogie.present.Presentation;
 import org.lugatgt.zoogie.present.R;
@@ -47,6 +48,8 @@ public abstract class PresentationActivity extends Activity implements Presentat
     private static final String CONTENT_FRAG_TAG = "contentSlide";
     
     private Presentation presentation;
+    
+    private TextView actionbarSlideTitleLbl;
     
     private ImageButton prevBtn;
     private ImageButton nextBtn;
@@ -86,19 +89,11 @@ public abstract class PresentationActivity extends Activity implements Presentat
         ActionBar bar = getActionBar();
         bar.setDisplayHomeAsUpEnabled(false);
         bar.setDisplayUseLogoEnabled(false);
-        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        bar.setDisplayShowCustomEnabled(true);
+        bar.setCustomView(R.layout.actionbar);
         
-        /*FIXME: Disabled until custom action bar is implemented.
-        bar.setListNavigationCallbacks(
-            new SlideListSpinnerAdapter(presentation, this),
-            new ActionBar.OnNavigationListener() {
-                @Override
-                public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-                    jumpTo(itemPosition);
-                    return true;
-                }
-            });
-        */
+        View actionbarView = bar.getCustomView();
+        actionbarSlideTitleLbl = (TextView)actionbarView.findViewById(R.id.actionbar_slideTitle);
         
         prevBtn = (ImageButton)findViewById(R.id.prevBtn);
         prevBtn.setOnClickListener(new View.OnClickListener() {
@@ -123,7 +118,6 @@ public abstract class PresentationActivity extends Activity implements Presentat
             // The title and slide fragments will restore their own state;
             // we only need to restore the presentation internal state.
             presentation.onRestoreInstanceState(savedInstanceState);
-            bar.setSelectedNavigationItem(presentation.getCurrentSlideIndex());
             updateToolbarState(presentation.getCurrentSlide(), presentation.getCurrentSlideIndex());
         }
         
@@ -131,7 +125,7 @@ public abstract class PresentationActivity extends Activity implements Presentat
         v.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
         
         //FIXME: Hide the ActionBar for now, until we add custom controls.
-        bar.hide();
+        //bar.hide();
     }
     
     @Override
@@ -245,9 +239,7 @@ public abstract class PresentationActivity extends Activity implements Presentat
      * @param idx The index of the current slide.
      */
     protected void updateNavigation(Slide slide, int idx) {
-        /*FIXME: Disabled since it triggers onNavigationItemSelected().
-        getActionBar().setSelectedNavigationItem(idx);
-        */
+        actionbarSlideTitleLbl.setText(slide.getTitle(this));
     }
     
     /**
