@@ -77,7 +77,7 @@ public class AboutActivity extends org.lugatgt.zoogie.present.ui.AboutActivity {
             
             ViewGroup changeListContainer = (ViewGroup)view.findViewById(R.id.changesContainer);
             for (CharSequence s : getResources().getTextArray(R.array.about_changes)) {
-                TextView textView = new TextView(container.getContext());
+                TextView textView = (TextView)inflater.inflate(R.layout.about_changes_item, null);
                 textView.setText(s);
                 changeListContainer.addView(textView);
             }
