@@ -121,7 +121,11 @@ public abstract class PresentationActivity extends Activity implements Presentat
             // The title and slide fragments will restore their own state;
             // we only need to restore the presentation internal state.
             presentation.onRestoreInstanceState(savedInstanceState);
-            updateToolbarState(presentation.getCurrentSlide(), presentation.getCurrentSlideIndex());
+            
+            Slide curSlide = presentation.getCurrentSlide();
+            int curSlideIdx = presentation.getCurrentSlideIndex();
+            updateNavigation(curSlide, curSlideIdx);
+            updateToolbarState(curSlide, curSlideIdx);
         }
         
         View v = findViewById(R.id.slideContainer);
