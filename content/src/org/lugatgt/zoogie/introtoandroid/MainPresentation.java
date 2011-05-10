@@ -19,9 +19,11 @@ package org.lugatgt.zoogie.introtoandroid;
 import java.lang.reflect.InvocationTargetException;
 
 import android.content.Context;
+import android.view.Menu;
 
 import org.lugatgt.zoogie.introtoandroid.slide.*;
 import org.lugatgt.zoogie.present.Presentation;
+import org.lugatgt.zoogie.present.R;
 import org.lugatgt.zoogie.present.Slide;
 import org.lugatgt.zoogie.present.SlideTransition;
 import org.lugatgt.zoogie.present.Transitions;

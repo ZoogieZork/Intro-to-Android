@@ -16,13 +16,52 @@
 
 package org.lugatgt.zoogie.introtoandroid;
 
+import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import org.lugatgt.zoogie.present.R;
 import org.lugatgt.zoogie.present.ui.PresentationActivity;
 
 
+/**
+ * Main presentation activity.
+ * <p>
+ * This subclass of {@link PresentationActivity} adds our own content-specific
+ * menu items and other customizations.
+ * 
+ * @author Michael Imamura
+ */
 public class MainActivity extends PresentationActivity {
 
+    // CONSTRUCTORS ////////////////////////////////////////////////////////////
+    
     public MainActivity() {
         super(new MainPresentation());
+    }
+    
+    // LIFECYCLE ///////////////////////////////////////////////////////////////
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // First add the default menu items, then append our own.
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.presentation_extra, menu);
+        return true;
+    }
+    
+    // EVENTS //////////////////////////////////////////////////////////////////
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_about:
+                startActivity(new Intent(this, AboutActivity.class));
+                return true;
+                
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
     
 }

@@ -26,6 +26,9 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
@@ -129,6 +132,12 @@ public abstract class PresentationActivity extends Activity implements Presentat
     }
     
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.presentation, menu);
+        return true;
+    }
+    
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         
@@ -158,6 +167,18 @@ public abstract class PresentationActivity extends Activity implements Presentat
         }
         
         return super.onKeyDown(keyCode, event);
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_title:
+                presentation.jumpTo(0);
+                return true;
+                
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
     
     // CONTENT FRAGMENT ////////////////////////////////////////////////////////
