@@ -15,18 +15,10 @@
     limitations under the License.
 -->
 
-<resources>
-    <!--
-        How long the animation between slides should last.
-        Default is the system-configured animation time.
-    -->
-    <integer name="slideTransitionDuration">@android:integer/config_mediumAnimTime</integer>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     
-    <!--
-        The duration for expanding/minimizing the slide when showing or
-        hiding the table of contents.
-        Default is the system-configured animation time.
-    -->
-    <integer name="tocTransitionDuration">@android:integer/config_mediumAnimTime</integer>
+    <include android:id="@+id/presentationFrame" layout="@layout/main"/>
     
-</resources>
+</FrameLayout>

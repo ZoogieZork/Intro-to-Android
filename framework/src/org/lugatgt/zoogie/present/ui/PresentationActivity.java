@@ -16,6 +16,7 @@
 
 package org.lugatgt.zoogie.present.ui;
 
+import android.animation.ObjectAnimator;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -29,7 +30,9 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -49,10 +52,15 @@ public abstract class PresentationActivity extends Activity implements Presentat
     
     private static final String CONTENT_FRAG_TAG = "contentSlide";
     
+    private static final String TOC_VISIBLE_KEY = "tocVisible";
+    
     private Presentation presentation;
+    private boolean tocVisible = false;
     
     private TextView actionbarSlideTitleLbl;
     
+    private ViewGroup slideFrame;
+    private ViewGroup mainToolbarFrame;
     private ImageButton prevBtn;
     private ImageButton nextBtn;
     
@@ -86,7 +94,7 @@ public abstract class PresentationActivity extends Activity implements Presentat
         }
         
         requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-        setContentView(R.layout.main);
+        setContentView(R.layout.toc);
         
         ActionBar bar = getActionBar();
         bar.setDisplayHomeAsUpEnabled(false);
@@ -96,6 +104,9 @@ public abstract class PresentationActivity extends Activity implements Presentat
         
         View actionbarView = bar.getCustomView();
         actionbarSlideTitleLbl = (TextView)actionbarView.findViewById(R.id.actionbar_slideTitle);
+        
+        slideFrame = (ViewGroup)findViewById(R.id.presentationFrame);
+        mainToolbarFrame = (ViewGroup)findViewById(R.id.mainToolbarFrame);
         
         prevBtn = (ImageButton)findViewById(R.id.prevBtn);
         prevBtn.setOnClickListener(new View.OnClickListener() {
@@ -125,6 +136,9 @@ public abstract class PresentationActivity extends Activity implements Presentat
             int curSlideIdx = presentation.getCurrentSlideIndex();
             updateNavigation(curSlide, curSlideIdx);
             updateToolbarState(curSlide, curSlideIdx);
+            
+            tocVisible = savedInstanceState.getBoolean(TOC_VISIBLE_KEY);
+            setTocViewState(tocVisible ? 0.0f : 1.0f);
         }
         
         View v = findViewById(R.id.slideContainer);
@@ -145,6 +159,7 @@ public abstract class PresentationActivity extends Activity implements Presentat
         super.onSaveInstanceState(outState);
         
         presentation.onSaveInstanceState(outState);
+        outState.putBoolean(TOC_VISIBLE_KEY, tocVisible);
     }
     
     // EVENTS //////////////////////////////////////////////////////////////////
@@ -177,6 +192,10 @@ public abstract class PresentationActivity extends Activity implements Presentat
         switch (item.getItemId()) {
             case R.id.menu_title:
                 presentation.jumpTo(0);
+                return true;
+                
+            case R.id.menu_toc:
+                toggleTableOfContents();
                 return true;
                 
             default:
@@ -241,6 +260,39 @@ public abstract class PresentationActivity extends Activity implements Presentat
         slideFrag.onAttachToPresentation(presentation);
         
         return ft;
+    }
+    
+    // TABLE OF CONTENTS ///////////////////////////////////////////////////////
+    
+    /**
+     * Toggle the visible state of the table of contents.
+     */
+    protected void toggleTableOfContents() {
+        ObjectAnimator anim = null;
+        if (tocVisible) {
+            anim = ObjectAnimator.ofFloat(this, "tocViewState", 0.0f, 1.0f);
+            //TODO: Destroy the TOC views when animation is finished.
+        } else {
+            anim = ObjectAnimator.ofFloat(this, "tocViewState", 1.0f, 0.0f);
+            //TODO: Create the TOC views.
+        }
+        anim.setDuration(getResources().getInteger(R.integer.tocTransitionDuration));
+        anim.setInterpolator(new DecelerateInterpolator());
+        anim.start();
+        
+        tocVisible = !tocVisible;
+    }
+    
+    /**
+     * Set how far expanded the slide fragment container is.
+     * @param amount 1.0f for fully-expanded (table of contents not visible) to
+     *               0.0f for fully-shrunk (table of contents visible).
+     */
+    public void setTocViewState(float amount) {
+        slideFrame.setTranslationX((1.0f - amount) * slideFrame.getWidth() / 4.0f);
+        slideFrame.setScaleX((1.0f/3.0f) + (amount * (2.0f / 3.0f)));
+        slideFrame.setScaleY((1.0f/3.0f) + (amount * (2.0f / 3.0f)));
+        mainToolbarFrame.setAlpha(amount);
     }
     
     // VIEW STATE //////////////////////////////////////////////////////////////
