@@ -16,7 +16,7 @@
 -->
 
 <resources>
-    <!-- Height of the title fragment, in normal and expanded states.  -->
+    <!-- Height of the title fragment, in normal and expanded states. -->
     <dimen name="title_frag_height">120dp</dimen>
     <dimen name="title_frag_expanded_height">350dp</dimen>
     
