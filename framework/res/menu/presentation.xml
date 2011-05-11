@@ -21,5 +21,7 @@
         android:title="@string/menu_title"/>
     <item
         android:id="@+id/menu_toc"
-        android:title="@string/menu_toc"/>
+        android:icon="@drawable/menu_toc"
+        android:title="@string/menu_toc"
+        android:showAsAction="always"/>
 </menu>
