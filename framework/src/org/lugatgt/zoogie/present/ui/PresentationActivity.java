@@ -25,6 +25,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.text.SpannableStringBuilder;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -316,7 +317,22 @@ public abstract class PresentationActivity extends Activity implements Presentat
      * @param idx The index of the current slide.
      */
     protected void updateNavigation(Slide slide, int idx) {
-        actionbarSlideTitleLbl.setText(slide.getTitle(this));
+        CharSequence title = "";
+        CharSequence subtitle = "";
+        if (idx == 0) {
+            title = getText(R.string.title_slide_title);
+        } else {
+            title = slide.getTitle(this);
+            subtitle = slide.getSubtitle(this);
+        }
+        
+        CharSequence combined;
+        if (subtitle != null && subtitle.length() > 0) {
+            combined = new SpannableStringBuilder().append(title).append(": ").append(subtitle);
+        } else {
+            combined = title;
+        }
+        actionbarSlideTitleLbl.setText(combined);
     }
     
     /**
