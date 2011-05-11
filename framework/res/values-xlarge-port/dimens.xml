@@ -24,6 +24,6 @@
     <dimen name="title_frag_diff_height">230dp</dimen>
     
     <!-- Translation for the minimized slide view in the Table of Contents view mode. -->
-    <dimen name="toc_slide_shrink_translate_x">250dp</dimen>
-    <dimen name="toc_slide_shrink_translate_y">-150dp</dimen>
+    <dimen name="toc_slide_shrink_translate_x">-150dp</dimen>
+    <dimen name="toc_slide_shrink_translate_y">400dp</dimen>
 </resources>
