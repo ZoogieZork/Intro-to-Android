@@ -15,12 +15,25 @@
     limitations under the License.
 -->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tocFrame"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingTop="?android:actionBarSize"
+    android:visibility="gone">
     
-    <include android:id="@+id/presentationFrame" layout="@layout/main"/>
+    <ListView
+        android:id="@+id/tocList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:choiceMode="singleChoice"/>
+        
+    <!--TODO: Slide notes and toolbar. -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
     
-    <include android:id="@+id/tocFrame" layout="@layout/toc_content"/>
-    
-</FrameLayout>
+</LinearLayout>

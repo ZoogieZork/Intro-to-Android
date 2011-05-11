@@ -25,7 +25,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.text.SpannableStringBuilder;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -34,7 +33,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.lugatgt.zoogie.present.Presentation;
@@ -58,18 +60,31 @@ public abstract class PresentationActivity extends Activity implements Presentat
     private Presentation presentation;
     private boolean tocVisible = false;
     
+    // Cache the slide titles (we assume that they won't change).
+    private CharSequence[] slideTitles;
+    
     private TextView actionbarSlideTitleLbl;
     
     private ViewGroup slideFrame;
     private ViewGroup mainToolbarFrame;
+    private ViewGroup tocFrame;
+    
     private ImageButton prevBtn;
     private ImageButton nextBtn;
+    
+    private ListView tocList;
     
     // CONSTRUCTORS ////////////////////////////////////////////////////////////
     
     public PresentationActivity(Presentation presentation) {
         this.presentation = presentation;
         presentation.setOnIndexChangedListener(this);
+    }
+    
+    // FIELD ACCESS ////////////////////////////////////////////////////////////
+    
+    protected Presentation getPresentation() {
+        return presentation;
     }
     
     // LIFECYCLE ///////////////////////////////////////////////////////////////
@@ -94,6 +109,11 @@ public abstract class PresentationActivity extends Activity implements Presentat
             StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyLog().penaltyDeath().build());
         }
         
+        slideTitles = presentation.getSlideTitles(this);
+        // Since the first slide's title is the name of the presentation,
+        // we replace it for listing purposes with just "Title".
+        slideTitles[0] = getString(R.string.title_slide_title);
+        
         requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         setContentView(R.layout.toc);
         
@@ -108,6 +128,7 @@ public abstract class PresentationActivity extends Activity implements Presentat
         
         slideFrame = (ViewGroup)findViewById(R.id.presentationFrame);
         mainToolbarFrame = (ViewGroup)findViewById(R.id.mainToolbarFrame);
+        tocFrame = (ViewGroup)findViewById(R.id.tocFrame);
         
         prevBtn = (ImageButton)findViewById(R.id.prevBtn);
         prevBtn.setOnClickListener(new View.OnClickListener() {
@@ -140,6 +161,9 @@ public abstract class PresentationActivity extends Activity implements Presentat
             
             tocVisible = savedInstanceState.getBoolean(TOC_VISIBLE_KEY);
             setTocViewState(tocVisible ? 0.0f : 1.0f);
+            if (tocVisible) {
+                initToc();
+            }
         }
         
         View v = findViewById(R.id.slideContainer);
@@ -275,7 +299,7 @@ public abstract class PresentationActivity extends Activity implements Presentat
             //TODO: Destroy the TOC views when animation is finished.
         } else {
             anim = ObjectAnimator.ofFloat(this, "tocViewState", 1.0f, 0.0f);
-            //TODO: Create the TOC views.
+            initToc();
         }
         anim.setDuration(getResources().getInteger(R.integer.tocTransitionDuration));
         anim.setInterpolator(new DecelerateInterpolator());
@@ -295,6 +319,32 @@ public abstract class PresentationActivity extends Activity implements Presentat
         slideFrame.setScaleX((1.0f/3.0f) + (amount * (2.0f / 3.0f)));
         slideFrame.setScaleY((1.0f/3.0f) + (amount * (2.0f / 3.0f)));
         mainToolbarFrame.setAlpha(amount);
+        
+        tocFrame.setVisibility((amount < 0.99f) ? View.VISIBLE : View.GONE);
+        tocFrame.setScaleX((2.0f * amount) + 1.0f);
+        tocFrame.setScaleY((2.0f * amount) + 1.0f);
+        tocFrame.setAlpha(1.0f - amount);
+    }
+    
+    /**
+     * 
+     */
+    protected void initToc() {
+        // Lazily initialize the table of contents list.
+        if (tocList == null) {
+            tocList = (ListView)findViewById(R.id.tocList);
+            tocList.setAdapter(new ArrayAdapter<CharSequence>(this, R.layout.toc_list_item, slideTitles));
+            tocList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    getPresentation().jumpTo(position);
+                }
+            });
+        }
+        
+        int pos = presentation.getCurrentSlideIndex();
+        tocList.setSelection(pos);
+        tocList.setItemChecked(pos, true);
     }
     
     // VIEW STATE //////////////////////////////////////////////////////////////
@@ -317,22 +367,7 @@ public abstract class PresentationActivity extends Activity implements Presentat
      * @param idx The index of the current slide.
      */
     protected void updateNavigation(Slide slide, int idx) {
-        CharSequence title = "";
-        CharSequence subtitle = "";
-        if (idx == 0) {
-            title = getString(R.string.title_slide_title);
-        } else {
-            title = slide.getTitle(this);
-            subtitle = slide.getSubtitle(this);
-        }
-        
-        CharSequence combined;
-        if (subtitle != null && subtitle.length() > 0) {
-            combined = new SpannableStringBuilder().append(title).append(": ").append(subtitle);
-        } else {
-            combined = title;
-        }
-        actionbarSlideTitleLbl.setText(combined);
+        actionbarSlideTitleLbl.setText(slideTitles[idx]);
     }
     
     /**

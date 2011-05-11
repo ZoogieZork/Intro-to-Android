@@ -23,6 +23,7 @@ import java.util.Map;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
 
 
 /**
@@ -75,12 +76,38 @@ public abstract class Presentation {
     
     // SLIDES //////////////////////////////////////////////////////////////////
     
+    /**
+     * Retrieve a list of combined slide titles (title and subtitle).
+     * @param ctx The current context, to load resources (may not be null).
+     * @return The list of titles (never null, never empty).
+     */
     public CharSequence[] getSlideTitles(Context ctx) {
         CharSequence[] titles = new CharSequence[slides.size()];
         for (int i = 0; i < slides.size(); i++) {
-            titles[i] = slides.get(i).getTitle(ctx);
+            titles[i] = generateSlideTitle(ctx, slides.get(i), i);
         }
         return titles;
+    }
+    
+    /**
+     * Generate the combined slide title (title and subtitle).
+     * @param ctx The current context, to load resources (may not be null).
+     * @param slide The slide (may not be null).
+     * @param idx The zero-based slide index.
+     * @return The combined slide title (never null, may be empty).
+     */
+    protected CharSequence generateSlideTitle(Context ctx, Slide slide, int idx) {
+        CharSequence title = slide.getTitle(ctx);
+        CharSequence subtitle = slide.getSubtitle(ctx);
+        
+        CharSequence combined;
+        if (subtitle != null && subtitle.length() > 0) {
+            combined = new SpannableStringBuilder().append(title).append(": ").append(subtitle);
+        } else {
+            combined = title;
+        }
+        
+        return combined;
     }
     
     public Slide getCurrentSlide() {
