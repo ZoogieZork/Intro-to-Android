@@ -320,7 +320,7 @@ public abstract class PresentationActivity extends Activity implements Presentat
         CharSequence title = "";
         CharSequence subtitle = "";
         if (idx == 0) {
-            title = getText(R.string.title_slide_title);
+            title = getString(R.string.title_slide_title);
         } else {
             title = slide.getTitle(this);
             subtitle = slide.getSubtitle(this);
