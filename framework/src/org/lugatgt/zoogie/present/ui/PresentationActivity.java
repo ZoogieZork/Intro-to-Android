@@ -217,6 +217,9 @@ public abstract class PresentationActivity extends Activity implements Presentat
         switch (item.getItemId()) {
             case R.id.menu_title:
                 presentation.jumpTo(0);
+                if (tocVisible) {
+                    toggleTableOfContents();
+                }
                 return true;
                 
             case R.id.menu_toc:
