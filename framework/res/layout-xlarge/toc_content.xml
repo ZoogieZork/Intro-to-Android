@@ -20,6 +20,8 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:transformPivotX="@dimen/toc_frame_pivot_x"
+    android:transformPivotY="@dimen/toc_frame_pivot_y"
     android:paddingTop="?android:actionBarSize"
     android:visibility="gone">
     
