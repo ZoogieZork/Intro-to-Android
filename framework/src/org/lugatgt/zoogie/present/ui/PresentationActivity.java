@@ -146,6 +146,21 @@ public abstract class PresentationActivity extends Activity implements Presentat
             }
         });
         
+        //FIXME: Tapping on the title frag toggles the action bar visibility.
+        //       This is just temporary until we get a better way to hide the
+        //       action bar.
+        getFragmentManager().findFragmentById(R.id.titleFragment).getView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActionBar actionBar = getActionBar();
+                if (actionBar.isShowing()) {
+                    actionBar.hide();
+                } else {
+                    actionBar.show();
+                }
+            }
+        });
+        
         if (savedInstanceState == null) {
             // Starting from scratch.
             onAfterIndexChanged(null, 0, true);
@@ -168,9 +183,6 @@ public abstract class PresentationActivity extends Activity implements Presentat
         
         View v = findViewById(R.id.slideContainer);
         v.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
-        
-        //FIXME: Hide the ActionBar for now, until we add custom controls.
-        //bar.hide();
     }
     
     @Override
@@ -308,11 +320,15 @@ public abstract class PresentationActivity extends Activity implements Presentat
     protected void toggleTableOfContents() {
         ObjectAnimator anim = null;
         if (tocVisible) {
+            // Leaving TOC mode.
             anim = ObjectAnimator.ofFloat(this, "tocViewState", 0.0f, 1.0f);
             //TODO: Destroy the TOC views when animation is finished.
+            getActionBar().hide();
         } else {
+            // Entering TOC mode.
             anim = ObjectAnimator.ofFloat(this, "tocViewState", 1.0f, 0.0f);
             initToc();
+            getActionBar().show();
         }
         anim.setDuration(getResources().getInteger(R.integer.tocTransitionDuration));
         anim.setInterpolator(new DecelerateInterpolator());
