@@ -24,8 +24,8 @@
     <dimen name="title_frag_diff_height">320dp</dimen>
     
     <!-- Translation for the minimized slide view in the Table of Contents view mode. -->
-    <dimen name="toc_slide_shrink_translate_x">-150dp</dimen>
-    <dimen name="toc_slide_shrink_translate_y">400dp</dimen>
+    <dimen name="toc_slide_shrink_translate_x">133dp</dimen>
+    <dimen name="toc_slide_shrink_translate_y">747dp</dimen>
     
     <!-- Pivot point for Table of Contents frame (for animations). -->
     <dimen name="toc_frame_pivot_x">0dp</dimen>

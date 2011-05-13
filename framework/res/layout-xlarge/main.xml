@@ -16,6 +16,8 @@
 -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:transformPivotX="0dp"
+    android:transformPivotY="0dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     

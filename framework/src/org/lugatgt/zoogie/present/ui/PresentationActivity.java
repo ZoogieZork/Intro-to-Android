@@ -327,8 +327,8 @@ public abstract class PresentationActivity extends Activity implements Presentat
      *               0.0f for fully-shrunk (table of contents visible).
      */
     public void setTocViewState(float amount) {
-        slideFrame.setTranslationX((1.0f - amount) * getResources().getDimension(R.dimen.toc_slide_shrink_translate_x));
-        slideFrame.setTranslationY((1.0f - amount) * getResources().getDimension(R.dimen.toc_slide_shrink_translate_y));
+        slideFrame.setX((1.0f - amount) * getResources().getDimension(R.dimen.toc_slide_shrink_translate_x));
+        slideFrame.setY((1.0f - amount) * getResources().getDimension(R.dimen.toc_slide_shrink_translate_y));
         slideFrame.setScaleX((1.0f/3.0f) + (amount * (2.0f / 3.0f)));
         slideFrame.setScaleY((1.0f/3.0f) + (amount * (2.0f / 3.0f)));
         mainToolbarFrame.setAlpha(amount);
