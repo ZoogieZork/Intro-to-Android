@@ -213,6 +213,16 @@ public abstract class PresentationActivity extends Activity implements Presentat
     }
     
     @Override
+    public void onBackPressed() {
+        // Going back from TOC mode is normal mode.
+        if (tocVisible) {
+            toggleTableOfContents();
+        } else {
+            super.onBackPressed();
+        }
+    }
+    
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_title:
