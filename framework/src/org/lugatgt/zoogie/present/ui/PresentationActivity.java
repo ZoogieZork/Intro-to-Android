@@ -164,6 +164,15 @@ public abstract class PresentationActivity extends Activity implements Presentat
             }
         });
         
+        // Tapping on the slide preview in TOC mode switches back to
+        // presentation mode.
+        findViewById(R.id.slidePreview).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleTableOfContents();
+            }
+        });
+        
         // Tapping on the title frag makes the action bar visible and resets
         // the fade-out timer.
         getFragmentManager().findFragmentById(R.id.titleFragment).getView().setOnClickListener(new View.OnClickListener() {
@@ -379,7 +388,7 @@ public abstract class PresentationActivity extends Activity implements Presentat
     }
     
     /**
-     * 
+     * Set up the table of contents views.
      */
     protected void initToc() {
         // Lazily initialize the table of contents list.

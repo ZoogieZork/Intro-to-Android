@@ -34,6 +34,7 @@
         
     <!--TODO: Slide notes and toolbar. -->
     <View
+        android:id="@+id/slidePreview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"/>
