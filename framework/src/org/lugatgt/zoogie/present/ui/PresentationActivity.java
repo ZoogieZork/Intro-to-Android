@@ -25,7 +25,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.KeyEvent;
