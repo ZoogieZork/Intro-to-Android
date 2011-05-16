@@ -48,6 +48,16 @@ import org.lugatgt.zoogie.present.SlideTransition;
 
 /**
  * Main presentation activity.
+ * <p>
+ * The activity can be in one of two states, based on the {@code tocVisible}
+ * flag:
+ * <ol>
+ * <li>Normal ("presentation") mode: This is the initial mode.</li>
+ * <li>Table of Contents ("TOC") mode: The slide view is minimized to a
+ *     preview in the corner, allowing the user to jump quickly to any
+ *     slide in the presentation.</li>
+ * </ol>
+ * 
  * @author Michael Imamura
  */
 public abstract class PresentationActivity extends Activity implements Presentation.OnIndexChangedListener {
@@ -64,7 +74,7 @@ public abstract class PresentationActivity extends Activity implements Presentat
     private Presentation presentation;
     private boolean tocVisible = false;
     
-    // Cache the slide titles (we assume that they won't change).
+    /** Cache of the slide titles (we assume that they won't change). */
     private CharSequence[] slideTitles;
     
     private View rootView;
@@ -379,6 +389,8 @@ public abstract class PresentationActivity extends Activity implements Presentat
         slideFrame.setY((1.0f - amount) * getResources().getDimension(R.dimen.toc_slide_shrink_translate_y));
         slideFrame.setScaleX((1.0f/3.0f) + (amount * (2.0f / 3.0f)));
         slideFrame.setScaleY((1.0f/3.0f) + (amount * (2.0f / 3.0f)));
+        
+        // Hide the prev/next toolbar since it doesn't work in TOC mode.
         mainToolbarFrame.setAlpha(amount);
         
         tocFrame.setVisibility((amount < 0.99f) ? View.VISIBLE : View.GONE);
@@ -408,6 +420,8 @@ public abstract class PresentationActivity extends Activity implements Presentat
         tocList.setItemChecked(pos, true);
     }
     
+    // ACTION BAR //////////////////////////////////////////////////////////////
+    
     /**
      * Show the action bar, optionally auto-hiding it after a delay.
      * @param keepVisible true to keep the action bar visible,
@@ -417,6 +431,8 @@ public abstract class PresentationActivity extends Activity implements Presentat
         rootView.setSystemUiVisibility(View.STATUS_BAR_VISIBLE);
         getActionBar().show();
         
+        // Remove any pending auto-hide event, and if auto-hide is requested,
+        // then set it again with the full timeout time.
         handler.removeCallbacks(fadeoutRunnable);
         if (!keepVisible) {
             handler.postDelayed(fadeoutRunnable, ACTIONBAR_AUTOHIDE_TIMEOUT);
