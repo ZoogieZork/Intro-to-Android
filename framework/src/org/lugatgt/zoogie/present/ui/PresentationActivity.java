@@ -373,10 +373,12 @@ public abstract class PresentationActivity extends Activity implements Presentat
         anim.setInterpolator(new DecelerateInterpolator());
         anim.start();
         
-        // Keep the action bar visible while TOC mode is active.
-        resetActionBarTimeout(!tocVisible);
-        
         tocVisible = !tocVisible;
+        
+        // Keep the action bar visible while TOC mode is active.
+        resetActionBarTimeout(tocVisible);
+        
+        updateNavigation(presentation.getCurrentSlide(), presentation.getCurrentSlideIndex());
     }
     
     /**
@@ -459,7 +461,11 @@ public abstract class PresentationActivity extends Activity implements Presentat
      * @param idx The index of the current slide.
      */
     protected void updateNavigation(Slide slide, int idx) {
-        actionbarSlideTitleLbl.setText(slideTitles[idx]);
+        if (tocVisible) {
+            actionbarSlideTitleLbl.setText(R.string.menu_toc);
+        } else {
+            actionbarSlideTitleLbl.setText(slideTitles[idx]);
+        }
     }
     
     /**
