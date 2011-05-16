@@ -24,6 +24,8 @@ import android.app.FragmentTransaction;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -53,6 +55,9 @@ public abstract class PresentationActivity extends Activity implements Presentat
     
     private static final String TAG = PresentationActivity.class.getSimpleName();
     
+    /** Time (in ms) until the action bar automatically fades out. */
+    private static final int ACTIONBAR_AUTOHIDE_TIMEOUT = 3000;
+    
     private static final String CONTENT_FRAG_TAG = "contentSlide";
     
     private static final String TOC_VISIBLE_KEY = "tocVisible";
@@ -62,6 +67,8 @@ public abstract class PresentationActivity extends Activity implements Presentat
     
     // Cache the slide titles (we assume that they won't change).
     private CharSequence[] slideTitles;
+    
+    private View rootView;
     
     private TextView actionbarSlideTitleLbl;
     
@@ -73,6 +80,9 @@ public abstract class PresentationActivity extends Activity implements Presentat
     private ImageButton nextBtn;
     
     private ListView tocList;
+    
+    private Handler handler;
+    private Runnable fadeoutRunnable;
     
     // CONSTRUCTORS ////////////////////////////////////////////////////////////
     
@@ -117,11 +127,20 @@ public abstract class PresentationActivity extends Activity implements Presentat
         requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         setContentView(R.layout.toc);
         
+        rootView = findViewById(R.id.presenterRoot);
+        
         ActionBar bar = getActionBar();
         bar.setDisplayHomeAsUpEnabled(false);
         bar.setDisplayUseLogoEnabled(false);
         bar.setDisplayShowCustomEnabled(true);
         bar.setCustomView(R.layout.actionbar);
+        bar.addOnMenuVisibilityListener(new ActionBar.OnMenuVisibilityListener() {
+            @Override
+            public void onMenuVisibilityChanged(boolean isVisible) {
+                // Keep the action bar visible while the menu is shown.
+                resetActionBarTimeout(isVisible);
+            }
+        });
         
         View actionbarView = bar.getCustomView();
         actionbarSlideTitleLbl = (TextView)actionbarView.findViewById(R.id.actionbar_slideTitle);
@@ -146,18 +165,12 @@ public abstract class PresentationActivity extends Activity implements Presentat
             }
         });
         
-        //FIXME: Tapping on the title frag toggles the action bar visibility.
-        //       This is just temporary until we get a better way to hide the
-        //       action bar.
+        // Tapping on the title frag makes the action bar visible and resets
+        // the fade-out timer.
         getFragmentManager().findFragmentById(R.id.titleFragment).getView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActionBar actionBar = getActionBar();
-                if (actionBar.isShowing()) {
-                    actionBar.hide();
-                } else {
-                    actionBar.show();
-                }
+                resetActionBarTimeout(false);
             }
         });
         
@@ -181,8 +194,18 @@ public abstract class PresentationActivity extends Activity implements Presentat
             }
         }
         
-        View v = findViewById(R.id.slideContainer);
-        v.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
+        // Set up the callback for auto-hiding the action bar after a delay.
+        handler = new Handler();
+        fadeoutRunnable = new Runnable() {
+            @Override
+            public void run() {
+                rootView.setSystemUiVisibility(View.STATUS_BAR_HIDDEN);
+                getActionBar().hide();
+            }
+        };
+        if (!tocVisible) {
+            resetActionBarTimeout(false);
+        }
     }
     
     @Override
@@ -323,16 +346,17 @@ public abstract class PresentationActivity extends Activity implements Presentat
             // Leaving TOC mode.
             anim = ObjectAnimator.ofFloat(this, "tocViewState", 0.0f, 1.0f);
             //TODO: Destroy the TOC views when animation is finished.
-            getActionBar().hide();
         } else {
             // Entering TOC mode.
             anim = ObjectAnimator.ofFloat(this, "tocViewState", 1.0f, 0.0f);
             initToc();
-            getActionBar().show();
         }
         anim.setDuration(getResources().getInteger(R.integer.tocTransitionDuration));
         anim.setInterpolator(new DecelerateInterpolator());
         anim.start();
+        
+        // Keep the action bar visible while TOC mode is active.
+        resetActionBarTimeout(!tocVisible);
         
         tocVisible = !tocVisible;
     }
@@ -374,6 +398,21 @@ public abstract class PresentationActivity extends Activity implements Presentat
         int pos = presentation.getCurrentSlideIndex();
         tocList.setSelection(pos);
         tocList.setItemChecked(pos, true);
+    }
+    
+    /**
+     * Show the action bar, optionally auto-hiding it after a delay.
+     * @param keepVisible true to keep the action bar visible,
+     *                    false to auto-hide it after a fixed interval.
+     */
+    protected void resetActionBarTimeout(boolean keepVisible) {
+        rootView.setSystemUiVisibility(View.STATUS_BAR_VISIBLE);
+        getActionBar().show();
+        
+        handler.removeCallbacks(fadeoutRunnable);
+        if (!keepVisible) {
+            handler.postDelayed(fadeoutRunnable, ACTIONBAR_AUTOHIDE_TIMEOUT);
+        }
     }
     
     // VIEW STATE //////////////////////////////////////////////////////////////
