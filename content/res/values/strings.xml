@@ -34,6 +34,9 @@
     <string name="about_changes_title">Version History</string>
     <string name="about_changes_summary"></string>
     <string-array name="about_changes">
+        <item><b>Version 1.3</b>
+            \n<li>Added API level 12 to \"API History\" slide.</li>
+        </item>
         <item><b>Version 1.2</b>
             \n<li>Enabled action bar and menu.</li>
             \n<li>Added table of contents mode.</li>
