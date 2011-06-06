@@ -127,9 +127,6 @@ public class TitleFragment extends Fragment {
         CharSequence newSubtitle = slide.getSubtitle(getActivity());
         if (newSubtitle == null) newSubtitle = "";
         
-        // Do nothing if the title and subtitle are unchanged.
-        if (newTitle.equals(title) && newSubtitle.equals(subtitle)) return;
-        
         int oldIndex = index;
         index = idx;
         title = newTitle;
