@@ -16,7 +16,7 @@
 
 package org.lugatgt.zoogie.present;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,13 +24,14 @@ import java.util.Map;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
+import android.util.AttributeSet;
 
 
 /**
  * Base class for presentations.
  * @author Michael Imamura
  */
-public abstract class Presentation {
+public class Presentation {
     
     private static final String PROP_PFX = "presentation.";
     private static final String PROP_INDEX = PROP_PFX + "index";
@@ -46,25 +47,43 @@ public abstract class Presentation {
     
     /**
      * Constructor.
-     * @param initSlides The initial set of slides (may not be null, may not be empty).
      */
-    public Presentation(Slide[] initSlides) {
-        if (initSlides == null || initSlides.length == 0) {
-            throw new IllegalArgumentException("Initial slides must not be empty.");
-        }
-        
-        slides = Arrays.asList(initSlides);
-        
-        nameToIndex = new HashMap<String, Integer>();
-        for (int i = 0; i < initSlides.length; i++) {
-            Slide initSlide = initSlides[i];
-            nameToIndex.put(initSlide.getName(), i);
-        }
-        
+    public Presentation() {
+        this(null);
+    }
+    
+    /**
+     * Constructor.
+     * @param attrs Attributes for initializing the fields (may be null).
+     */
+    public Presentation(AttributeSet attrs) {
         idx = 0;
     }
     
     // FIELD ACCESS ////////////////////////////////////////////////////////////
+    
+    /**
+     * Set the slides for this presentation.
+     * <p>
+     * Currently, this can only be be done once for initialization.
+     * 
+     * @param slides The list of slides (may not be null, may not be empty).
+     */
+    public void setSlides(List<? extends Slide> slides) {
+        if (slides == null || slides.isEmpty()) {
+            throw new IllegalArgumentException("Slide list must not be empty.");
+        }
+        
+        this.slides = new ArrayList<Slide>(slides);
+        
+        nameToIndex = new HashMap<String, Integer>();
+        int i = 0;
+        for (Slide slide : slides) {
+            nameToIndex.put(slide.getName(), i);
+        }
+        
+        idx = 0;
+    }
     
     /**
      * Set the callback for when the current slide index changes.

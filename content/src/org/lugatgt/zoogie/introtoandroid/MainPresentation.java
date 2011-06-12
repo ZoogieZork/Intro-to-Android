@@ -17,8 +17,10 @@
 package org.lugatgt.zoogie.introtoandroid;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 
 import android.content.Context;
+import android.util.AttributeSet;
 
 import org.lugatgt.zoogie.introtoandroid.slide.AndroidSlide;
 import org.lugatgt.zoogie.introtoandroid.slide.ApiHistorySlide;
@@ -129,8 +131,9 @@ public class MainPresentation extends Presentation {
     
     // CONSTRUCTORS ////////////////////////////////////////////////////////////
     
-    public MainPresentation() {
-        super(Slides.values());
+    public MainPresentation(AttributeSet attrs) {
+        super(attrs);
+        setSlides(Arrays.asList(Slides.values()));
     }
     
 }

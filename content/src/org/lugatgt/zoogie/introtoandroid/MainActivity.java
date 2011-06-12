@@ -41,7 +41,8 @@ public class MainActivity extends PresentationActivity {
     
     @Override
     protected Presentation onCreatePresentation(PresentationInflater inflater, Bundle savedInstanceState) {
-        return new MainPresentation();
+        return inflater.inflate(R.xml.main_presentation);
+        //return super.onCreatePresentation(inflater, savedInstanceState);
     }
     
     @Override

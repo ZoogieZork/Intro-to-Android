@@ -120,8 +120,7 @@ public abstract class PresentationActivity extends Activity implements Presentat
      * @return The created {@link Presentation} (never null).
      */
     protected Presentation onCreatePresentation(PresentationInflater inflater, Bundle savedInstanceState) {
-        //TODO: Use real resource.
-        return inflater.inflate(0);
+        return inflater.inflate(R.xml.presentation);
     }
     
     @Override
