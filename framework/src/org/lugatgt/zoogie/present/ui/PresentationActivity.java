@@ -41,6 +41,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import org.lugatgt.zoogie.present.Presentation;
+import org.lugatgt.zoogie.present.PresentationInflater;
 import org.lugatgt.zoogie.present.R;
 import org.lugatgt.zoogie.present.Slide;
 import org.lugatgt.zoogie.present.SlideTransition;
@@ -95,9 +96,7 @@ public abstract class PresentationActivity extends Activity implements Presentat
     
     // CONSTRUCTORS ////////////////////////////////////////////////////////////
     
-    public PresentationActivity(Presentation presentation) {
-        this.presentation = presentation;
-        presentation.setOnIndexChangedListener(this);
+    public PresentationActivity() {
     }
     
     // FIELD ACCESS ////////////////////////////////////////////////////////////
@@ -107,6 +106,23 @@ public abstract class PresentationActivity extends Activity implements Presentat
     }
     
     // LIFECYCLE ///////////////////////////////////////////////////////////////
+    
+    /**
+     * Called when the {@link Presentation} should be created.
+     * <p>
+     * The default behavior is to load from an XML resource (presentation.xml).
+     * Subclasses can override this behavior to create their own presentations.
+     * 
+     * @param inflater A presentation inflater for loading from XML resources
+     *                 (never null).
+     * @param savedInstanceState Activity saved state (may be null), same as
+     *                           passed to {@link #onCreate(Bundle)}.
+     * @return The created {@link Presentation} (never null).
+     */
+    protected Presentation onCreatePresentation(PresentationInflater inflater, Bundle savedInstanceState) {
+        //TODO: Use real resource.
+        return inflater.inflate(0);
+    }
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -127,6 +143,13 @@ public abstract class PresentationActivity extends Activity implements Presentat
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
             StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyLog().penaltyDeath().build());
         }
+        
+        // Create the presentation and register to listen for events.
+        presentation = onCreatePresentation(new PresentationInflater(this), savedInstanceState);
+        if (presentation == null) {
+            throw new IllegalArgumentException("onCreatePresentation() must return a Presentation instance.");
+        }
+        presentation.setOnIndexChangedListener(this);
         
         slideTitles = presentation.getSlideTitles(this);
         // Since the first slide's title is the name of the presentation,
@@ -224,6 +247,16 @@ public abstract class PresentationActivity extends Activity implements Presentat
         if (!tocVisible) {
             resetActionBarTimeout(false);
         }
+    }
+    
+    @Override
+    public void onDestroy() {
+        if (presentation != null) {
+            presentation.setOnIndexChangedListener(null);
+            presentation = null;
+        }
+        
+        super.onDestroy();
     }
     
     @Override

@@ -17,9 +17,12 @@
 package org.lugatgt.zoogie.introtoandroid;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.lugatgt.zoogie.present.Presentation;
+import org.lugatgt.zoogie.present.PresentationInflater;
 import org.lugatgt.zoogie.present.R;
 import org.lugatgt.zoogie.present.ui.PresentationActivity;
 
@@ -34,13 +37,12 @@ import org.lugatgt.zoogie.present.ui.PresentationActivity;
  */
 public class MainActivity extends PresentationActivity {
 
-    // CONSTRUCTORS ////////////////////////////////////////////////////////////
-    
-    public MainActivity() {
-        super(new MainPresentation());
-    }
-    
     // LIFECYCLE ///////////////////////////////////////////////////////////////
+    
+    @Override
+    protected Presentation onCreatePresentation(PresentationInflater inflater, Bundle savedInstanceState) {
+        return new MainPresentation();
+    }
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
