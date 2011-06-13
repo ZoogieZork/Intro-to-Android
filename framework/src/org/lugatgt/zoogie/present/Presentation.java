@@ -40,14 +40,14 @@ public class Presentation {
     private static final String PROP_PFX = "presentation.";
     private static final String PROP_INDEX = PROP_PFX + "index";
     
-    private static final List<Slide> DEFAULT_SLIDES;
+    private static final List<SlideInfo> DEFAULT_SLIDES;
     static {
-        List<Slide> slides = new ArrayList<Slide>(1);
+        List<SlideInfo> slides = new ArrayList<SlideInfo>(1);
         slides.add(new EmptyPresentationSlideInfo());
         DEFAULT_SLIDES = slides;
     }
     
-    private List<Slide> slides = DEFAULT_SLIDES;
+    private List<SlideInfo> slides = DEFAULT_SLIDES;
     private Map<String, Integer> nameToIndex;
     
     private OnIndexChangedListener indexChangedListener;
@@ -81,7 +81,7 @@ public class Presentation {
      * 
      * @param slides The list of slides (may not be null, may not be empty).
      */
-    public void setSlides(List<? extends Slide> slides) {
+    public void setSlides(List<? extends SlideInfo> slides) {
         //TODO: Properly support changing the slide list multiple times.
         if (this.slides != DEFAULT_SLIDES) {
             throw new IllegalArgumentException("setSlides() can only be called once.");
@@ -91,11 +91,11 @@ public class Presentation {
             throw new IllegalArgumentException("Slide list must not be empty.");
         }
         
-        this.slides = new ArrayList<Slide>(slides);
+        this.slides = new ArrayList<SlideInfo>(slides);
         
         nameToIndex.clear();
         int i = 0;
-        for (Slide slide : slides) {
+        for (SlideInfo slide : slides) {
             nameToIndex.put(slide.getName(), i);
         }
         
@@ -132,7 +132,7 @@ public class Presentation {
      * @param idx The zero-based slide index.
      * @return The combined slide title (never null, may be empty).
      */
-    protected CharSequence generateSlideTitle(Context ctx, Slide slide, int idx) {
+    protected CharSequence generateSlideTitle(Context ctx, SlideInfo slide, int idx) {
         CharSequence title = slide.getTitle(ctx);
         CharSequence subtitle = slide.getSubtitle(ctx);
         
@@ -146,7 +146,7 @@ public class Presentation {
         return combined;
     }
     
-    public Slide getCurrentSlide() {
+    public SlideInfo getCurrentSlide() {
         return slides.get(idx);
     }
     
@@ -166,19 +166,19 @@ public class Presentation {
         return slides.size();
     }
     
-    public Slide jumpTo(int i) {
+    public SlideInfo jumpTo(int i) {
         if (i < 0 || i >= slides.size()) {
             throw new ArrayIndexOutOfBoundsException(
                 "Slide index must be 0 <= idx < " + slides.size());
         }
-        Slide oldSlide = getCurrentSlide();
+        SlideInfo oldSlide = getCurrentSlide();
         int oldIdx = idx;
         idx = i;
         fireOnIndexChanged(oldSlide, oldIdx, true);
         return getCurrentSlide();
     }
     
-    public Slide jumpTo(String name) {
+    public SlideInfo jumpTo(String name) {
         Integer newIdx = nameToIndex.get(name);
         if (newIdx == null) {
             throw new IllegalArgumentException("Unable to find a slide named \"" + name + '"');
@@ -187,22 +187,22 @@ public class Presentation {
         }
     }
     
-    public Slide prev() {
+    public SlideInfo prev() {
         if (idx == 0) {
             return null;
         } else {
-            Slide oldSlide = getCurrentSlide();
+            SlideInfo oldSlide = getCurrentSlide();
             idx--;
             fireOnIndexChanged(oldSlide, idx + 1, true);
             return getCurrentSlide();
         }
     }
     
-    public Slide next() {
+    public SlideInfo next() {
         if (idx == slides.size() - 1) {
             return null;
         } else {
-            Slide oldSlide = getCurrentSlide();
+            SlideInfo oldSlide = getCurrentSlide();
             idx++;
             fireOnIndexChanged(oldSlide, idx - 1, false);
             return getCurrentSlide();
@@ -221,7 +221,7 @@ public class Presentation {
     
     // EVENTS //////////////////////////////////////////////////////////////////
     
-    protected void fireOnIndexChanged(Slide oldSlide, int oldIndex, boolean immediate) {
+    protected void fireOnIndexChanged(SlideInfo oldSlide, int oldIndex, boolean immediate) {
         if (indexChangedListener != null) {
             if (oldIndex != idx) {
                 indexChangedListener.onAfterIndexChanged(oldSlide, oldIndex, immediate);
@@ -246,14 +246,14 @@ public class Presentation {
          * @param immediate true if navigating to the new slide immediately;
          *                  (i.e., should not play any animations).
          */
-        void onAfterIndexChanged(Slide oldSlide, int oldIndex, boolean immediate);
+        void onAfterIndexChanged(SlideInfo oldSlide, int oldIndex, boolean immediate);
         
     }
     
     ////////////////////////////////////////////////////////////////////////////
     // EmptyPresentationSlide
     
-    private static class EmptyPresentationSlideInfo implements Slide {
+    private static class EmptyPresentationSlideInfo implements SlideInfo {
 
         @Override
         public String getName() {

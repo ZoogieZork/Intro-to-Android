@@ -30,7 +30,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.lugatgt.zoogie.present.R;
-import org.lugatgt.zoogie.present.Slide;
+import org.lugatgt.zoogie.present.SlideInfo;
 
 
 /**
@@ -120,7 +120,7 @@ public class TitleFragment extends Fragment {
      * @param idx The zero-based index of the slide in the presentation.
      * @param animate true to animate between the previous title and the new title.
      */
-    public void setSlide(Slide slide, int idx, boolean animate) {
+    public void setSlide(SlideInfo slide, int idx, boolean animate) {
         CharSequence newTitle = slide.getTitle(getActivity());
         if (newTitle == null) newTitle = "";
         

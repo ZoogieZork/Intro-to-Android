@@ -27,7 +27,7 @@ import org.lugatgt.zoogie.present.ui.SlideFragment;
  * Metadata for a slide in the presentation.
  * @author Michael Imamura
  */
-public interface Slide {
+public interface SlideInfo {
     
     /**
      * The unique ID of the slide (not visible to the user).

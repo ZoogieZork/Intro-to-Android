@@ -43,7 +43,7 @@ import android.widget.TextView;
 import org.lugatgt.zoogie.present.Presentation;
 import org.lugatgt.zoogie.present.PresentationInflater;
 import org.lugatgt.zoogie.present.R;
-import org.lugatgt.zoogie.present.Slide;
+import org.lugatgt.zoogie.present.SlideInfo;
 import org.lugatgt.zoogie.present.SlideTransition;
 
 
@@ -222,7 +222,7 @@ public abstract class PresentationActivity extends Activity implements Presentat
             // we only need to restore the presentation internal state.
             presentation.onRestoreInstanceState(savedInstanceState);
             
-            Slide curSlide = presentation.getCurrentSlide();
+            SlideInfo curSlide = presentation.getCurrentSlide();
             int curSlideIdx = presentation.getCurrentSlideIndex();
             updateNavigation(curSlide, curSlideIdx);
             updateToolbarState(curSlide, curSlideIdx);
@@ -336,7 +336,7 @@ public abstract class PresentationActivity extends Activity implements Presentat
      * @return The initialized transaction (never null).
      *         It is up to the caller to amend and commit it.
      */
-    protected FragmentTransaction createFragmentTransaction(Slide prevSlide, Slide slide, boolean animated) {
+    protected FragmentTransaction createFragmentTransaction(SlideInfo prevSlide, SlideInfo slide, boolean animated) {
         FragmentManager fragMgr = getFragmentManager();
         
         // Create the slide fragment.
@@ -481,7 +481,7 @@ public abstract class PresentationActivity extends Activity implements Presentat
      * @param idx The index of the current slide.
      * @param animate true to animate the transition, if possible.
      */
-    private void updateUi(Slide slide, int idx, boolean animate) {
+    private void updateUi(SlideInfo slide, int idx, boolean animate) {
         updateTitle(slide, idx, animate);
         updateNavigation(slide, idx);
         updateToolbarState(slide, idx);
@@ -492,7 +492,7 @@ public abstract class PresentationActivity extends Activity implements Presentat
      * @param slide The current slide (may not be null).
      * @param idx The index of the current slide.
      */
-    protected void updateNavigation(Slide slide, int idx) {
+    protected void updateNavigation(SlideInfo slide, int idx) {
         if (tocVisible) {
             actionbarSlideTitleLbl.setText(R.string.menu_toc);
         } else {
@@ -506,7 +506,7 @@ public abstract class PresentationActivity extends Activity implements Presentat
      * @param idx The index of the current slide.
      * @param animate true to animate the transition, if possible.
      */
-    protected void updateTitle(Slide slide, int idx, boolean animate) {
+    protected void updateTitle(SlideInfo slide, int idx, boolean animate) {
         FragmentManager fragMgr = getFragmentManager();
         TitleFragment titleFrag = (TitleFragment)fragMgr.findFragmentById(R.id.titleFragment);
         titleFrag.setSlide(slide, idx, animate);
@@ -517,7 +517,7 @@ public abstract class PresentationActivity extends Activity implements Presentat
      * @param slide The current slide (may not be null).
      * @param idx The index of the current slide.
      */
-    protected void updateToolbarState(Slide slide, int idx) {
+    protected void updateToolbarState(SlideInfo slide, int idx) {
         int curSlideIndex = presentation.getCurrentSlideIndex();
         prevBtn.setEnabled(curSlideIndex > 0);
         nextBtn.setEnabled(curSlideIndex < presentation.getSlideCount() - 1);
@@ -525,8 +525,8 @@ public abstract class PresentationActivity extends Activity implements Presentat
     
     // Presentation.OnIndexChangedListener /////////////////////////////////////
     
-    public void onAfterIndexChanged(Slide oldSlide, int oldIndex, boolean immediate) {
-        Slide slide = presentation.getCurrentSlide();
+    public void onAfterIndexChanged(SlideInfo oldSlide, int oldIndex, boolean immediate) {
+        SlideInfo slide = presentation.getCurrentSlide();
         createFragmentTransaction(oldSlide, slide, !immediate).commit();
         updateUi(slide, presentation.getCurrentSlideIndex(), !immediate);
     }

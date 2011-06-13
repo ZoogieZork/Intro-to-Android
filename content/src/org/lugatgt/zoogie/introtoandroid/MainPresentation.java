@@ -31,7 +31,7 @@ import org.lugatgt.zoogie.introtoandroid.slide.PartsSlide;
 import org.lugatgt.zoogie.introtoandroid.slide.TitleSlide;
 import org.lugatgt.zoogie.present.Presentation;
 import org.lugatgt.zoogie.present.R;
-import org.lugatgt.zoogie.present.Slide;
+import org.lugatgt.zoogie.present.SlideInfo;
 import org.lugatgt.zoogie.present.SlideTransition;
 import org.lugatgt.zoogie.present.Transitions;
 import org.lugatgt.zoogie.present.ui.SlideFragment;
@@ -39,7 +39,7 @@ import org.lugatgt.zoogie.present.ui.SlideFragment;
 
 public class MainPresentation extends Presentation {
     
-    private enum Slides implements Slide {
+    private enum Slides implements SlideInfo {
         
         TITLE(TitleSlide.class, "Intro to Android Development", Transitions.SLIDE_LEFT),
         ANDROID(AndroidSlide.class, "About Android", Transitions.ZOOM_IN),
