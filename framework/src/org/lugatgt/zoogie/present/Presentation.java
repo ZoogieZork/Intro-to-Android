@@ -16,6 +16,7 @@
 
 package org.lugatgt.zoogie.present;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +26,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.util.AttributeSet;
+
+import org.lugatgt.zoogie.present.slide.EmptyPresentationSlide;
+import org.lugatgt.zoogie.present.ui.SlideFragment;
 
 
 /**
@@ -36,7 +40,14 @@ public class Presentation {
     private static final String PROP_PFX = "presentation.";
     private static final String PROP_INDEX = PROP_PFX + "index";
     
-    private List<Slide> slides;
+    private static final List<Slide> DEFAULT_SLIDES;
+    static {
+        List<Slide> slides = new ArrayList<Slide>(1);
+        slides.add(new EmptyPresentationSlideInfo());
+        DEFAULT_SLIDES = slides;
+    }
+    
+    private List<Slide> slides = DEFAULT_SLIDES;
     private Map<String, Integer> nameToIndex;
     
     private OnIndexChangedListener indexChangedListener;
@@ -58,6 +69,7 @@ public class Presentation {
      */
     public Presentation(AttributeSet attrs) {
         idx = 0;
+        nameToIndex = new HashMap<String, Integer>();
     }
     
     // FIELD ACCESS ////////////////////////////////////////////////////////////
@@ -70,13 +82,18 @@ public class Presentation {
      * @param slides The list of slides (may not be null, may not be empty).
      */
     public void setSlides(List<? extends Slide> slides) {
+        //TODO: Properly support changing the slide list multiple times.
+        if (this.slides != DEFAULT_SLIDES) {
+            throw new IllegalArgumentException("setSlides() can only be called once.");
+        }
+        
         if (slides == null || slides.isEmpty()) {
             throw new IllegalArgumentException("Slide list must not be empty.");
         }
         
         this.slides = new ArrayList<Slide>(slides);
         
-        nameToIndex = new HashMap<String, Integer>();
+        nameToIndex.clear();
         int i = 0;
         for (Slide slide : slides) {
             nameToIndex.put(slide.getName(), i);
@@ -230,6 +247,40 @@ public class Presentation {
          *                  (i.e., should not play any animations).
          */
         void onAfterIndexChanged(Slide oldSlide, int oldIndex, boolean immediate);
+        
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////
+    // EmptyPresentationSlide
+    
+    private static class EmptyPresentationSlideInfo implements Slide {
+
+        @Override
+        public String getName() {
+            return "_empty";
+        }
+
+        @Override
+        public CharSequence getTitle(Context ctx) {
+            return "";
+        }
+
+        @Override
+        public CharSequence getSubtitle(Context ctx) {
+            return null;
+        }
+
+        @Override
+        public SlideFragment createFragment()
+            throws InstantiationException, IllegalAccessException, InvocationTargetException
+        {
+            return new EmptyPresentationSlide();
+        }
+
+        @Override
+        public SlideTransition getTransition() {
+            return null;
+        }
         
     }
     

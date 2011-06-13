@@ -20,6 +20,9 @@
 
     <string name="title_slide_title">Title</string>
     
+    <string name="slide_internal_empty_content"
+        >The presentation is empty or there there was a problem loading the slides.</string>
+    
     <string name="menu_title">Title Slide</string>
     <string name="menu_toc">Table of Contents</string>
     <string name="menu_about">About</string>
