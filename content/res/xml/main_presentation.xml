@@ -15,5 +15,5 @@
     limitations under the License.
 -->
 
-<org.lugatgt.zoogie.introtoandroid.MainPresentation>
+<org.lugatgt.zoogie.introtoandroid.MainPresentation slidePackages="org.lugatgt.zoogie.introtoandroid.slides">
 </org.lugatgt.zoogie.introtoandroid.MainPresentation>

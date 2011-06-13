@@ -18,6 +18,9 @@ package org.lugatgt.zoogie.present;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -37,6 +40,8 @@ import android.view.InflateException;
 public class PresentationInflater {
 
     private static final String TAG = PresentationInflater.class.getSimpleName();
+    
+    private static final Pattern PACKAGE_SPLIT_RX = Pattern.compile("[,;\\s]+");
     
     private Context ctx;
     
@@ -86,6 +91,7 @@ public class PresentationInflater {
     private Presentation parsePresentation(XmlResourceParser parser, AttributeSet attrs)
         throws XmlPullParserException, IOException
     {
+        List<String> slidePackages = new ArrayList<String>();
         
         int eventType = parser.getEventType();
         String presentationClassName = null;
@@ -94,10 +100,24 @@ public class PresentationInflater {
         do {
             if (eventType == XmlPullParser.START_TAG) {
                 presentationClassName = parser.getName();
+                
+                String slidePackagesStr = attrs.getAttributeValue(null, "slidePackages");
+                if (slidePackagesStr != null) {
+                    String[] packageNames = PACKAGE_SPLIT_RX.split(slidePackagesStr.trim());
+                    for (String packageName : packageNames) {
+                        if (!packageName.endsWith(".")) {
+                            packageName += '.';
+                        }
+                        slidePackages.add(packageName);
+                    }
+                }
+                
                 break;
             }
             eventType = parser.next();
         } while (eventType != XmlPullParser.END_DOCUMENT);
+        
+        slidePackages.add("org.lugatgt.zoogie.present.slide.");
         
         // The root tag is either:
         //   - "presentation" for the standard Presentation class.
