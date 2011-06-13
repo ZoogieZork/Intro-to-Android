@@ -35,6 +35,7 @@
     <string name="about_changes_summary"></string>
     <string-array name="about_changes">
         <item><b>Version 1.3</b>
+            \n<li>Added option to hide the navigation toolbar.</li>
             \n<li>Added API level 12 to \"API History\" slide.</li>
         </item>
         <item><b>Version 1.2</b>
