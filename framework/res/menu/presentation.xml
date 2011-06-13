@@ -20,6 +20,9 @@
         android:id="@+id/menu_title"
         android:title="@string/menu_title"/>
     <item
+        android:id="@+id/menu_nav_toolbar"
+        android:title="@string/menu_hide_nav_toolbar"/>
+    <item
         android:id="@+id/menu_toc"
         android:icon="@drawable/menu_toc"
         android:title="@string/menu_toc"

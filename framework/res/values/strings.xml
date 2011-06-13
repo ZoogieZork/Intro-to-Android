@@ -21,6 +21,8 @@
     <string name="title_slide_title">Title</string>
     
     <string name="menu_title">Title Slide</string>
+    <string name="menu_show_nav_toolbar">Show Navigation</string>
+    <string name="menu_hide_nav_toolbar">Hide Navigation</string>
     <string name="menu_toc">Table of Contents</string>
     <string name="menu_about">About</string>
     

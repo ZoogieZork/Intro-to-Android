@@ -70,9 +70,11 @@ public abstract class PresentationActivity extends Activity implements Presentat
     private static final String CONTENT_FRAG_TAG = "contentSlide";
     
     private static final String TOC_VISIBLE_KEY = "tocVisible";
+    private static final String NAV_TOOLBAR_VISIBLE_KEY = "navToolbarVisible";
     
     private Presentation presentation;
     private boolean tocVisible = false;
+    private boolean navToolbarVisible = true;
     
     /** Cache of the slide titles (we assume that they won't change). */
     private CharSequence[] slideTitles;
@@ -82,7 +84,7 @@ public abstract class PresentationActivity extends Activity implements Presentat
     private TextView actionbarSlideTitleLbl;
     
     private ViewGroup slideFrame;
-    private ViewGroup mainToolbarFrame;
+    private ViewGroup navToolbarFrame;
     private ViewGroup tocFrame;
     
     private ImageButton prevBtn;
@@ -155,7 +157,7 @@ public abstract class PresentationActivity extends Activity implements Presentat
         actionbarSlideTitleLbl = (TextView)actionbarView.findViewById(R.id.actionbar_slideTitle);
         
         slideFrame = (ViewGroup)findViewById(R.id.presentationFrame);
-        mainToolbarFrame = (ViewGroup)findViewById(R.id.mainToolbarFrame);
+        navToolbarFrame = (ViewGroup)findViewById(R.id.mainToolbarFrame);
         tocFrame = (ViewGroup)findViewById(R.id.tocFrame);
         
         prevBtn = (ImageButton)findViewById(R.id.prevBtn);
@@ -199,13 +201,14 @@ public abstract class PresentationActivity extends Activity implements Presentat
             // The title and slide fragments will restore their own state;
             // we only need to restore the presentation internal state.
             presentation.onRestoreInstanceState(savedInstanceState);
+            tocVisible = savedInstanceState.getBoolean(TOC_VISIBLE_KEY);
+            navToolbarVisible = savedInstanceState.getBoolean(NAV_TOOLBAR_VISIBLE_KEY, true);
             
             Slide curSlide = presentation.getCurrentSlide();
             int curSlideIdx = presentation.getCurrentSlideIndex();
             updateNavigation(curSlide, curSlideIdx);
             updateToolbarState(curSlide, curSlideIdx);
             
-            tocVisible = savedInstanceState.getBoolean(TOC_VISIBLE_KEY);
             setTocViewState(tocVisible ? 0.0f : 1.0f);
             if (tocVisible) {
                 initToc();
@@ -233,11 +236,19 @@ public abstract class PresentationActivity extends Activity implements Presentat
     }
     
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.menu_nav_toolbar).setTitle(
+            navToolbarVisible ? R.string.menu_hide_nav_toolbar : R.string.menu_show_nav_toolbar);
+        return true;
+    }
+    
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         
         presentation.onSaveInstanceState(outState);
         outState.putBoolean(TOC_VISIBLE_KEY, tocVisible);
+        outState.putBoolean(NAV_TOOLBAR_VISIBLE_KEY, navToolbarVisible);
     }
     
     // EVENTS //////////////////////////////////////////////////////////////////
@@ -283,6 +294,11 @@ public abstract class PresentationActivity extends Activity implements Presentat
                 if (tocVisible) {
                     toggleTableOfContents();
                 }
+                return true;
+                
+            case R.id.menu_nav_toolbar:
+                navToolbarVisible = !navToolbarVisible;
+                updateToolbarState(presentation.getCurrentSlide(), presentation.getCurrentSlideIndex());
                 return true;
                 
             case R.id.menu_toc:
@@ -393,7 +409,7 @@ public abstract class PresentationActivity extends Activity implements Presentat
         slideFrame.setScaleY((1.0f/3.0f) + (amount * (2.0f / 3.0f)));
         
         // Hide the prev/next toolbar since it doesn't work in TOC mode.
-        mainToolbarFrame.setAlpha(amount);
+        navToolbarFrame.setAlpha(amount);
         
         tocFrame.setVisibility((amount < 0.99f) ? View.VISIBLE : View.GONE);
         tocFrame.setScaleX((2.0f * amount) + 1.0f);
@@ -486,6 +502,8 @@ public abstract class PresentationActivity extends Activity implements Presentat
      * @param idx The index of the current slide.
      */
     protected void updateToolbarState(Slide slide, int idx) {
+        navToolbarFrame.setVisibility(navToolbarVisible ? View.VISIBLE : View.GONE);
+        
         int curSlideIndex = presentation.getCurrentSlideIndex();
         prevBtn.setEnabled(curSlideIndex > 0);
         nextBtn.setEnabled(curSlideIndex < presentation.getSlideCount() - 1);
