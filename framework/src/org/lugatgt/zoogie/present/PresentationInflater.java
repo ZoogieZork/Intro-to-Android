@@ -61,10 +61,10 @@ public class PresentationInflater {
             return parsePresentation(parser, attrs);
             
         } catch (XmlPullParserException ex) {
-            throw new InflateException("Failed to load presententation XML.", ex);
+            throw new InflateException("Failed to load presentation XML.", ex);
             
         } catch (IOException ex) {
-            throw new InflateException("Failed to load presententation XML.", ex);
+            throw new InflateException("Failed to load presentation XML.", ex);
             
         } finally {
             if (parser != null) parser.close();
