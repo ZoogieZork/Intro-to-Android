@@ -150,7 +150,7 @@ public abstract class PresentationActivity extends Activity implements Presentat
         }
         presentation.setOnIndexChangedListener(this);
         
-        slideTitles = presentation.getSlideTitles(this);
+        slideTitles = presentation.getSlideTitles();
         // Since the first slide's title is the name of the presentation,
         // we replace it for listing purposes with just "Title".
         slideTitles[0] = getString(R.string.title_slide_title);

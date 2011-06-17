@@ -18,8 +18,6 @@ package org.lugatgt.zoogie.present;
 
 import java.lang.reflect.InvocationTargetException;
 
-import android.content.Context;
-
 import org.lugatgt.zoogie.present.ui.SlideFragment;
 
 
@@ -40,14 +38,14 @@ public interface SlideInfo {
      * @param ctx The context, for retrieving resources (may not be null).
      * @return The title, or null if the slide has no title.
      */
-    public CharSequence getTitle(Context ctx);
+    public CharSequence getTitle();
     
     /**
      * Retrieves the subtitle of the slide.
      * @param ctx The context, for retrieving resources (may not be null).
      * @return The subtitle, or null if the slide has no subtitle.
      */
-    public CharSequence getSubtitle(Context ctx);
+    public CharSequence getSubtitle();
     
     /**
      * Creates the slide fragment used for displaying the content.

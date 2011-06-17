@@ -30,7 +30,7 @@ public class SlideListSpinnerAdapter extends ArrayAdapter<CharSequence> implemen
     
     public SlideListSpinnerAdapter(Presentation presentation, Context ctx) {
         super(ctx, android.R.layout.simple_spinner_item,
-            renderTitleList(presentation.getSlideTitles(ctx), ctx));
+            renderTitleList(presentation.getSlideTitles(), ctx));
         
         setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     }

@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.util.AttributeSet;
@@ -117,10 +116,10 @@ public class Presentation {
      * @param ctx The current context, to load resources (may not be null).
      * @return The list of titles (never null, never empty).
      */
-    public CharSequence[] getSlideTitles(Context ctx) {
+    public CharSequence[] getSlideTitles() {
         CharSequence[] titles = new CharSequence[slides.size()];
         for (int i = 0; i < slides.size(); i++) {
-            titles[i] = generateSlideTitle(ctx, slides.get(i), i);
+            titles[i] = generateSlideTitle(slides.get(i), i);
         }
         return titles;
     }
@@ -132,9 +131,9 @@ public class Presentation {
      * @param idx The zero-based slide index.
      * @return The combined slide title (never null, may be empty).
      */
-    protected CharSequence generateSlideTitle(Context ctx, SlideInfo slide, int idx) {
-        CharSequence title = slide.getTitle(ctx);
-        CharSequence subtitle = slide.getSubtitle(ctx);
+    protected CharSequence generateSlideTitle(SlideInfo slide, int idx) {
+        CharSequence title = slide.getTitle();
+        CharSequence subtitle = slide.getSubtitle();
         
         CharSequence combined;
         if (subtitle != null && subtitle.length() > 0) {
@@ -261,12 +260,12 @@ public class Presentation {
         }
 
         @Override
-        public CharSequence getTitle(Context ctx) {
+        public CharSequence getTitle() {
             return "";
         }
 
         @Override
-        public CharSequence getSubtitle(Context ctx) {
+        public CharSequence getSubtitle() {
             return null;
         }
 

@@ -19,7 +19,6 @@ package org.lugatgt.zoogie.introtoandroid;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 
-import android.content.Context;
 import android.util.AttributeSet;
 
 import org.lugatgt.zoogie.introtoandroid.slide.AndroidSlide;
@@ -90,12 +89,12 @@ public class MainPresentation extends Presentation {
         }
         
         @Override
-        public String getTitle(Context ctx) {
+        public String getTitle() {
             return title;
         }
         
         @Override
-        public String getSubtitle(Context ctx) {
+        public String getSubtitle() {
             return subtitle;
         }
         

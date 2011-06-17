@@ -121,10 +121,10 @@ public class TitleFragment extends Fragment {
      * @param animate true to animate between the previous title and the new title.
      */
     public void setSlide(SlideInfo slide, int idx, boolean animate) {
-        CharSequence newTitle = slide.getTitle(getActivity());
+        CharSequence newTitle = slide.getTitle();
         if (newTitle == null) newTitle = "";
         
-        CharSequence newSubtitle = slide.getSubtitle(getActivity());
+        CharSequence newSubtitle = slide.getSubtitle();
         if (newSubtitle == null) newSubtitle = "";
         
         int oldIndex = index;
