@@ -48,7 +48,8 @@ public class PresentationInflater {
     // CONSTRUCTORS ////////////////////////////////////////////////////////////
     
     public PresentationInflater(Context ctx) {
-        this.ctx = ctx;
+        // Use the app context to avoid holding a reference to the activity.
+        this.ctx = ctx.getApplicationContext();
     }
     
     // INFLATION ///////////////////////////////////////////////////////////////
