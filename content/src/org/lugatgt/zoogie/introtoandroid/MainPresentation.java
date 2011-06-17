@@ -27,7 +27,7 @@ import org.lugatgt.zoogie.introtoandroid.slide.BasicTextSlide;
 import org.lugatgt.zoogie.introtoandroid.slide.ForkThisSlide;
 import org.lugatgt.zoogie.introtoandroid.slide.InternalsSlide;
 import org.lugatgt.zoogie.introtoandroid.slide.PartsSlide;
-import org.lugatgt.zoogie.introtoandroid.slide.TitleSlide;
+import org.lugatgt.zoogie.introtoandroid.slide.MainTitleSlide;
 import org.lugatgt.zoogie.present.Presentation;
 import org.lugatgt.zoogie.present.R;
 import org.lugatgt.zoogie.present.SlideInfo;
@@ -40,7 +40,7 @@ public class MainPresentation extends Presentation {
     
     private enum Slides implements SlideInfo {
         
-        TITLE(TitleSlide.class, "Intro to Android Development", Transitions.SLIDE_LEFT),
+        TITLE(MainTitleSlide.class, "Intro to Android Development", Transitions.SLIDE_LEFT),
         ANDROID(AndroidSlide.class, "About Android", Transitions.ZOOM_IN),
         INTERNALS(InternalsSlide.class, "About Android", "Under the Hood", Transitions.SPIN),
         DALVIK(BasicTextSlide.class, "Dalvik VM", Transitions.SLIDE_UP, R.array.dalvik_content),

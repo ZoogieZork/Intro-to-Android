@@ -16,46 +16,7 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="@dimen/title_frag_diff_height">
-    
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            style="@style/Byline"
-            android:text="@string/byline_presenter"/>
-        <TextView
-            style="@style/BylineDivider"/>
-        <TextView
-            style="@style/Byline"
-            android:text="@string/byline_event"/>
-        <TextView
-            style="@style/BylineDivider"/>
-        <TextView
-            style="@style/Byline"
-            android:text="@string/byline_date"/>
-    </LinearLayout>
-    
-    <Button
         android:id="@+id/aboutBtn"
-        android:layout_marginTop="40dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/menu_about"/>
-    
-    <!-- Vertical spacer -->
-    <View
-        android:layout_weight="1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-        
-    <TextView
-        android:id="@+id/versionLbl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    
-</LinearLayout>
