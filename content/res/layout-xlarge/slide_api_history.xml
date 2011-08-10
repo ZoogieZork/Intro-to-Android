@@ -41,6 +41,18 @@
         <TableRow>
             <TextView
                 style="@style/Slide_ApiHistory_ApiCell"
+                android:text="13"/>
+            <TextView
+                style="@style/Slide_ApiHistory_VersionCell"
+                android:text="3.2"/>
+            <TextView
+                style="@style/Slide_ApiHistory_NameCell"
+                android:text="Honeycomb"/>
+        </TableRow>
+        
+        <TableRow>
+            <TextView
+                style="@style/Slide_ApiHistory_ApiCell"
                 android:text="12"/>
             <TextView
                 style="@style/Slide_ApiHistory_VersionCell"
