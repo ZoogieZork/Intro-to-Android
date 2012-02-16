@@ -21,6 +21,8 @@
     android:versionCode="7"
     android:versionName="1.2">
     
+    <uses-sdk android:minSdkVersion="11" />
+    
     <application
         android:icon="@drawable/icon"
         android:label="@string/app_name"
@@ -44,6 +46,4 @@
         
     </application>
     
-    <uses-sdk android:minSdkVersion="11" />
-
 </manifest>
