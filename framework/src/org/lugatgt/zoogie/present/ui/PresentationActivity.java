@@ -288,25 +288,23 @@ public abstract class PresentationActivity extends Activity implements Presentat
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_title:
-                presentation.jumpTo(0);
-                if (tocVisible) {
-                    toggleTableOfContents();
-                }
-                return true;
-                
-            case R.id.menu_nav_toolbar:
-                navToolbarVisible = !navToolbarVisible;
-                updateToolbarState(presentation.getCurrentSlide(), presentation.getCurrentSlideIndex());
-                return true;
-                
-            case R.id.menu_toc:
+        int id = item.getItemId();
+        
+        if (id == R.id.menu_title) {
+            presentation.jumpTo(0);
+            if (tocVisible) {
                 toggleTableOfContents();
-                return true;
-                
-            default:
-                return super.onOptionsItemSelected(item);
+            }
+            return true;
+        } else if (id == R.id.menu_nav_toolbar) {
+            navToolbarVisible = !navToolbarVisible;
+            updateToolbarState(presentation.getCurrentSlide(), presentation.getCurrentSlideIndex());
+            return true;
+        } else if (id == R.id.menu_toc) {
+            toggleTableOfContents();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
     }
     
