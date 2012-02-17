@@ -51,12 +51,14 @@
         <ImageButton
             android:id="@+id/prevBtn"
             style="@style/ToolbarButton"
-            android:src="@android:drawable/ic_media_previous"/>
+            android:src="@android:drawable/ic_media_previous"
+            android:contentDescription="@string/toolbar_prev"/>
         <ImageButton
             android:id="@+id/nextBtn"
             style="@style/ToolbarButton"
             android:layout_toRightOf="@id/prevBtn"
-            android:src="@android:drawable/ic_media_play"/>
+            android:src="@android:drawable/ic_media_play"
+            android:contentDescription="@string/toolbar_next"/>
         
     </RelativeLayout>
     

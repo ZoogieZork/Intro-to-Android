@@ -17,6 +17,9 @@
 
 <resources>
     <string name="app_name">Presentation</string>
+    
+    <string name="toolbar_prev">Previous Slide</string>
+    <string name="toolbar_next">Next Slide</string>
 
     <string name="title_slide_title">Title</string>
     
